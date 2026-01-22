@@ -23,7 +23,7 @@ class ContentService {
   constructor() {
     this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
     this.bloggerAPI = import.meta.env.VITE_BLOGGER_API_KEY;
-    this.blogId = import.meta.env.VITE_BLOGGER_BLOG_ID;
+    this.blogId = import.meta.env.VITE_BLOGGER_ID;
   }
 
   /**

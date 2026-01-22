@@ -12,5 +12,5 @@ build-log-latest.log
 
 # Environment variables
 .env
-.env.local
-.env.production
+.env.*
+!.env.example

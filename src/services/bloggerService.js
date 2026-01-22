@@ -1,7 +1,7 @@
 // Blogger RSS Feed Service
 // Configuration
 const BLOGGER_CONFIG = {
-  blogId: process.env.REACT_APP_BLOGGER_ID || 'YOUR_BLOG_ID',
+  blogId: import.meta.env.VITE_BLOGGER_ID || '1722387930275850186',
   baseUrl: 'https://www.blogger.com/feeds',
   defaultParams: '?alt=rss&max-results=50'
 };
