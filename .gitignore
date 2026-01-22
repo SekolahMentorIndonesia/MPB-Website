@@ -1,0 +1,16 @@
+.DS_Store
+/node_modules/
+/.vite/
+
+# React Router
+/.react-router/
+/build/
+
+# Logs
+*.log
+build-log-latest.log
+
+# Environment variables
+.env
+.env.local
+.env.production
