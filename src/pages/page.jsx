@@ -2,8 +2,6 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import {
   CompanyHero,
-  CompanyFeatures,
-  CompanyBenefits,
   CompanyAbout,
   CompanyContact,
   CompanyTestimonials,
@@ -96,12 +94,6 @@ export default function HomePage() {
       <div style={{ display: 'none' }}>
         <SMIProducts />
       </div>
-
-      {/* Features Section */}
-      <CompanyFeatures />
-
-      {/* Benefits Section */}
-      <CompanyBenefits />
 
       {/* Testimonials Section */}
       <CompanyTestimonials />

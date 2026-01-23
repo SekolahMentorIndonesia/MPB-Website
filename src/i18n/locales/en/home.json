@@ -28,8 +28,61 @@
   },
   "products": {
     "title": "OUR PROGRAMS",
-    "subtitle": "Featured Programs for Content Creators",
-    "description": "Choose the program that suits your needs and level in the world of content creation."
+    "subtitle": "Featured Programs of Sekolah Mentor Indonesia",
+    "description": "Various educational program choices to support your career and business.",
+    "items": {
+      "learning": {
+        "name": "Learning Program",
+        "desc": "Access to community and basic materials."
+      },
+      "mentoring": {
+        "name": "Mentoring",
+        "desc": "Intensive personal guidance."
+      },
+      "coaching": {
+        "name": "Coaching",
+        "desc": "Exclusive training for maximum results."
+      },
+      "online_class": {
+        "name": "Online Class",
+        "desc": "Self-paced learning with video materials."
+      },
+      "digital_product": {
+        "name": "Educational Products",
+        "desc": "Supporting tools and digital assets."
+      }
+    }
+  },
+  "advantages": {
+    "badge": "OUR ADVANTAGES",
+    "title": "Advantages of Sekolah Mentor Indonesia",
+    "description": "Focused on educational value, structured learning systems, practitioner mentors, and real results for alumni.",
+    "list": {
+      "system": {
+        "title": "Learning System",
+        "desc": "Systematic and easy-to-understand learning methods."
+      },
+      "mentor": {
+        "title": "Practitioner Mentors",
+        "desc": "Guided directly by experienced practitioners in their fields."
+      },
+      "curriculum": {
+        "title": "Proven Curriculum",
+        "desc": "Material relevant to current industry needs."
+      },
+      "method": {
+        "title": "Effective Method",
+        "desc": "Practical approach focused on results and implementation."
+      },
+      "results": {
+        "title": "Alumni Results",
+        "desc": "Real proof of alumni success in building careers and businesses."
+      }
+    },
+    "stats": {
+      "satisfaction": "Student Satisfaction",
+      "alumni": "Total Alumni"
+    }
   },
   "pricing": {
     "title": "Mentoring Packages",

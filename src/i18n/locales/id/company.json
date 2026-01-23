@@ -11,15 +11,15 @@
   },
   "hero": {
     "badge": "Lembaga Pelatihan Terakreditasi",
-    "headline_main": "Cetak Wirausahawan",
-    "headline_sub": "Kompeten & Berkarakter",
-    "subheadline": "Lembaga pelatihan dan pendampingan bisnis terdepan untuk membekali Anda dengan strategi praktis dari para mentor berpengalaman.",
-    "cta": "Kunjungi Sekolah Mentor Indonesia",
+    "headline_main": "Membangun Ekosistem",
+    "headline_sub": "Pendidikan & Kreator Digital",
+    "subheadline": "PT. Multiusaha Prioritas Bersama merupakan perusahaan utama yang mengelola dan mengembangkan berbagai unit usaha di bidang edukasi, komunitas, dan media kreator digital di Indonesia.",
+    "cta": "Tentang Perusahaan",
     "trust_mentor": "Mentor Praktisi",
     "trust_curriculum": "Kurikulum Teruji",
     "founder_quote": "Built from real entrepreneurial battles — value-first, human-centered.",
     "founder_role": "Founder & Business Mentor",
-    "cta_title": "Kunjungi website Sekolah Mentor Indonesia",
+    "cta_title": "Tentang PT. Multiusaha Prioritas Bersama",
     "founder_alt": "Mohamad Iqbal Alhafizh - Founder Sekolah Mentor Indonesia"
   },
   "about": {
@@ -90,13 +90,13 @@
       },
       {
         "name": "Irvan Kusuma Tardiyanto",
-        "role": "Owner XA Production House",
+        "role": "Owner KK Production House",
         "image": "/images/company/irvan.jpeg",
         "content": "MPB Group tidak hanya bicara teori. Melalui unit pendidikannya, SMI, saya belajar leadership dan mindset strategis yang benar-benar aplikatif. Sekarang keputusan bisnis saya jauh lebih data-driven dan terarah."
       },
       {
         "name": "Rigel Pradiko",
-        "role": "Entrepreneur",
+        "role": "Owner Tokowadah",
         "image": "/images/company/rigel.jpeg",
         "content": "Nilai terbesar dari MPB Group adalah pendekatan mentoring yang terstruktur. Akses ke mentor dan ekosistem di bawah MPB Group membantu saya mempercepat proses pengambilan keputusan dan akselerasi bisnis."
       }
@@ -191,31 +191,6 @@
         "description": "Perluas jaringan koneksi dengan industri kreatif"
       }
     }
-  },
-  "testimonials": {
-    "badge": "Testimoni",
-    "title": "Apa Kata Mereka?",
-    "description": "Cerita nyata dari para alumni yang telah bertransformasi bersama Sekolah Mentor Indonesia.",
-    "list": [
-      {
-        "name": "Robert leonardo tobing",
-        "role": "OWNER PT Sinergi kasikarya sejahtera",
-        "image": "/images/company/robert.jpeg",
-        "content": "Sebagai owner, tantangan terbesar saya adalah membangun sistem yang autopilot. SMI memberikan blueprint yang sangat clear tentang cara scaling tanpa mengorbankan kualitas operasional. Investasi waktu di sini benar-benar berdampak langsung pada bottom line perusahaan kami."
-      },
-      {
-        "name": "Irvan kusuma fardiyanto",
-        "role": "OWNER KK Production house",
-        "image": "/images/company/irvan.jpeg",
-        "content": "SMI bukan cuma soal teori bisnis, tapi soal leadership dan mindset strategis. Mentor di sini membantu saya membedah bottleneck di perusahaan yang selama ini nggak saya sadari. Sekarang pengambilan keputusan jadi jauh lebih data-driven dan terukur."
-      },
-      {
-        "name": "Rigel pawallo",
-        "role": "Owner Tokowadah",
-        "image": "/images/company/rigel.jpeg",
-        "content": "Value terbesar yang saya dapatkan adalah akses ke networking level CEO. Bertukar pikiran dengan sesama pengusaha di SMI memberikan perspektif baru yang nggak didapat di tempat lain. Ini adalah ekosistem yang tepat kalau mau akselerasi bisnis secara serius."
-      }
-    ]
   },
   "programs": {
     "list": {

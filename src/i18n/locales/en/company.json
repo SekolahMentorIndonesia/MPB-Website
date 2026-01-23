@@ -14,12 +14,12 @@
     "headline_main": "Molding Entrepreneurs",
     "headline_sub": "Competent & Characterized",
     "subheadline": "Leading business training and mentoring institution to equip you with practical strategies from experienced mentors.",
-    "cta": "Visit Sekolah Mentor Indonesia",
+    "cta": "About Company",
     "trust_mentor": "Practitioner Mentors",
     "trust_curriculum": "Proven Curriculum",
     "founder_quote": "Built from real entrepreneurial battles — value-first, human-centered.",
     "founder_role": "Founder & Business Mentor",
-    "cta_title": "Visit Sekolah Mentor Indonesia website",
+    "cta_title": "About PT. Multiusaha Prioritas Bersama",
     "founder_alt": "Mohamad Iqbal Alhafizh - Founder of Sekolah Mentor Indonesia"
   },
   "about": {
@@ -98,7 +98,7 @@
         "name": "Rigel Pradiko",
         "role": "Entrepreneur",
         "image": "/images/company/rigel.jpeg",
-        "content": "The greatest value of MPB Group is its structured mentoring approach. Access to mentors and the ecosystem under MPB Group helped me accelerate the decision-making process and business acceleration."
+        "content": "The greatest value of MPB Group is its structured mentoring approach. Access to mentors and the ecosystem under MPB Group helped me accelerate the decision-making process and business growth."
       }
     ]
   },
@@ -191,31 +191,6 @@
         "description": "Expand your network connections with the creative industry"
       }
     }
-  },
-  "testimonials": {
-    "badge": "Testimonials",
-    "title": "What They Say?",
-    "description": "Real stories from alumni who have transformed with Sekolah Mentor Indonesia.",
-    "list": [
-      {
-        "name": "Robert leonardo tobing",
-        "role": "OWNER PT Sinergi kasikarya sejahtera",
-        "image": "/images/company/robert.jpeg",
-        "content": "As an owner, my biggest challenge was building an autopilot system. SMI provided a very clear blueprint on how to scale without sacrificing operational quality. The time investment here truly had a direct impact on our company's bottom line."
-      },
-      {
-        "name": "Irvan kusuma fardiyanto",
-        "role": "OWNER KK Production house",
-        "image": "/images/company/irvan.jpeg",
-        "content": "SMI is not just about business theory, but about leadership and strategic mindset. The mentors here helped me dissect bottlenecks in the company that I hadn't realized before. Now decision making is much more data-driven and measurable."
-      },
-      {
-        "name": "Rigel pawallo",
-        "role": "Owner Tokowadah",
-        "image": "/images/company/rigel.jpeg",
-        "content": "The biggest value I received was access to CEO-level networking. Exchanging ideas with fellow entrepreneurs at SMI provided new perspectives not found elsewhere. This is the right ecosystem if you want to seriously accelerate your business."
-      }
-    ]
   },
   "programs": {
     "list": {

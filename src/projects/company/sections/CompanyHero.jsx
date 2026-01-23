@@ -44,8 +44,8 @@ export default function CompanyHero() {
             {/* CTA Button */}
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start mb-10">
               <a
-                href="/sekolah-mentor-indonesia"
-                title="Kunjungi website Sekolah Mentor Indonesia"
+                href="#about-company"
+                title={t('hero.cta_title')}
                 className="w-full sm:w-auto bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm sm:text-base px-8 py-4 rounded-xl transition-all shadow-soft flex items-center justify-center gap-2 font-sans"
               >
                 {t('hero.cta')}

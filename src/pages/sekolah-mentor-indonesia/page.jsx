@@ -5,6 +5,7 @@ import SMIHomeHero from "../../projects/sekolah-mentor-indonesia/sections/SMIHom
 import WebsiteContent from "../../projects/sekolah-mentor-indonesia/sections/WebsiteContent";
 import SMIHomeCommunity from "../../projects/sekolah-mentor-indonesia/sections/SMIHomeCommunity";
 import SMIProducts from "../../projects/sekolah-mentor-indonesia/sections/SMIProducts";
+import SMIAdvantages from "../../projects/sekolah-mentor-indonesia/sections/SMIAdvantages";
 import SMIHomeSuccessStories from "../../projects/sekolah-mentor-indonesia/sections/SMIHomeSuccessStories";
 import SMIAIAssistant from "../../projects/sekolah-mentor-indonesia/sections/SMIAIAssistant";
 import Footer from "../../components/Footer";
@@ -63,6 +64,7 @@ export default function AppPage() {
         {/* <WebsiteContent /> */} {/* Sembunyikan sementara Pusat Edukasi Gratis */}
         <SMIHomeCommunity />
         <SMIProducts />
+        <SMIAdvantages />
         <SMIHomeSuccessStories />
         <SMIBlog />
         <SMIFAQ />

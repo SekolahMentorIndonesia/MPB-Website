@@ -27,9 +27,62 @@
     }
   },
   "products": {
-    "title": "PROGRAM KAMI",
-    "subtitle": "Program Unggulan untuk Content Creator",
-    "description": "Pilih program yang sesuai dengan kebutuhan dan level Anda dalam dunia content creation."
+    "title": "PROGRAM UNGGULAN",
+    "subtitle": "Program Unggulan Sekolah Mentor Indonesia",
+    "description": "Berbagai pilihan program edukasi untuk menunjang karir dan bisnis Anda.",
+    "items": {
+      "learning": {
+        "name": "Program Belajar",
+        "desc": "Akses komunitas dan materi dasar."
+      },
+      "mentoring": {
+        "name": "Mentoring",
+        "desc": "Bimbingan intensif personal."
+      },
+      "coaching": {
+        "name": "Coaching",
+        "desc": "Pelatihan eksklusif untuk hasil maksimal."
+      },
+      "online_class": {
+        "name": "Kelas Online",
+        "desc": "Belajar mandiri dengan video materi."
+      },
+      "digital_product": {
+        "name": "Produk Edukasi",
+        "desc": "Tools dan aset digital pendukung."
+      }
+    }
+  },
+  "advantages": {
+    "badge": "KEUNGGULAN KAMI",
+    "title": "Keunggulan Sekolah Mentor Indonesia",
+    "description": "Fokus pada value pendidikan, sistem belajar terstruktur, mentor praktisi, dan hasil nyata bagi alumni.",
+    "list": {
+      "system": {
+        "title": "Sistem Belajar",
+        "desc": "Metode pembelajaran yang sistematis dan mudah dipahami."
+      },
+      "mentor": {
+        "title": "Mentor Praktisi",
+        "desc": "Dibimbing langsung oleh praktisi yang berpengalaman di bidangnya."
+      },
+      "curriculum": {
+        "title": "Kurikulum Teruji",
+        "desc": "Materi yang relevan dengan kebutuhan industri saat ini."
+      },
+      "method": {
+        "title": "Metode Efektif",
+        "desc": "Pendekatan praktis yang fokus pada hasil dan implementasi."
+      },
+      "results": {
+        "title": "Hasil Alumni",
+        "desc": "Bukti nyata kesuksesan alumni dalam membangun karir dan bisnis."
+      }
+    },
+    "stats": {
+      "satisfaction": "Kepuasan Siswa",
+      "alumni": "Total Alumni"
+    }
   },
   "pricing": {
     "title": "Paket Mentoring",

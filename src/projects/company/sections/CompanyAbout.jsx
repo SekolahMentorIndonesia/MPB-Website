@@ -7,7 +7,7 @@ export default function CompanyAbout() {
   return (
     <div className="bg-neutral-50 overflow-hidden">
       {/* Section 1: Tentang PT */}
-      <section id="tentang-pt" className="py-20 lg:py-32 px-4 sm:px-8">
+      <section id="about-company" className="py-20 lg:py-32 px-4 sm:px-8">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

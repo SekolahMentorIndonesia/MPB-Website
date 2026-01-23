@@ -1,10 +1,12 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Star, Users, UserCheck, Building, Shield, CheckCircle, XCircle, AlertCircle, X } from "lucide-react";
+import { ArrowRight, Star, Users, UserCheck, Building, Shield, CheckCircle, XCircle, AlertCircle, X, MonitorPlay, BookOpen, HeartHandshake } from "lucide-react";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import OrderModal from "../../../components/OrderModal";
 import { createPaymentToken } from "../../../services/paymentApi";
 
 export default function SMIProducts() {
+  const { t } = useTranslation('home');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -192,10 +194,10 @@ export default function SMIProducts() {
   const products = [
     {
       id: 'community',
-      name: 'Komunitas (Premium)',
+      name: t('products.items.learning.name'),
       price: 'Rp 50.000',
-      period: '', // One-time payment, no recurring
-      description: 'Akses penuh seumur hidup ke komunitas kreator SMI dengan sesi sharing dan event eksklusif.',
+      period: '', 
+      description: t('products.items.learning.desc'),
       features: [
         'Akses komunitas kreator SMI (seumur hidup)',
         'Event online / offline tanpa batas',
@@ -212,10 +214,10 @@ export default function SMIProducts() {
     },
     {
       id: 'private',
-      name: 'Mentoring (Private)',
+      name: t('products.items.mentoring.name'),
       price: 'Rp 100.000',
       period: '/jam',
-      description: 'Sesi mentoring 1-on-1 online atau offline untuk kreator serius yang ingin berkembang pesat.',
+      description: t('products.items.mentoring.desc'),
       features: [
         'Konsultasi langsung 1-on-1',
         'Review akun & konten',
@@ -223,17 +225,17 @@ export default function SMIProducts() {
         'Jadwal fleksibel (by appointment)',
         'Bisa online atau offline'
       ],
-      icon: UserCheck,
+      icon: HeartHandshake,
       color: 'purple',
       link: '#contact',
       action: 'contact'
     },
     {
       id: 'corporate',
-      name: 'Private Exclusive (Coaching)',
+      name: t('products.items.coaching.name'),
       price: 'Rp 5-6jt',
       period: '/sesi',
-      description: 'Coaching intensif untuk perusahaan, komunitas besar, atau institusi yang ingin mengundang mentor Sekolah Mentor Indonesia. Isi form konsultasi dulu untuk diskusi kebutuhan Anda.',
+      description: t('products.items.coaching.desc'),
       features: [
         'Konsultasi awal dengan admin SMI',
         'Analisis kebutuhan perusahaan',
@@ -242,9 +244,9 @@ export default function SMIProducts() {
         'Workshop, event, atau internal training',
         'Kontrak & kerja sama resmi'
       ],
-      icon: Building,
+      icon: Star,
       color: 'green',
-      action: 'consultation' // Custom action untuk form konsultasi
+      action: 'consultation'
     }
   ];
 
@@ -313,7 +315,11 @@ export default function SMIProducts() {
           </div>
 
           {/* CTA Button */}
-          {product.action === 'consultation' ? (
+          {product.action === 'coming_soon' ? (
+            <button disabled className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-neutral-200 text-neutral-500 rounded-xl font-semibold cursor-not-allowed">
+              Segera Hadir
+            </button>
+          ) : product.action === 'consultation' ? (
             // Custom consultation button for Private Exclusive
             <div className="space-y-3">
               <button
@@ -382,13 +388,13 @@ export default function SMIProducts() {
           className="text-center mb-16"
         >
           <span className="text-brand-600 font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs mb-4 block font-sans">
-            PILIHAN PAKET
+            {t('products.subtitle')}
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 mb-6 font-display leading-tight">
-            Pilih Layanan Terbaik Untuk Anda
+            {t('products.title')}
           </h2>
           <p className="text-sm sm:text-base lg:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed font-sans">
-            Dapatkan akses ke mentorship berkualitas, komunitas eksklusif, dan resources premium
+            {t('products.description')}
           </p>
         </motion.div>
 

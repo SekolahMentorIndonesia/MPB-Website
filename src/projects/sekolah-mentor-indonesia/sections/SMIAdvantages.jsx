@@ -1,30 +1,30 @@
-import { Award, Zap, HeartHandshake, Rocket } from "lucide-react";
+import { Award, Users, BookOpen, Target } from "lucide-react";
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 export default function SMIAdvantages() {
-  const { t } = useTranslation('landing');
+  const { t } = useTranslation('home');
 
   const advantages = [
     {
-      icon: <Award className="w-5 h-5 sm:w-6 sm:h-6" />,
+      icon: <BookOpen className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: t('advantages.list.system.title'),
+      description: t('advantages.list.system.desc'),
+    },
+    {
+      icon: <Users className="w-5 h-5 sm:w-6 sm:h-6" />,
       title: t('advantages.list.mentor.title'),
       description: t('advantages.list.mentor.desc'),
     },
     {
-      icon: <Zap className="w-5 h-5 sm:w-6 sm:h-6" />,
+      icon: <Award className="w-5 h-5 sm:w-6 sm:h-6" />,
       title: t('advantages.list.curriculum.title'),
       description: t('advantages.list.curriculum.desc'),
     },
     {
-      icon: <HeartHandshake className="w-5 h-5 sm:w-6 sm:h-6" />,
-      title: t('advantages.list.mentoring.title'),
-      description: t('advantages.list.mentoring.desc'),
-    },
-    {
-      icon: <Rocket className="w-5 h-5 sm:w-6 sm:h-6" />,
-      title: t('advantages.list.ecosystem.title'),
-      description: t('advantages.list.ecosystem.desc'),
+      icon: <Target className="w-5 h-5 sm:w-6 sm:h-6" />,
+      title: t('advantages.list.method.title'),
+      description: t('advantages.list.method.desc'),
     },
   ];
 
