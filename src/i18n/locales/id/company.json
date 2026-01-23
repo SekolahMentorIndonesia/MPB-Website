@@ -77,6 +77,31 @@
     "cta_program": "Lihat Program Kami",
     "cta_consultation": "Mulai Konsultasi"
   },
+  "testimonials": {
+    "badge": "TESTIMONI",
+    "title": "Apa Kata Klien & Partner MPB Group?",
+    "subtitle": "Cerita nyata dari klien dan alumni unit bisnis di bawah naungan MPB Group.",
+    "list": [
+      {
+        "name": "Robert Leonardo Tobing",
+        "role": "Owner PT Karya Sejahtera",
+        "image": "/images/company/robert.jpeg",
+        "content": "Sebagai owner, tantangan terbesar saya adalah membangun sistem bisnis yang rapi dan scalable. Melalui program di bawah MPB Group, khususnya Sekolah Mentor Indonesia (SMI), saya mendapatkan blueprint sistem operasional yang jelas dan terukur. Dampaknya langsung terasa pada bottom line perusahaan kami."
+      },
+      {
+        "name": "Irvan Kusuma Tardiyanto",
+        "role": "Owner XA Production House",
+        "image": "/images/company/irvan.jpeg",
+        "content": "MPB Group tidak hanya bicara teori. Melalui unit pendidikannya, SMI, saya belajar leadership dan mindset strategis yang benar-benar aplikatif. Sekarang keputusan bisnis saya jauh lebih data-driven dan terarah."
+      },
+      {
+        "name": "Rigel Pradiko",
+        "role": "Entrepreneur",
+        "image": "/images/company/rigel.jpeg",
+        "content": "Nilai terbesar dari MPB Group adalah pendekatan mentoring yang terstruktur. Akses ke mentor dan ekosistem di bawah MPB Group membantu saya mempercepat proses pengambilan keputusan dan akselerasi bisnis."
+      }
+    ]
+  },
   "footer": {
     "description": "Lembaga pelatihan dan pendampingan bisnis terdepan untuk membekali Anda dengan strategi praktis.",
     "business_units": "Business Units",

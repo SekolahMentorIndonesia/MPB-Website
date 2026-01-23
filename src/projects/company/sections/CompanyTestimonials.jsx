@@ -100,14 +100,14 @@ export default function CompanyTestimonials() {
             {t('testimonials.title')}
           </h2>
           <p className="text-sm sm:text-base text-neutral-500 max-w-2xl mx-auto font-sans">
-            {t('testimonials.description')}
+            {t('testimonials.subtitle')}
           </p>
         </div>
 
         {/* Testimonials Layout - Responsive */}
         <div className="relative max-w-7xl mx-auto">
           {/* Desktop: Show all 3 testimonials in grid */}
-          <div className="hidden lg:grid lg:grid-cols-3 gap-6">
+          <div className="hidden lg:grid lg:grid-cols-3 gap-8">
             {testimonials.map((testi, index) => (
               <motion.div
                 key={index}
@@ -115,26 +115,31 @@ export default function CompanyTestimonials() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-neutral-50 p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-neutral-100 shadow-soft flex flex-col justify-between h-full"
+                className="bg-neutral-50 p-8 rounded-2xl sm:rounded-3xl border border-neutral-100 shadow-soft flex flex-col justify-between h-full hover:shadow-lg transition-shadow duration-300"
               >
                 <div>
-                  <Quote className="text-brand-200 mb-6 w-7 h-7 sm:w-8 sm:h-8" />
-                  <p className="text-sm sm:text-base text-neutral-700 leading-relaxed mb-8 font-sans italic">
+                  <Quote className="text-brand-200 mb-6 w-8 h-8" />
+                  <p className="text-base text-neutral-700 leading-relaxed mb-8 font-sans italic">
                     "{testi.content}"
                   </p>
                 </div>
 
                 <div className="pt-6 border-t border-neutral-200 flex items-center gap-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-white shadow-sm flex-shrink-0">
+                  <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-sm flex-shrink-0 bg-neutral-200">
                     <img 
                       src={testi.image} 
-                      alt={`${testi.name} - ${testi.role} - Testimoni Sekolah Mentor Indonesia`} 
+                      alt={`${testi.name} - ${testi.role}`} 
                       className="w-full h-full object-cover"
+                      onError={(e) => {
+                        e.target.style.display = 'none'; // Hide image if broken
+                        e.target.parentElement.classList.add('flex', 'items-center', 'justify-center');
+                        e.target.parentElement.innerHTML = `<span class="text-neutral-400 font-bold text-lg">${testi.name.charAt(0)}</span>`;
+                      }}
                     />
                   </div>
                   <div>
-                    <h4 className="font-bold text-neutral-900 text-xs sm:text-sm font-display">{testi.name}</h4>
-                    <p className="text-neutral-400 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans leading-tight">
+                    <h4 className="font-bold text-neutral-900 text-sm sm:text-base font-display mb-0.5">{testi.name}</h4>
+                    <p className="text-neutral-500 text-xs sm:text-sm font-sans leading-tight">
                       {testi.role}
                     </p>
                   </div>
@@ -168,26 +173,31 @@ export default function CompanyTestimonials() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="min-w-full max-w-full snap-center bg-neutral-50 p-6 sm:p-8 rounded-2xl sm:rounded-3xl border border-neutral-100 shadow-soft flex flex-col justify-between"
+                    className="min-w-full max-w-full snap-center bg-neutral-50 p-8 rounded-2xl sm:rounded-3xl border border-neutral-100 shadow-soft flex flex-col justify-between"
                   >
                     <div>
-                      <Quote className="text-brand-200 mb-6 w-7 h-7 sm:w-8 sm:h-8" />
-                      <p className="text-sm sm:text-base text-neutral-700 leading-relaxed mb-8 font-sans italic">
+                      <Quote className="text-brand-200 mb-6 w-8 h-8" />
+                      <p className="text-base text-neutral-700 leading-relaxed mb-8 font-sans italic">
                         "{testi.content}"
                       </p>
                     </div>
 
                     <div className="pt-6 border-t border-neutral-200 flex items-center gap-4">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full overflow-hidden border-2 border-white shadow-sm flex-shrink-0">
+                      <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-white shadow-sm flex-shrink-0 bg-neutral-200">
                         <img 
                           src={testi.image} 
                           alt={testi.name} 
                           className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.target.style.display = 'none';
+                            e.target.parentElement.classList.add('flex', 'items-center', 'justify-center');
+                            e.target.parentElement.innerHTML = `<span class="text-neutral-400 font-bold text-lg">${testi.name.charAt(0)}</span>`;
+                          }}
                         />
                       </div>
                       <div>
-                        <h4 className="font-bold text-neutral-900 text-xs sm:text-sm font-display">{testi.name}</h4>
-                        <p className="text-neutral-400 text-[9px] sm:text-[10px] uppercase tracking-wider font-sans leading-tight">
+                        <h4 className="font-bold text-neutral-900 text-sm sm:text-base font-display mb-0.5">{testi.name}</h4>
+                        <p className="text-neutral-500 text-xs sm:text-sm font-sans leading-tight">
                           {testi.role}
                         </p>
                       </div>
