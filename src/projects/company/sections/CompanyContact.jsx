@@ -1,8 +1,10 @@
 import { Mail, Phone, MapPin, Send, MessageCircle, Clock, CheckCircle, ChevronDown, X, CheckCircle2, AlertCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function CompanyContact() {
+  const { t } = useTranslation('company');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -12,11 +14,11 @@ export default function CompanyContact() {
   const [isSubjectOpen, setIsSubjectOpen] = useState(false);
 
   const subjectOptions = [
-    { value: 'general', label: 'Informasi Umum' },
-    { value: 'registration', label: 'Pendaftaran Program' },
-    { value: 'technical', label: 'Bantuan Teknis' },
-    { value: 'partnership', label: 'Kerjasama' },
-    { value: 'other', label: 'Lainnya' }
+    { value: 'general', label: t('contact.form.subjects.general') },
+    { value: 'registration', label: t('contact.form.subjects.registration') },
+    { value: 'technical', label: t('contact.form.subjects.technical') },
+    { value: 'partnership', label: t('contact.form.subjects.partnership') },
+    { value: 'other', label: t('contact.form.subjects.other') }
   ];
 
   const [notification, setNotification] = useState({
@@ -74,7 +76,7 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
       
       if (response.ok) {
         console.log('✅ Message sent to Telegram bot successfully');
-        showNotification('Pesan berhasil dikirim!', 'success');
+        showNotification(t('contact.form.success_message'), 'success');
         // Reset form
         setFormData({
           name: '',
@@ -84,11 +86,11 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
         });
       } else {
         console.log('❌ Failed to send message to Telegram bot');
-        showNotification('Gagal mengirim pesan. Silakan coba lagi.', 'error');
+        showNotification(t('contact.form.error_message'), 'error');
       }
     } catch (error) {
       console.error('❌ Error sending message to Telegram bot:', error);
-      showNotification('Terjadi kesalahan. Silakan coba lagi.', 'error');
+      showNotification(t('contact.form.error_general'), 'error');
     }
   };
 
@@ -134,7 +136,7 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
               </div>
               <div className="flex-1">
                 <p className="font-semibold text-sm">
-                  {notification.type === 'success' ? 'Berhasil!' : 'Gagal!'}
+                  {notification.type === 'success' ? t('contact.form.success_title') : t('contact.form.error_title')}
                 </p>
                 <p className="text-sm mt-1 opacity-90">
                   {notification.message}
@@ -161,13 +163,13 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
           className="text-center mb-16"
         >
           <span className="text-brand-600 font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs mb-4 block font-sans">
-            HUBUNGI KAMI
+            {t('contact.badge')}
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 mb-6 font-display leading-tight">
-            Siap Membantu Anda <span className="text-brand-600">Berkembang</span>
+            {t('contact.title')} <span className="text-brand-600">{t('contact.title_highlight')}</span>
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed font-sans">
-            Tim profesional kami siap menjawab pertanyaan dan membantu Anda memulai perjalanan sukses di dunia content creation.
+            {t('contact.description')}
           </p>
         </motion.div>
 
@@ -185,14 +187,14 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
                 <div className="w-8 h-8 bg-brand-100 rounded-xl flex items-center justify-center">
                   <Send className="w-4 h-4 text-brand-600" />
                 </div>
-                Kirim Pesan Langsung
+                {t('contact.form.title')}
               </h3>
               
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-semibold text-neutral-700 mb-2">
-                      Nama Lengkap *
+                      {t('contact.form.name_label')}
                     </label>
                     <input
                       type="text"
@@ -202,13 +204,13 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-sm"
-                      placeholder="John Doe"
+                      placeholder={t('contact.form.name_placeholder')}
                     />
                   </div>
 
                   <div>
                     <label htmlFor="email" className="block text-sm font-semibold text-neutral-700 mb-2">
-                      Email *
+                      {t('contact.form.email_label')}
                     </label>
                     <input
                       type="email"
@@ -218,14 +220,14 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
                       onChange={handleChange}
                       required
                       className="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-sm"
-                      placeholder="john@example.com"
+                      placeholder={t('contact.form.email_placeholder')}
                     />
                   </div>
                 </div>
 
                 <div>
                   <label htmlFor="subject" className="block text-sm font-semibold text-neutral-700 mb-2">
-                    Subjek *
+                    {t('contact.form.subject_label')}
                   </label>
                   <div className="relative">
                     <button
@@ -236,7 +238,7 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
                       <span className={formData.subject ? 'text-neutral-900' : 'text-neutral-400'}>
                         {formData.subject 
                           ? subjectOptions.find(opt => opt.value === formData.subject)?.label 
-                          : 'Pilih subjek'
+                          : t('contact.form.subject_placeholder')
                         }
                       </span>
                       <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform duration-200 ${isSubjectOpen ? 'rotate-180' : ''}`} />
@@ -270,7 +272,7 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-semibold text-neutral-700 mb-2">
-                    Pesan *
+                    {t('contact.form.message_label')}
                   </label>
                   <textarea
                     id="message"
@@ -280,7 +282,7 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
                     required
                     rows={6}
                     className="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all resize-none text-sm"
-                    placeholder="Tulis pesan Anda di sini..."
+                    placeholder={t('contact.form.message_placeholder')}
                   />
                 </div>
 
@@ -288,7 +290,7 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
                   type="submit"
                   className="w-full bg-brand-600 text-white py-4 px-6 rounded-xl font-semibold hover:bg-brand-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
                 >
-                  Kirim Pesan
+                  {t('contact.form.submit')}
                 </button>
               </form>
             </div>

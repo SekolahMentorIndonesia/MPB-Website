@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 export default function CompanyCTA() {
-  const { t } = useTranslation('landing');
+  const { t } = useTranslation('company');
 
   return (
     <section id="kontak" className="py-16 sm:py-24 px-4 sm:px-6 bg-white overflow-hidden">

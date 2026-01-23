@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 export default function CompanyHero() {
-  const { t } = useTranslation('landing');
+  const { t } = useTranslation('company');
 
   return (
     <section id="hero" className="relative min-h-[100dvh] pt-24 sm:pt-32 pb-16 overflow-hidden bg-white flex items-center">
@@ -48,7 +48,7 @@ export default function CompanyHero() {
                 title="Kunjungi website Sekolah Mentor Indonesia"
                 className="w-full sm:w-auto bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm sm:text-base px-8 py-4 rounded-xl transition-all shadow-soft flex items-center justify-center gap-2 font-sans"
               >
-                Kunjungi Sekolah Mentor Indonesia
+                {t('hero.cta')}
                 <ArrowRight className="w-4.5 h-4.5" />
               </a>
             </div>
@@ -57,11 +57,11 @@ export default function CompanyHero() {
             <div className="flex flex-row justify-center lg:justify-start gap-3 sm:gap-8 pt-8 border-t border-neutral-100 items-center">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4.5 h-4.5 text-brand-600 shrink-0" />
-                <span className="text-neutral-700 font-medium text-xs sm:text-sm font-sans">{t('hero.trust_points.mentor')}</span>
+                <span className="text-neutral-700 font-medium text-xs sm:text-sm font-sans">{t('hero.trust_mentor')}</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="w-4.5 h-4.5 text-brand-600 shrink-0" />
-                <span className="text-neutral-700 font-medium text-xs sm:text-sm font-sans">{t('hero.trust_points.curriculum')}</span>
+                <span className="text-neutral-700 font-medium text-xs sm:text-sm font-sans">{t('hero.trust_curriculum')}</span>
               </div>
             </div>
           </motion.div>
@@ -77,16 +77,16 @@ export default function CompanyHero() {
               <div className="relative w-full h-full aspect-[4/5] sm:aspect-[3/4]">
                 <img
                   src="/images/company/founder.jpeg"
-                  alt="Mohamad Iqbal Alhafizh - Founder Sekolah Mentor Indonesia"
+                  alt={t('hero.founder_alt')}
                   className="absolute inset-0 w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/25 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
                   <p className="text-white font-semibold text-sm sm:text-base leading-relaxed italic">
-                    “Built from real entrepreneurial battles — value-first, human-centered.”
+                    “{t('hero.founder_quote')}”
                   </p>
                   <p className="text-brand-100 text-[11px] sm:text-xs font-bold mt-2">
-                    Mohamad Iqbal Alhafizh · Founder & Business Mentor
+                    Mohamad Iqbal Alhafizh · {t('hero.founder_role')}
                   </p>
                 </div>
               </div>

@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 
 export default function CompanyFeatures() {
-  const { t } = useTranslation('landing');
+  const { t } = useTranslation('company');
   
   const features = [
     {

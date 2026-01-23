@@ -4,30 +4,28 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export default function Navbar({ variant = 'company' }) {
-  const { t, i18n } = useTranslation(['landing', 'home']);
+  const { t, i18n } = useTranslation(['company', 'landing', 'home']);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
 
   const navbarConfig = {
     company: {
       logo: "/images/company/logo.jpeg",
-      title: "MPB Group",
-      subtitle: "Multiusaha Prioritas Bersama",
+      title: t('navbar.title', { ns: 'company' }),
+      subtitle: t('navbar.subtitle', { ns: 'company' }),
       menuItems: [
-        { name: 'Home', href: '#hero' },
-        // Updated Link
+        { name: t('navbar.home', { ns: 'company' }), href: '#hero' },
         { 
-          name: 'Tentang', 
+          name: t('navbar.about', { ns: 'company' }), 
           href: '#tentang-pt',
           hasDropdown: true,
           dropdownItems: [
-            { name: 'Tentang Kami', href: '#tentang-pt' },
-            { name: 'Visi & Misi', href: '#visi-misi' },
-            { name: 'Struktur Perseroan', href: '#unit-usaha' },
+            { name: t('navbar.about_us', { ns: 'company' }), href: '#tentang-pt' },
+            { name: t('navbar.vision_mission', { ns: 'company' }), href: '#visi-misi' },
+            { name: t('navbar.structure', { ns: 'company' }), href: '#unit-usaha' },
           ]
         },
-        { name: 'Business Unit', href: '#unit-usaha' },
-        { name: 'Hubungi Kami', href: '#contact' },
+        { name: t('navbar.contact', { ns: 'company' }), href: '#contact' },
       ]
     },
     smi: {

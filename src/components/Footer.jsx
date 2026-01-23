@@ -64,16 +64,9 @@ export default function Footer({
           
           {/* Column 1: Company Info (MPB Group) */}
           <div className="flex flex-col items-start">
-            <a href="/" className="flex items-center mb-6 group">
-              <img 
-                src="/images/company/logo.jpeg" 
-                alt="Logo MPB Group" 
-                className="h-14 w-auto object-contain rounded-lg transition-transform group-hover:scale-105"
-              />
-              <div className="ml-4 flex flex-col items-start">
+            <a href="/" className="flex flex-col items-start mb-6 group">
                   <span className="text-xl font-bold text-white leading-tight tracking-tight">MPB Group</span>
                   <span className="text-xs text-neutral-500 font-medium tracking-wide uppercase mt-0.5">Multiusaha Prioritas Bersama</span>
-              </div>
             </a>
             <p className="text-sm leading-relaxed mb-8 font-sans text-neutral-400 max-w-xs">
               {t('footer.description')}
@@ -97,7 +90,7 @@ export default function Footer({
           {/* Column 2: Business Units */}
           <div>
              <h4 className="text-white font-bold text-sm mb-6 font-display uppercase tracking-widest border-b border-neutral-800 pb-2 inline-block">
-              Business Units
+              {t('footer.business_units', { ns: 'company' })}
             </h4>
             <ul className="space-y-4 text-sm font-sans">
               <li>
@@ -113,7 +106,7 @@ export default function Footer({
           {/* Column 3: Contact */}
           <div>
             <h4 className="text-white font-bold text-sm mb-6 font-display uppercase tracking-widest border-b border-neutral-800 pb-2 inline-block">
-              {t('footer.contact') || 'Contact'}
+              {t('footer.contact', { ns: 'company' }) || 'Contact'}
             </h4>
             <div className="flex flex-col gap-5">
               <div className="flex gap-3 items-start">
@@ -130,7 +123,7 @@ export default function Footer({
               </div>
               <div className="flex gap-3 items-center">
                 <Mail className="text-brand-500 flex-shrink-0 w-5 h-5" />
-                <a href="mailto:sekolahmentorindonesia@gmail.com" className="text-sm hover:text-white transition-colors">sekolahmentorindonesia@gmail.com</a>
+                <a href="mailto:multiusahaprioritasbersama@gmail.com" className="text-sm hover:text-white transition-colors">multiusahaprioritasbersama@gmail.com</a>
               </div>
             </div>
           </div>
@@ -138,7 +131,7 @@ export default function Footer({
           {/* Column 4: Legal & Company */}
           <div>
             <h4 className="text-white font-bold text-sm mb-6 font-display uppercase tracking-widest border-b border-neutral-800 pb-2 inline-block">
-              Company
+              {t('footer.company_header', { ns: 'company' })}
             </h4>
             <ul className="space-y-3 text-sm font-sans mb-8">
               {navigationLinks.map((link, i) => (
@@ -151,11 +144,11 @@ export default function Footer({
             </ul>
             
             <h4 className="text-white font-bold text-sm mb-4 font-display uppercase tracking-widest border-b border-neutral-800 pb-2 inline-block">
-              Legal
+              {t('footer.legal', { ns: 'company' })}
             </h4>
             <ul className="space-y-3 text-sm font-sans">
-              <li><a href="#" className="hover:text-brand-400 transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-brand-400 transition-colors">Terms of Service</a></li>
+              <li><a href="#" className="hover:text-brand-400 transition-colors">{t('footer.privacy', { ns: 'company' })}</a></li>
+              <li><a href="#" className="hover:text-brand-400 transition-colors">{t('footer.terms', { ns: 'company' })}</a></li>
             </ul>
           </div>
 
@@ -164,10 +157,10 @@ export default function Footer({
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-4 text-center md:text-left">
           <p className="text-xs text-neutral-500 font-sans">
-            &copy; {currentYear} PT Multiusaha Prioritas Bersama. All rights reserved.
+            {t('footer.copyright', { ns: 'company', year: currentYear })}
           </p>
           <p className="text-xs text-neutral-600 font-sans flex items-center gap-1">
-            <span>Powered by</span>
+            <span>{t('footer.powered_by', { ns: 'company' })}</span>
             <span className="text-neutral-500 font-medium">MPB Group</span>
           </p>
         </div>

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function CompanyFounderStory() {
+  const { t } = useTranslation('company');
   const VIDEO_ID = "j0lv9bNS2mE";
 
   return (
@@ -15,17 +17,17 @@ export default function CompanyFounderStory() {
               className="lg:order-1 order-2"
             >
               <span className="inline-block text-brand-600 font-bold tracking-[0.18em] uppercase text-[10px] sm:text-xs mb-4">
-                Perjalanan di Balik Sekolah Mentor Indonesia
+                {t('founder_story.badge')}
               </span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-neutral-900 mb-4 font-display leading-tight">
-                Membangun Kepercayaan Melalui Kisah Nyata
+                {t('founder_story.title')}
               </h2>
               <p className="text-neutral-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6">
-                Cerita nyata bagaimana SMI dibangun dari pengalaman gagal, belajar, dan mendampingi wirausahawan secara langsung.
+                {t('founder_story.description')}
               </p>
               <div className="bg-brand-50/60 border-l-4 border-brand-300 rounded-xl p-4 sm:p-5 mb-6">
                 <p className="text-neutral-700 text-sm sm:text-base italic">
-                  “SMI tidak dibangun dari teori, tapi dari pengalaman langsung mendampingi wirausahawan menghadapi masalah nyata di lapangan.”
+                  “{t('founder_story.quote')}”
                 </p>
               </div>
               <div className="flex items-center gap-3 mb-8">
@@ -33,9 +35,9 @@ export default function CompanyFounderStory() {
                   M
                 </div>
                 <div>
-                  <p className="text-neutral-900 font-bold">Mohammad Iqbal Alhafizh</p>
-                  <p className="text-neutral-500 text-sm font-medium">Founder & Mentor Utama</p>
-                  <p className="text-neutral-400 text-xs mt-1">Sekolah Mentor Indonesia</p>
+                  <p className="text-neutral-900 font-bold">{t('founder_story.name')}</p>
+                  <p className="text-neutral-500 text-sm font-medium">{t('founder_story.role')}</p>
+                  <p className="text-neutral-400 text-xs mt-1">{t('founder_story.subrole')}</p>
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-3">
@@ -43,13 +45,13 @@ export default function CompanyFounderStory() {
                   href="#program"
                   className="w-full sm:w-auto bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl transition-all shadow-lg shadow-brand-200"
                 >
-                  Lihat Program Kami
+                  {t('founder_story.cta_program')}
                 </a>
                 <a
-                  href="#kontak"
+                  href="#contact"
                   className="w-full sm:w-auto bg-white text-neutral-700 border border-neutral-200 px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl font-bold text-sm sm:text-base hover:bg-neutral-50 transition-all"
                 >
-                  Mulai Konsultasi
+                  {t('founder_story.cta_consultation')}
                 </a>
               </div>
             </motion.div>

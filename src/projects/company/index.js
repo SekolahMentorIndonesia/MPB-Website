@@ -8,5 +8,3 @@ export { default as CompanyCTA } from './sections/CompanyCTA';
 export { default as CompanyFounderStory } from './sections/CompanyFounderStory';
 export { default as CompanyTestimonials } from './sections/CompanyTestimonials';
 
-// Data
-export * from './data/companyData';

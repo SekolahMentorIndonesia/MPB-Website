@@ -7,12 +7,14 @@ import homeID from './locales/id/home.json';
 import authID from './locales/id/auth.json';
 import dashboardID from './locales/id/dashboard.json';
 import landingID from './locales/id/landing.json';
+import companyID from './locales/id/company.json';
 
 import commonEN from './locales/en/common.json';
 import homeEN from './locales/en/home.json';
 import authEN from './locales/en/auth.json';
 import dashboardEN from './locales/en/dashboard.json';
 import landingEN from './locales/en/landing.json';
+import companyEN from './locales/en/company.json';
 
 const resources = {
   id: {
@@ -21,6 +23,7 @@ const resources = {
     auth: authID,
     dashboard: dashboardID,
     landing: landingID,
+    company: companyID,
   },
   en: {
     common: commonEN,
@@ -28,6 +31,7 @@ const resources = {
     auth: authEN,
     dashboard: dashboardEN,
     landing: landingEN,
+    company: companyEN,
   },
 };
 
@@ -37,7 +41,7 @@ const i18nOptions = {
   resources,
   lng: isBrowser ? window.localStorage.getItem('i18nextLng') || 'id' : 'id',
   fallbackLng: 'id',
-  ns: ['common', 'home', 'auth', 'dashboard', 'landing'],
+  ns: ['common', 'home', 'auth', 'dashboard', 'landing', 'company'],
   defaultNS: 'common',
   interpolation: {
     escapeValue: false,

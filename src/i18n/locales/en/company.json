@@ -1,0 +1,202 @@
+{
+  "navbar": {
+    "title": "MPB Group",
+    "subtitle": "Multiusaha Prioritas Bersama",
+    "home": "Home",
+    "about": "About",
+    "about_us": "About Us",
+    "vision_mission": "Vision & Mission",
+    "structure": "Corporate Structure",
+    "contact": "Contact Us"
+  },
+  "hero": {
+    "badge": "Accredited Training Institution",
+    "headline_main": "Molding Entrepreneurs",
+    "headline_sub": "Competent & Characterized",
+    "subheadline": "Leading business training and mentoring institution to equip you with practical strategies from experienced mentors.",
+    "cta": "Visit Sekolah Mentor Indonesia",
+    "trust_mentor": "Practitioner Mentors",
+    "trust_curriculum": "Proven Curriculum",
+    "founder_quote": "Built from real entrepreneurial battles — value-first, human-centered.",
+    "founder_role": "Founder & Business Mentor",
+    "cta_title": "Visit Sekolah Mentor Indonesia website",
+    "founder_alt": "Mohamad Iqbal Alhafizh - Founder of Sekolah Mentor Indonesia"
+  },
+  "about": {
+    "badge": "ABOUT US",
+    "title": "PT. Multiusaha Prioritas Bersama",
+    "history_badge": "BRIEF HISTORY",
+    "history_p1": "PT. Multiusaha Prioritas Bersama was established on November 27, 2023, with the goal of building a resilient entrepreneurial ecosystem in Indonesia.",
+    "history_p2": "As a holding company, we focus on building a resilient entrepreneurial ecosystem through various business lines, including education and training.",
+    "history_p3": "We believe that with the right approach, every business potential can be accelerated effectively and sustainably.",
+    "parent_company": "PT. Multiusaha Prioritas Bersama",
+    "parent_type": "Holding Company"
+  },
+  "strategy": {
+    "badge": "CORPORATE STRATEGY",
+    "title": "Vision & Mission",
+    "vision_title": "Vision",
+    "vision_desc": "To be the leading business training and mentoring institution in Indonesia that creates competent, mentally strong, and synergy-ready entrepreneurs.",
+    "mission_title": "Mission",
+    "mission_1": "Organizing relevant and practical business training and coaching programs to produce human resources with capable skills and mentality.",
+    "mission_2": "Equipping participants with the mindset and strategies needed to help Business Partners achieve maximum turnover."
+  },
+  "structure": {
+    "badge": "CORPORATE STRUCTURE",
+    "title": "Our Business Units",
+    "smi_name": "Sekolah Mentor Indonesia",
+    "smi_field": "Mentoring & Coaching Field",
+    "smi_cta": "Visit Website",
+    "mti_name": "PT Mitranet Teknologi Internusa",
+    "mti_field": "Digital Telecommunications Field",
+    "mti_cta": "Visit Website",
+    "sks_name": "PT Sinergi Kasikarya Sejahtera",
+    "sks_field": "Food & Beverages Field",
+    "sks_cta": "Visit Website",
+    "me_name": "Multiusaha Elektronik",
+    "me_field": "Electronics Distribution Field",
+    "me_cta": "Visit Website",
+    "ms_name": "Multisky",
+    "ms_field": "Tour & Event Field",
+    "ms_cta": "Visit Website",
+    "mp_name": "Multipriority Store",
+    "mp_field": "Design & Printing Field",
+    "mp_cta": "Visit Website",
+    "ppp_name": "Priority Pro Property",
+    "ppp_field": "Property Field",
+    "ppp_cta": "Visit Website"
+  },
+  "founder_story": {
+    "badge": "The Journey Behind Sekolah Mentor Indonesia",
+    "title": "Building Trust Through Real Stories",
+    "description": "Real stories of how SMI was built from failure, learning, and directly mentoring entrepreneurs.",
+    "quote": "SMI was not built from theory, but from direct experience mentoring entrepreneurs facing real problems in the field.",
+    "name": "Mohammad Iqbal Alhafizh",
+    "role": "Founder & Lead Mentor",
+    "subrole": "Sekolah Mentor Indonesia",
+    "cta_program": "View Our Programs",
+    "cta_consultation": "Start Consultation"
+  },
+  "footer": {
+    "description": "Leading business training and mentoring institution to equip you with practical strategies.",
+    "business_units": "Business Units",
+    "office": "Office",
+    "contact": "Contact",
+    "copyright": "© {{year}} PT. Multiusaha Prioritas Bersama. All rights reserved.",
+    "legal": "Legal",
+    "company_header": "Company",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "powered_by": "Powered by"
+  },
+  "contact": {
+    "badge": "CONTACT US",
+    "title": "Ready to Help You",
+    "title_highlight": "Grow",
+    "description": "Our professional team is ready to answer your questions and help you start your successful journey in content creation.",
+    "form": {
+      "title": "Send Direct Message",
+      "name_label": "Full Name *",
+      "name_placeholder": "Enter your full name",
+      "email_label": "Email Address *",
+      "email_placeholder": "name@email.com",
+      "subject_label": "Message Subject",
+      "subject_placeholder": "Select message subject",
+      "message_label": "Your Message *",
+      "message_placeholder": "Write your message or question here...",
+      "submit": "Send Message",
+      "subjects": {
+        "general": "General Information",
+        "registration": "Program Registration",
+        "technical": "Technical Support",
+        "partnership": "Partnership",
+        "other": "Other"
+      },
+      "success_title": "Success!",
+      "success_message": "Message sent successfully!",
+      "error_title": "Failed!",
+      "error_message": "Failed to send message. Please try again.",
+      "error_general": "An error occurred. Please try again."
+    }
+  },
+  "cta": {
+    "title": "Accelerate Your Business Growth Now",
+    "description": "Optimize your potential and business through intensive mentoring and a practical curriculum specially designed for superior entrepreneurs.",
+    "join": "Join Now",
+    "consultation": "Consultation"
+  },
+  "features": {
+    "badge": "Featured Features",
+    "title": "Complete Features for Best Experience",
+    "description": "Enjoy various premium features specifically designed to support your journey as a content creator.",
+    "list": {
+      "interactive": {
+        "title": "Interactive Classes",
+        "description": "High-quality learning videos with easy-to-understand materials"
+      },
+      "community": {
+        "title": "Active Community",
+        "description": "Join thousands of other creators in a supportive community"
+      },
+      "certificate": {
+        "title": "Official Certificate",
+        "description": "Get certificates that can enhance your professional credibility"
+      }
+    }
+  },
+  "benefits": {
+    "badge": "Advantages",
+    "title": "Benefits of Joining SMI",
+    "description": "Get various exclusive benefits that you won't find on other platforms.",
+    "list": {
+      "mentor": {
+        "title": "Experienced Mentors",
+        "description": "Learn directly from experts who have been successful in their field"
+      },
+      "flexible": {
+        "title": "Flexible Time",
+        "description": "Access materials anytime and anywhere according to your schedule"
+      },
+      "portfolio": {
+        "title": "Portfolio Development",
+        "description": "Help build a strong portfolio for your career"
+      },
+      "network": {
+        "title": "Wide Networking",
+        "description": "Expand your network connections with the creative industry"
+      }
+    }
+  },
+  "testimonials": {
+    "badge": "Testimonials",
+    "title": "What They Say?",
+    "description": "Real stories from alumni who have transformed with Sekolah Mentor Indonesia.",
+    "list": [
+      {
+        "name": "Robert leonardo tobing",
+        "role": "OWNER PT Sinergi kasikarya sejahtera",
+        "image": "/images/company/robert.jpeg",
+        "content": "As an owner, my biggest challenge was building an autopilot system. SMI provided a very clear blueprint on how to scale without sacrificing operational quality. The time investment here truly had a direct impact on our company's bottom line."
+      },
+      {
+        "name": "Irvan kusuma fardiyanto",
+        "role": "OWNER KK Production house",
+        "image": "/images/company/irvan.jpeg",
+        "content": "SMI is not just about business theory, but about leadership and strategic mindset. The mentors here helped me dissect bottlenecks in the company that I hadn't realized before. Now decision making is much more data-driven and measurable."
+      },
+      {
+        "name": "Rigel pawallo",
+        "role": "Owner Tokowadah",
+        "image": "/images/company/rigel.jpeg",
+        "content": "The biggest value I received was access to CEO-level networking. Exchanging ideas with fellow entrepreneurs at SMI provided new perspectives not found elsewhere. This is the right ecosystem if you want to seriously accelerate your business."
+      }
+    ]
+  },
+  "programs": {
+    "list": {
+      "mindset": { "title": "Business Mindset" },
+      "sales": { "title": "Sales Excellence" },
+      "leadership": { "title": "Leadership & Team" }
+    }
+  }
+}

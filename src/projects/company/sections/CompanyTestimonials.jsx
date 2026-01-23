@@ -3,10 +3,9 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { useEffect, useRef, useState } from "react";
 
-import { testimonials } from "../data/companyData";
-
 export default function CompanyTestimonials() {
-  const { t } = useTranslation('landing');
+  const { t } = useTranslation('company');
+  const testimonials = t('testimonials.list', { returnObjects: true });
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAutoSliding, setIsAutoSliding] = useState(true);
   const [direction, setDirection] = useState(1); // 1 = maju, -1 = mundur
