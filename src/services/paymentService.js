@@ -267,11 +267,11 @@ class PaymentService {
    */
   async uploadProof(formData) {
     try {
-      const token = localStorage.getItem('token');
+      // const token = localStorage.getItem('token');
       const response = await fetch(`${this.baseURL}/api/payments`, {
         method: 'POST',
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer dummy-token`,
         },
         body: formData,
       });

@@ -1,36 +1,34 @@
 import { useCallback } from 'react';
-import { signIn, signOut } from "@auth/create/react";
 
 function useAuth() {
-  const callbackUrl = typeof window !== 'undefined' 
-    ? new URLSearchParams(window.location.search).get('callbackUrl')
-    : null;
-
-  const signInWithCredentials = useCallback((options) => {
-    return signIn("credentials-signin", {
-      ...options,
-      callbackUrl: callbackUrl ?? options.callbackUrl
-    });
-  }, [callbackUrl])
-
-  const signUpWithCredentials = useCallback((options) => {
-    return signIn("credentials-signup", {
-      ...options,
-      callbackUrl: callbackUrl ?? options.callbackUrl
-    });
-  }, [callbackUrl])
-
-  const signInWithGoogle = useCallback((options) => {
-    return signIn("google", {
-      ...options,
-      callbackUrl: callbackUrl ?? options.callbackUrl
-    });
-  }, [callbackUrl]);
-  const signInWithFacebook = useCallback((options) => {
-    return signIn("facebook", options);
+  const signInWithCredentials = useCallback(async (options) => {
+    console.log('signInWithCredentials mocked', options);
+    return Promise.resolve({ ok: true });
   }, []);
-  const signInWithTwitter = useCallback((options) => {
-    return signIn("twitter", options);
+
+  const signUpWithCredentials = useCallback(async (options) => {
+    console.log('signUpWithCredentials mocked', options);
+    return Promise.resolve({ ok: true });
+  }, []);
+
+  const signInWithGoogle = useCallback(async (options) => {
+    console.log('signInWithGoogle mocked', options);
+    return Promise.resolve({ ok: true });
+  }, []);
+
+  const signInWithFacebook = useCallback(async (options) => {
+    console.log('signInWithFacebook mocked', options);
+    return Promise.resolve({ ok: true });
+  }, []);
+
+  const signInWithTwitter = useCallback(async (options) => {
+    console.log('signInWithTwitter mocked', options);
+    return Promise.resolve({ ok: true });
+  }, []);
+
+  const signOut = useCallback(async () => {
+    console.log('signOut mocked');
+    return Promise.resolve({ ok: true });
   }, []);
 
   return {

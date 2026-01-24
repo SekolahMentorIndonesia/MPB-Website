@@ -1,20 +1,17 @@
 import { motion } from "framer-motion";
 import { ArrowRight, BookOpen, Sparkles, CheckCircle2 } from "lucide-react";
-import { useAuthStore } from "../../../store/useAuthStore";
+import { useUser } from "../../../hooks/useUser";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router";
 
 export default function SMIHomeHero() {
   const { t } = useTranslation('home');
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated } = useUser();
   const navigate = useNavigate();
 
   const handleStartLearning = () => {
-    if (isAuthenticated) {
-      window.location.href = "/dashboard";
-    } else {
-      navigate("/login"); // Redirect to login page instead of mock login
-    }
+    // Dashboard removed, scroll to packages
+    document.getElementById('paket')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -62,7 +59,7 @@ export default function SMIHomeHero() {
               onClick={handleStartLearning}
               className="w-full sm:w-auto bg-brand-600 text-white px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base shadow-xl shadow-brand-200 flex items-center justify-center gap-3 group transition-all"
             >
-              {isAuthenticated ? t('hero.cta_dashboard') : t('hero.cta_start')}
+              {t('hero.cta_start')}
               <ArrowRight className="w-[18px] h-[18px] group-hover:translate-x-1 transition-transform" />
             </motion.button>
 

@@ -1,5 +1,5 @@
 import { motion, AnimatePresence } from "framer-motion";
-import { X, User, Mail, Phone, MessageSquare, CreditCard } from "lucide-react";
+import { X, User, Mail, Phone, MessageSquare, CreditCard, Building } from "lucide-react";
 import { useState } from "react";
 
 export default function OrderModal({ isOpen, onClose, product, onProceedToPayment }) {
@@ -7,6 +7,7 @@ export default function OrderModal({ isOpen, onClose, product, onProceedToPaymen
     name: '',
     email: '',
     phone: '',
+    company: '',
     notes: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -37,12 +38,16 @@ export default function OrderModal({ isOpen, onClose, product, onProceedToPaymen
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
+      company: formData.company,
+      notes: formData.notes,
       product: {
         id: product.id,
         name: product.name,
         price: product.price, // Format "Rp 50.000" akan dikonversi di backend
         period: product.period,
-        description: product.description || product.name
+        description: product.description || product.name,
+        productType: product.productType,
+        paymentMode: product.paymentMode // Use product config directly
       }
     };
     
@@ -157,11 +162,29 @@ export default function OrderModal({ isOpen, onClose, product, onProceedToPaymen
                 />
               </div>
 
+              {/* Company (Coaching Only) */}
+              {product.productType === 'coaching' && (
+                <div>
+                  <label className="flex items-center gap-2 text-sm font-medium text-neutral-700 mb-2">
+                    <Building className="w-4 h-4" />
+                    Perusahaan (Opsional)
+                  </label>
+                  <input
+                    type="text"
+                    name="company"
+                    value={formData.company}
+                    onChange={handleInputChange}
+                    className="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all"
+                    placeholder="Nama Perusahaan / Instansi"
+                  />
+                </div>
+              )}
+
               {/* Notes */}
               <div>
                 <label className="flex items-center gap-2 text-sm font-medium text-neutral-700 mb-2">
                   <MessageSquare className="w-4 h-4" />
-                  Catatan (Opsional)
+                  {product.productType === 'coaching' ? 'Kebutuhan / Catatan' : 'Catatan (Opsional)'}
                 </label>
                 <textarea
                   name="notes"
@@ -169,24 +192,26 @@ export default function OrderModal({ isOpen, onClose, product, onProceedToPaymen
                   onChange={handleInputChange}
                   rows={3}
                   className="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent outline-none transition-all resize-none"
-                  placeholder="Ceritakan tujuan Anda bergabung..."
+                  placeholder={product.productType === 'coaching' ? 'Ceritakan kebutuhan training Anda...' : 'Ceritakan tujuan Anda bergabung...'}
                 />
               </div>
             </div>
 
-            {/* Product Summary */}
-            <div className="mt-6 p-4 bg-neutral-50 rounded-xl">
-              <div className="flex items-center justify-between mb-2">
-                <span className="text-sm text-neutral-600">Produk</span>
-                <span className="text-sm font-medium text-neutral-900">{product.name}</span>
+            {/* Product Summary - Hide for Coaching */}
+            {product.productType !== 'coaching' && (
+              <div className="mt-6 p-4 bg-neutral-50 rounded-xl">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm text-neutral-600">Produk</span>
+                  <span className="text-sm font-medium text-neutral-900">{product.name}</span>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-sm text-neutral-600">Total</span>
+                  <span className="text-lg font-bold text-brand-600">
+                    {product.price}{product.period}
+                  </span>
+                </div>
               </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-neutral-600">Total</span>
-                <span className="text-lg font-bold text-brand-600">
-                  {product.price}{product.period}
-                </span>
-              </div>
-            </div>
+            )}
 
             {/* Submit Button */}
             <button

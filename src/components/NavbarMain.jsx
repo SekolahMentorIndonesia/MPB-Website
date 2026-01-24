@@ -1,13 +1,13 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { User, LogOut, ChevronDown, Globe, Menu, X } from "lucide-react";
 import { useState } from "react";
-import { useAuthStore } from "../store/useAuthStore";
+import { useUser } from "../hooks/useUser";
 import { useTranslation } from "react-i18next";
 import { useNavigate, Link } from "react-router";
 
 export default function NavbarMain() {
   const { t, i18n } = useTranslation('common');
-  const { isAuthenticated, user, logout } = useAuthStore();
+  const { isAuthenticated, user, logout } = useUser();
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -165,74 +165,6 @@ export default function NavbarMain() {
               )}
             </AnimatePresence>
           </div>
-
-          {/* Auth Section - Desktop Only */}
-          <div className="hidden lg:flex items-center gap-3">
-            {isAuthenticated ? (
-              <div className="flex items-center gap-3">
-                {isAdminRole && (
-                  <button 
-                    onClick={() => navigate('/admin/dashboard')}
-                    className="flex items-center gap-2 px-3 py-1.5 bg-brand-50 text-brand-600 rounded-md border border-brand-100 font-bold text-xs hover:bg-brand-100 transition-all duration-200"
-                  >
-                    Dashboard
-                  </button>
-                )}
-                
-                <div className="relative">
-                  <button 
-                    onClick={() => setIsProfileOpen(!isProfileOpen)}
-                    className="flex items-center gap-2 p-1 pr-2 bg-neutral-50 rounded-full hover:bg-neutral-100 transition-all duration-200 border border-neutral-200"
-                  >
-                    <div className="w-7 h-7 rounded-full bg-brand-600 flex items-center justify-center text-white font-bold text-xs">
-                      {user?.name?.charAt(0) || 'U'}
-                    </div>
-                    <span className="text-xs font-bold text-neutral-700">{user?.name}</span>
-                    <ChevronDown className={`text-neutral-400 w-3 h-3 transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`} />
-                  </button>
-
-                  <AnimatePresence>
-                    {isProfileOpen && (
-                      <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-sm border border-neutral-100 p-1 overflow-hidden"
-                      >
-                        <button 
-                          onClick={() => {
-                            navigate('/profile');
-                            setIsProfileOpen(false);
-                          }}
-                          className="w-full text-left px-3 py-2 text-xs font-medium text-neutral-600 hover:bg-neutral-50 rounded-md flex items-center gap-2 transition-colors duration-200"
-                        >
-                          <User className="w-3 h-3" /> Profil
-                        </button>
-                        <button 
-                          onClick={() => {
-                            logout();
-                            setIsProfileOpen(false);
-                          }}
-                          className="w-full text-left px-3 py-2 text-xs font-medium text-red-500 hover:bg-red-50 rounded-md flex items-center gap-2 transition-colors duration-200"
-                        >
-                          <LogOut className="w-3 h-3" /> Keluar
-                        </button>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
-              </div>
-            ) : (
-              <div className="hidden lg:flex items-center gap-3">
-                <Link
-                  to="/login"
-                  className="text-neutral-700 hover:text-brand-600 font-medium transition-colors"
-                >
-                  Login
-                </Link>
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Mobile Menu Button */}
@@ -310,20 +242,7 @@ export default function NavbarMain() {
           {/* Auth Section */}
           <div className="p-5 border-t border-neutral-100 bg-neutral-50">
             <h4 className="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-3">Akun</h4>
-            {isAuthenticated ? (
-              <div className="space-y-2">
-                {isAdminRole && (
-                  <button 
-                    onClick={() => {
-                      navigate('/admin/dashboard');
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-brand-600 text-white rounded-lg font-medium text-sm hover:bg-brand-700 shadow-md transition-all duration-200"
-                  >
-                    Dashboard
-                  </button>
-                )}
-                
+            <div className="space-y-2">
                 <button 
                   onClick={() => {
                     navigate('/profile');
@@ -344,17 +263,6 @@ export default function NavbarMain() {
                   <LogOut className="w-4 h-4" /> Keluar
                 </button>
               </div>
-            ) : (
-              <div className="space-y-2">
-                <Link
-                    to="/login"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                    className="flex items-center justify-center px-4 py-3 bg-brand-600 text-white rounded-lg font-medium text-sm hover:bg-brand-700 shadow-md transition-all duration-200"
-                  >
-                    Login
-                  </Link>
-                </div>
-            )}
           </div>
 
           {/* Language Section */}

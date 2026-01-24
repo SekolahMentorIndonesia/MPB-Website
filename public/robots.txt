@@ -6,14 +6,8 @@ Crawl-delay: 1
 
 # Block admin and private areas
 Disallow: /admin/
-Disallow: /dashboard/
 Disallow: /api/
 Disallow: /_create/
-
-# Allow specific resources
-Allow: /dashboard/content
-Allow: /dashboard/community
-Allow: /dashboard/profile
 
 # Sitemap location
 Sitemap: https://smi.id/sitemap.xml

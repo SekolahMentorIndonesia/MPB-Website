@@ -42,7 +42,7 @@ import { useNotification, NotificationProvider } from './contexts/NotificationCo
 // @ts-ignore
 import NotificationContainer from './components/NotificationContainer';
 // @ts-ignore
-import AuthInitializer from './components/AuthInitializer';
+
 
 export const links = () => [
   {
@@ -633,10 +633,8 @@ export function Layout({ children }: { children: ReactNode }) {
       </head>
       <body>
         <NotificationProvider>
-          <AuthInitializer>
             <ClientOnly loader={() => children} />
             <NotificationContainer />
-          </AuthInitializer>
         </NotificationProvider>
         <HotReloadIndicator />
         <Toaster position="bottom-right" />

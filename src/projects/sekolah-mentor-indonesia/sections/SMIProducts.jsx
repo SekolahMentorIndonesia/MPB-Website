@@ -1,9 +1,17 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Star, Users, UserCheck, Building, Shield, CheckCircle, XCircle, AlertCircle, X, MonitorPlay, BookOpen, HeartHandshake } from "lucide-react";
+import { ArrowRight, Star, Users, UserCheck, Building, Shield, CheckCircle, XCircle, AlertCircle, X, MonitorPlay, BookOpen, HeartHandshake, Clock } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import OrderModal from "../../../components/OrderModal";
 import { createPaymentToken } from "../../../services/paymentApi";
+
+// KONFIGURASI PEMBAYARAN
+// Mengontrol metode pembayaran untuk setiap tipe produk
+const PAYMENT_CONFIG = {
+  program: "manual", // "gateway" | "manual"
+  mentoring: "gateway", // "gateway" | "manual"
+  coaching: "manual" // "manual" only (Redirect WA)
+};
 
 export default function SMIProducts() {
   const { t } = useTranslation('home');
@@ -11,6 +19,8 @@ export default function SMIProducts() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState(null); // success, error, pending, null
+  const [manualPaymentData, setManualPaymentData] = useState(null);
+  const [isManualModalOpen, setIsManualModalOpen] = useState(false);
   
   // Fungsi untuk membuka modal form
   const handleOrderClick = (product) => {
@@ -18,35 +28,52 @@ export default function SMIProducts() {
     setIsModalOpen(true);
   };
 
-  // Fungsi khusus untuk Private Exclusive - langsung ke WhatsApp dengan data form
-  const handleConsultationClick = (product) => {
-    // Tunggu data dari form OrderModal
+  // Fungsi khusus untuk Coaching (B2B) - Redirect ke WhatsApp
+  const handleCoachingClick = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
 
-  // Fungsi untuk handle submit form konsultasi
+  // Fungsi untuk handle submit form konsultasi (deprecated for Coaching, kept for ref)
   const handleConsultationSubmit = (formData) => {
-    // Format pesan WhatsApp dengan data yang diisi user
-    const message = `Halo Tim SMI, saya tertarik dengan Private Exclusive Coaching.\n\n` +
-      `Data Konsultasi:\n` +
-      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n` +
-      `Layanan: Private Exclusive Coaching\n` +
-      `Nama: ${formData.name}\n` +
-      `Email: ${formData.email}\n` +
-      `WhatsApp: ${formData.phone}\n` +
-      `Lokasi: ${formData.locationType}\n` +
-      `Catatan: ${formData.notes || 'Tidak ada catatan'}\n\n` +
-      `━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n` +
-      `Mohon informasikan harga dan proses selanjutnya. Terima kasih! 🙏`;
-
-    // Selalu kirim ke nomor WhatsApp admin SMI yang benar
-    const whatsappUrl = `https://wa.me/6281915020498?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
+    // ... logic moved to handleCoachingClick for direct redirect
   };
   
-  // Fungsi untuk trigger pembayaran Midtrans (IMPLEMENTASI BENAR)
-  const handleProceedToPayment = async (orderData) => {
+  // Fungsi utama pemrosesan order
+  const handleProcessOrder = async (orderData) => {
+    const { product } = orderData;
+    
+    // Handle Coaching / Consultation
+    if (product.productType === 'coaching') {
+        const message = `Halo Tim SMI, saya ingin konsultasi Corporate Training/Coaching.\n\n` +
+            `DATA DIRI\n` +
+            `Nama: ${orderData.name}\n` +
+            `Email: ${orderData.email}\n` +
+            `No WA: ${orderData.phone}\n` +
+            `Perusahaan: ${orderData.company || '-'}\n` +
+            `Kebutuhan: ${orderData.notes || '-'}\n\n` +
+            `Mohon informasi lebih lanjut. Terima kasih!`;
+        
+        const whatsappUrl = `https://wa.me/6281915020498?text=${encodeURIComponent(message)}`;
+        window.open(whatsappUrl, '_blank');
+        setIsModalOpen(false);
+        return;
+    }
+
+    const paymentMode = product.paymentMode; // Get selected mode
+    
+    if (paymentMode === 'gateway') {
+        await handleGatewayPayment(orderData);
+    } else {
+        // Setup data for manual payment modal
+        setManualPaymentData(orderData);
+        setIsManualModalOpen(true);
+        setIsModalOpen(false);
+    }
+  };
+
+  // 1. Payment Gateway Flow
+  const handleGatewayPayment = async (orderData) => {
     try {
       setIsProcessing(true);
       console.log('Starting payment process...', orderData);
@@ -67,24 +94,33 @@ export default function SMIProducts() {
       }
       
       const snapToken = response.token;
-      console.log('Snap Token:', snapToken);
       
       // 3. Validasi window.snap tersedia
       if (!window.snap) {
         throw new Error('Midtrans Snap not loaded');
       }
       
-      // 4. Panggil snap.pay() dengan TOKEN STRING MURNI
+      // 4. Panggil snap.pay()
       window.snap.pay(snapToken, {
         onSuccess: (result) => {
           console.log('Payment Success:', result);
-          setPaymentStatus('success');
+          // Set status based on product type
+          if (orderData.product.productType === 'mentoring') {
+              setPaymentStatus('review');
+              sendTelegramNotification(orderData, 'MENUNGGU REVIEW (Gateway Paid)', 'Gateway');
+          } else {
+              setPaymentStatus('success'); // Program -> PAID
+              sendTelegramNotification(orderData, 'PAID', 'Gateway');
+          }
+          
           setIsProcessing(false);
+          setIsModalOpen(false);
         },
         onPending: (result) => {
           console.log('Payment Pending:', result);
           setPaymentStatus('pending');
           setIsProcessing(false);
+          setIsModalOpen(false);
         },
         onError: (result) => {
           console.log('Payment Error:', result);
@@ -92,7 +128,7 @@ export default function SMIProducts() {
           setIsProcessing(false);
         },
         onClose: () => {
-          console.log('Customer closed the popup without finishing the payment');
+          console.log('Customer closed the popup');
           setIsProcessing(false);
         }
       });
@@ -103,6 +139,102 @@ export default function SMIProducts() {
       setIsProcessing(false);
     }
   };
+
+  // 2. Manual Payment Flow
+  const handleManualSubmit = async () => {
+    // Submit data to backend (mock or real)
+    setIsProcessing(true);
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    // Set status based on product type
+    // Program (Manual) -> PENDING -> 1x24 jam
+    // Mentoring (Manual) -> MENUNGGU REVIEW -> 1x24 jam
+    
+    const status = manualPaymentData.product.productType === 'mentoring' ? 'review' : 'pending';
+    setPaymentStatus(status);
+    
+    // Kirim notifikasi ke Telegram (Mock)
+    sendTelegramNotification(manualPaymentData, status === 'review' ? 'MENUNGGU REVIEW' : 'PENDING', 'Manual');
+    
+    setIsProcessing(false);
+    setIsManualModalOpen(false);
+  };
+
+  // Helper: Send Telegram Notification (Simulation)
+  const sendTelegramNotification = (data, status, method) => {
+    // In a real app, this would call an API endpoint that triggers the bot
+    // Since we can't add backend, we'll rely on the existing enrollment flow or just log it
+    // But we CAN try to open a window if it's client side, but that's annoying.
+    // We'll assume the "Backend" (simulated) handles it.
+    console.log(`[TELEGRAM] Sending notification to admin:
+      Order: ${data.product.name}
+      Customer: ${data.name} (${data.email})
+      Status: ${status}
+      Method: ${method}
+    `);
+  };
+
+  // Manual Payment Modal Component
+  const ManualPaymentModal = () => {
+    if (!isManualModalOpen || !manualPaymentData) return null;
+
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          className="bg-white rounded-2xl max-w-md w-full p-6 relative max-h-[90vh] overflow-y-auto"
+        >
+          <button
+            onClick={() => setIsManualModalOpen(false)}
+            className="absolute top-4 right-4 p-2 hover:bg-neutral-100 rounded-lg"
+          >
+            <X className="w-5 h-5" />
+          </button>
+
+          <h3 className="text-xl font-bold mb-4">Instruksi Pembayaran</h3>
+          
+          <div className="bg-neutral-50 p-4 rounded-xl mb-6">
+            <p className="text-sm text-neutral-600 mb-1">Total Pembayaran:</p>
+            <p className="text-2xl font-bold text-brand-600">
+              {manualPaymentData.product.price}
+            </p>
+          </div>
+
+          <div className="space-y-4 mb-8">
+            <div className="border border-neutral-200 rounded-xl p-4">
+              <p className="font-semibold text-neutral-900 mb-1">Bank Transfer</p>
+              <p className="text-sm text-neutral-600">BCA: 1234567890</p>
+              <p className="text-sm text-neutral-600">A.n. Sekolah Mentor Indonesia</p>
+            </div>
+            {/* 
+            <div className="border border-neutral-200 rounded-xl p-4">
+              <p className="font-semibold text-neutral-900 mb-1">QRIS</p>
+              <div className="bg-neutral-200 h-32 rounded-lg flex items-center justify-center text-neutral-500 text-sm">
+                [QRIS Image Placeholder]
+              </div>
+            </div>
+            */}
+          </div>
+          
+          <div className="text-sm text-neutral-500 mb-6">
+            Silakan lakukan pembayaran ke nomor rekening di atas. Setelah transfer, klik tombol di bawah untuk konfirmasi. Admin akan memverifikasi dalam 1x24 jam.
+          </div>
+
+          <button
+            onClick={handleManualSubmit}
+            disabled={isProcessing}
+            className="w-full py-3 bg-brand-600 text-white rounded-xl font-bold hover:bg-brand-700 transition-colors disabled:opacity-50"
+          >
+            {isProcessing ? 'Memproses...' : 'Saya Sudah Bayar'}
+          </button>
+        </motion.div>
+      </div>
+    );
+  };
+
 
   // Payment Status Modal Component
   const PaymentStatusModal = () => {
@@ -132,6 +264,14 @@ export default function SMIProducts() {
         title: 'Pembayaran Pending',
         message: 'Pembayaran Anda sedang diproses. Silakan selesaikan pembayaran Anda.',
         buttonColor: 'bg-yellow-600 hover:bg-yellow-700'
+      },
+      review: {
+        icon: Clock,
+        iconColor: 'text-blue-600',
+        bgColor: 'bg-blue-50',
+        title: 'Menunggu Review',
+        message: 'Data Anda sedang direview oleh admin. Kami akan menghubungi Anda via WhatsApp 1x24 jam.',
+        buttonColor: 'bg-blue-600 hover:bg-blue-700'
       }
     };
 
@@ -210,7 +350,9 @@ export default function SMIProducts() {
       color: 'blue',
       popular: true,
       link: '#contact',
-      action: 'contact'
+      action: 'checkout',
+      productType: 'program',
+      paymentMode: PAYMENT_CONFIG.program
     },
     {
       id: 'private',
@@ -228,7 +370,9 @@ export default function SMIProducts() {
       icon: HeartHandshake,
       color: 'purple',
       link: '#contact',
-      action: 'contact'
+      action: 'checkout',
+      productType: 'mentoring',
+      paymentMode: PAYMENT_CONFIG.mentoring
     },
     {
       id: 'corporate',
@@ -246,7 +390,9 @@ export default function SMIProducts() {
       ],
       icon: Star,
       color: 'green',
-      action: 'consultation'
+      action: 'consultation',
+      productType: 'coaching',
+      paymentMode: PAYMENT_CONFIG.coaching
     }
   ];
 
@@ -323,7 +469,7 @@ export default function SMIProducts() {
             // Custom consultation button for Private Exclusive
             <div className="space-y-3">
               <button
-                onClick={() => handleConsultationClick(product)}
+                onClick={() => handleCoachingClick(product)}
                 disabled={isProcessing}
                 className="w-full flex items-center justify-center gap-2 py-3 px-6 bg-green-600 text-white rounded-xl font-semibold hover:bg-green-700 transition-all duration-300 disabled:bg-neutral-300 disabled:cursor-not-allowed"
               >
@@ -335,12 +481,12 @@ export default function SMIProducts() {
                 ) : (
                   <>
                     <Building className="w-4 h-4" />
-                    Isi Form Konsultasi
+                    Konsultasi Sekarang
                   </>
                 )}
               </button>
               <p className="text-xs text-neutral-500 text-center">
-                Isi data konsultasi, kami akan follow-up via WhatsApp
+                Hubungi kami via WhatsApp untuk diskusi kebutuhan Anda
               </p>
             </div>
           ) : product.external ? (
@@ -440,12 +586,11 @@ export default function SMIProducts() {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         product={selectedProduct}
-        onProceedToPayment={
-          selectedProduct?.action === 'consultation' 
-            ? handleConsultationSubmit 
-            : handleProceedToPayment
-        }
+        onProceedToPayment={handleProcessOrder}
       />
+      
+      {/* Manual Payment Modal */}
+      <ManualPaymentModal />
       
       {/* Payment Status Modal */}
       <PaymentStatusModal />

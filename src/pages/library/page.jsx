@@ -91,15 +91,6 @@ export default function LibraryPage() {
                     <MessageSquare className="w-[18px] h-[18px] group-hover:scale-110 transition-transform" />
                     Tanya Asisten
                   </motion.button>
-                  
-                  <motion.button
-                    whileHover={{ y: -2, backgroundColor: "rgba(0,0,0,0.02)" }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={() => window.location.href = '/app'}
-                    className="w-full sm:w-auto bg-transparent text-neutral-600 border border-neutral-200 px-8 sm:px-10 py-3 sm:py-4 rounded-xl sm:rounded-2xl font-bold text-sm flex items-center justify-center gap-2"
-                  >
-                    Jelajahi Fitur
-                  </motion.button>
                 </div>
               </motion.div>
             </div>

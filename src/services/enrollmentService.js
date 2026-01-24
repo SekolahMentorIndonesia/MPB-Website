@@ -13,11 +13,6 @@ export const enrollmentService = {
       hasToken: !!token
     });
 
-    // Validate token first
-    if (!token) {
-      throw new Error('Token tidak ditemukan. Silakan login kembali.');
-    }
-
     // Create form data for file upload
     const formData = new FormData();
     
@@ -78,7 +73,7 @@ export const enrollmentService = {
         console.error('Validation error details:', error.response?.data?.details);
         throw new Error(errorMsg);
       } else if (error.response?.status === 401) {
-        throw new Error('Sesi Anda telah berakhir. Silakan login kembali.');
+        throw new Error('Sesi tidak valid.');
       } else if (error.response?.status === 403) {
         throw new Error('Anda tidak memiliki izin untuk melakukan aksi ini.');
       } else if (error.code === 'ECONNREFUSED') {
