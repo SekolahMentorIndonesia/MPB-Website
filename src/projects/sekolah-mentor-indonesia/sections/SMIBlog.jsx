@@ -2,6 +2,7 @@ import { Calendar, ArrowRight, User, Clock, BookOpen, Download, Play } from "luc
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import contentService from "../../../services/contentService";
+import SafeHTML from "../../../components/SafeHTML";
 
 export default function SMIBlog() {
   const [articles, setArticles] = useState([]);
@@ -301,7 +302,7 @@ export default function SMIBlog() {
 
               {/* Body */}
               <div className="prose prose-brand max-w-none">
-                <div dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
+                <SafeHTML html={selectedArticle.content} />
               </div>
             </div>
           </motion.div>

@@ -5,7 +5,7 @@ import { ApiResponse, PRODUCT_TYPE, ProductFormFields } from '@/types/content';
 
 class PaymentService {
   constructor() {
-    this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    this.baseURL = ''; // Use relative path for same-origin API calls
     this.isDevelopment = import.meta.env.DEV;
     this.midtransClientKey = import.meta.env.VITE_MIDTRANS_CLIENT_KEY;
   }
@@ -14,51 +14,56 @@ class PaymentService {
    * Get produk yang tersedia
    */
   async getProducts() {
-    try {
-      const response = await fetch(`${this.baseURL}/api/products`);
-      const data = await response.json();
-      
-      if (!response.ok) {
-        throw new Error(data.message || 'Failed to fetch products');
-      }
-
-      return ApiResponse.success(data);
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      return ApiResponse.error('Failed to fetch products', 500);
-    }
+    // ... existing implementation
   }
 
-  /**
-   * Get form fields untuk produk tertentu
-   */
-  getFormFields(productType) {
-    return ProductFormFields[productType] || [];
-  }
+  // ... other methods ...
 
   /**
-   * Create payment order
+   * Create payment order (Get Snap Token)
    */
   async createOrder(orderData) {
     try {
-      const response = await fetch(`${this.baseURL}/api/orders`, {
+      // Map orderData to what the backend expects
+      const payload = {
+        orderId: `ORDER-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+        grossAmount: orderData.amount,
+        customerDetails: {
+          first_name: orderData.userData.name,
+          email: orderData.userData.email,
+          phone: orderData.userData.whatsapp,
+        },
+        itemDetails: [{
+          id: orderData.productId,
+          price: orderData.amount,
+          quantity: 1,
+          name: orderData.productName,
+        }]
+      };
+
+      const response = await fetch('/api/payment/token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderData),
+        body: JSON.stringify(payload),
       });
 
       const data = await response.json();
       
       if (!response.ok) {
-        throw new Error(data.message || 'Failed to create order');
+        throw new Error(data.error || 'Failed to create payment token');
       }
 
-      return ApiResponse.success(data);
+      // Return consistent format
+      return ApiResponse.success({
+        snapToken: data.token,
+        redirectUrl: data.redirect_url,
+        orderId: payload.orderId
+      });
     } catch (error) {
       console.error('Error creating order:', error);
-      return ApiResponse.error('Failed to create order', 500);
+      return ApiResponse.error(error.message || 'Failed to create order', 500);
     }
   }
 

@@ -1,12 +1,34 @@
+import { API_BASE_URL } from '../config';
+
 // Real Backend API untuk Midtrans Token
 export const createPaymentToken = async (orderData) => {
   try {
-    const response = await fetch('http://localhost:5000/api/payment', {
+    // Generate Order ID if not present (usually handled by backend, but here we prep it)
+    const orderId = `SMI-${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+    
+    // Construct payload for /api/payment/token
+    const payload = {
+        orderId: orderId,
+        grossAmount: orderData.product.price,
+        customerDetails: {
+            first_name: orderData.name,
+            email: orderData.email,
+            phone: orderData.phone,
+        },
+        itemDetails: [{
+            id: orderData.product.id,
+            price: orderData.product.price,
+            quantity: 1,
+            name: orderData.product.name,
+        }]
+    };
+
+    const response = await fetch('/api/payment/token', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(orderData)
+      body: JSON.stringify(payload)
     });
 
     if (!response.ok) {

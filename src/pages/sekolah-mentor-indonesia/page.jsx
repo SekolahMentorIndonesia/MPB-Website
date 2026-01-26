@@ -8,7 +8,6 @@ import SMIProducts from "../../projects/sekolah-mentor-indonesia/sections/SMIPro
 import SMIAdvantages from "../../projects/sekolah-mentor-indonesia/sections/SMIAdvantages";
 import SMIHomeSuccessStories from "../../projects/sekolah-mentor-indonesia/sections/SMIHomeSuccessStories";
 import SMIAIAssistant from "../../projects/sekolah-mentor-indonesia/sections/SMIAIAssistant";
-import Footer from "../../components/Footer";
 import SMILoadingScreen from "../../projects/sekolah-mentor-indonesia/sections/SMILoadingScreen";
 import SMIFAQ from "../../projects/sekolah-mentor-indonesia/sections/SMIFAQ";
 import SMIBlog from "../../projects/sekolah-mentor-indonesia/sections/SMIBlog";
@@ -18,10 +17,15 @@ const loadMidtransScript = () => {
   if (!document.querySelector('script[data-midtrans-snap]')) {
     const script = document.createElement('script');
     script.src = 'https://app.sandbox.midtrans.com/snap/snap.js';
-    script.setAttribute('data-client-key', 'Mid-client-cFNW4aZ2M9oBRcjZ');
-    script.setAttribute('data-midtrans-snap', 'true');
-    script.async = true;
-    document.head.appendChild(script);
+    const clientKey = import.meta.env.VITE_MIDTRANS_CLIENT_KEY;
+    if (clientKey) {
+        script.setAttribute('data-client-key', clientKey);
+        script.setAttribute('data-midtrans-snap', 'true');
+        script.async = true;
+        document.head.appendChild(script);
+    } else {
+        console.error("VITE_MIDTRANS_CLIENT_KEY not set");
+    }
   }
 };
 
@@ -58,7 +62,6 @@ export default function AppPage() {
         {isLoading && <SMILoadingScreen key="loading" />}
       </AnimatePresence>
 
-      <Navbar variant="smi" />
       <main>
         <SMIHomeHero />
         {/* <WebsiteContent /> */} {/* Sembunyikan sementara Pusat Edukasi Gratis */}
@@ -69,7 +72,6 @@ export default function AppPage() {
         <SMIBlog />
         <SMIFAQ />
       </main>
-      <Footer variant="smi" />
       <SMIAIAssistant />
     </div>
   );

@@ -27,14 +27,16 @@ class ContentService {
   }
 
   /**
-   * Fetch konten dari Blogger API dengan fallback ke JSON
+   * Fetch konten dari Blogger API via Backend Proxy
    */
   async fetchContent() {
     try {
-      // Priority 1: Blogger RSS Feed (no API key needed)
-      const bloggerData = await this.fetchFromBloggerRSS();
-      if (bloggerData.length > 0) {
-        return ApiResponse.success(bloggerData, 'Content loaded from Blogger RSS');
+      // Priority 1: Backend Proxy for Blogger RSS Feed
+      const bloggerData = await this.fetchFromBloggerProxy();
+      const entries = this.transformBloggerData(bloggerData);
+      
+      if (entries.length > 0) {
+        return ApiResponse.success(entries, 'Content loaded from Blogger Proxy');
       }
 
       // Priority 2: Local JSON fallback
@@ -43,61 +45,33 @@ class ContentService {
 
     } catch (error) {
       console.error('Error fetching content:', error);
-      return ApiResponse.error('Failed to fetch content', 500);
+      // Fallback to JSON on error
+      const jsonData = await this.fetchFromJSON();
+      return ApiResponse.success(jsonData, 'Content loaded from local JSON (Fallback)');
     }
   }
 
   /**
-   * Fetch dari Blogger RSS Feed (no API key needed)
+   * Fetch dari Blogger via Backend Proxy (Secure)
    */
-  async fetchFromBloggerRSS() {
-    const blogId = this.blogId || '1722387930275850186';
-    
-    // Try multiple approaches to avoid CORS issues
-    const urls = [
-      `https://api.allorigins.win/raw?url=${encodeURIComponent(`https://www.blogger.com/feeds/${blogId}/posts/default?alt=json&max-results=50`)}`,
-      `https://cors-anywhere.herokuapp.com/https://www.blogger.com/feeds/${blogId}/posts/default?alt=json&max-results=50`,
-      `https://www.blogger.com/feeds/${blogId}/posts/default?alt=json&max-results=50`
-    ];
-    
-    let data = null;
-    let lastError = null;
-    
-    for (const url of urls) {
-      try {
-        console.log('🔍 Trying URL:', url);
-        
-        const response = await fetch(url);
-        
-        if (!response.ok) {
-          throw new Error(`HTTP error: ${response.status}`);
-        }
-        
-        const json = await response.json();
-        console.log('📊 Response data:', json);
-        
-        // Handle different response formats
-        if (json.feed && json.feed.entry) {
-          data = json;
-          break;
-        } else if (Array.isArray(json)) {
-          // Some proxies return array directly
-          data = { feed: { entry: json } };
-          break;
-        }
-      } catch (error) {
-        console.warn(`❌ Failed with ${url}:`, error.message);
-        lastError = error;
+  async fetchFromBloggerProxy() {
+    try {
+      const response = await fetch('/api/content/blogger');
+      if (!response.ok) {
+        throw new Error(`Proxy error: ${response.status}`);
       }
+      return await response.json();
+    } catch (error) {
+      console.warn('Failed to fetch from proxy:', error);
+      return {};
     }
-    
-    if (!data) {
-      console.error('All URLs failed, using fallback');
-      throw lastError || new Error('All fetch attempts failed');
-    }
-    
-    if (!data.feed || !data.feed.entry) {
-      console.log('⚠️ No entries found in RSS feed');
+  }
+
+  /**
+   * Transform raw Blogger data ke format SMI
+   */
+  transformBloggerData(data) {
+    if (!data || !data.feed || !data.feed.entry) {
       return [];
     }
     

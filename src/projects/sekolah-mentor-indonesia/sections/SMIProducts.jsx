@@ -8,7 +8,7 @@ import { createPaymentToken } from "../../../services/paymentApi";
 // KONFIGURASI PEMBAYARAN
 // Mengontrol metode pembayaran untuk setiap tipe produk
 const PAYMENT_CONFIG = {
-  program: "manual", // "gateway" | "manual"
+  program: "gateway", // "gateway" | "manual"
   mentoring: "gateway", // "gateway" | "manual"
   coaching: "manual" // "manual" only (Redirect WA)
 };

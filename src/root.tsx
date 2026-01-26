@@ -40,6 +40,8 @@ import { useTranslation } from 'react-i18next';
 // @ts-ignore
 import { useNotification, NotificationProvider } from './contexts/NotificationContext';
 // @ts-ignore
+import { AuthProvider } from './contexts/AuthContext';
+// @ts-ignore
 import NotificationContainer from './components/NotificationContainer';
 // @ts-ignore
 
@@ -632,10 +634,12 @@ export function Layout({ children }: { children: ReactNode }) {
         {LoadFontsSSR ? <LoadFontsSSR /> : null}
       </head>
       <body>
-        <NotificationProvider>
-            <ClientOnly loader={() => children} />
-            <NotificationContainer />
-        </NotificationProvider>
+        <AuthProvider>
+          <NotificationProvider>
+              <ClientOnly loader={() => children} />
+              <NotificationContainer />
+          </NotificationProvider>
+        </AuthProvider>
         <HotReloadIndicator />
         <Toaster position="bottom-right" />
         <ScrollRestoration />

@@ -1,23 +1,25 @@
 import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+import { API_BASE_URL, API_ENDPOINTS } from '../config';
 
 const getAuthHeader = () => {
-  return { Authorization: `Bearer dummy-token` };
+  const token = localStorage.getItem('token');
+  return token ? { Authorization: `Bearer ${token}` } : {};
 };
 
 export const uploadFile = async (file) => {
   try {
     const formData = new FormData();
     formData.append('photo', file);
+    
+    const uploadUrl = `${API_BASE_URL}${API_ENDPOINTS.USER.UPLOAD}`;
 
-    console.log('📤 Sending request to:', `${API_URL}/api/user/upload-photo`);
+    console.log('📤 Sending request to:', uploadUrl);
     console.log('📤 FormData contents:');
     for (let [key, value] of formData.entries()) {
       console.log(`  ${key}:`, value instanceof File ? `File(${value.name}, ${value.size} bytes)` : value);
     }
 
-    const response = await axios.post(`${API_URL}/api/user/upload-photo`, formData, {
+    const response = await axios.post(uploadUrl, formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         ...getAuthHeader()

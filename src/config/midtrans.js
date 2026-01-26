@@ -3,7 +3,7 @@ export const MIDTRANS_CONFIG = {
   // Sandbox Environment
   SANDBOX: {
     CLIENT_KEY: import.meta.env.VITE_MIDTRANS_CLIENT_KEY || '',
-    SERVER_KEY: import.meta.env.VITE_MIDTRANS_SERVER_KEY || '',
+    // SERVER_KEY removed for security - handled by backend
     SNAP_URL: 'https://app.sandbox.midtrans.com/snap/snap.js',
     API_URL: 'https://api.sandbox.midtrans.com'
   },
@@ -11,10 +11,10 @@ export const MIDTRANS_CONFIG = {
   // Production Environment (uncomment when ready)
   PRODUCTION: {
     CLIENT_KEY: import.meta.env.VITE_MIDTRANS_CLIENT_KEY || '',
-    SERVER_KEY: import.meta.env.VITE_MIDTRANS_SERVER_KEY || '',
+    // SERVER_KEY removed for security - handled by backend
     SNAP_URL: 'https://app.midtrans.com/snap/snap.js',
     API_URL: 'https://api.midtrans.com'
-  }
+  },
 };
 
 // Current environment (change to PRODUCTION when ready)

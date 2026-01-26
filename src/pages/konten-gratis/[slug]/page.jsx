@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -19,6 +21,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import contentService from '../../../services/contentService';
+import SafeHTML from '../../../components/SafeHTML';
 
 export function meta({ params }) {
   return [
@@ -262,9 +265,9 @@ export default function KontenDetailPage({ params }) {
           )}
 
           {/* Content Body */}
-          <div 
+          <SafeHTML 
             className="prose prose-lg max-w-none text-neutral-700 leading-relaxed mb-8"
-            dangerouslySetInnerHTML={{ __html: content.content }}
+            html={content.content}
           />
 
           {/* Tags */}

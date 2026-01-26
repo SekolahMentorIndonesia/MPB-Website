@@ -1,3 +1,5 @@
+'use client';
+
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { 
@@ -17,6 +19,7 @@ import {
 } from 'lucide-react';
 import contentService from '../../services/contentService';
 import { CONTENT_TYPE, FilterOptions } from '../../types/content';
+import SafeHTML from '../../components/SafeHTML';
 
 export function meta() {
   return [
@@ -493,9 +496,9 @@ export default function KontenGratisPage() {
               )}
 
               {/* Content */}
-              <div 
+              <SafeHTML 
                 className="prose prose-sm max-w-none text-neutral-700 leading-relaxed mb-8"
-                dangerouslySetInnerHTML={{ __html: selectedContent.content }}
+                html={selectedContent.content}
               />
 
               {/* Action Buttons */}
