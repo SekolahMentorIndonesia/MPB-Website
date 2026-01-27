@@ -16,10 +16,10 @@ export default function SMIBlog() {
         console.log('Loading landing content...');
         
         // Use new content service
-        const response = await contentService.getLandingContent(6);
+        const response = await contentService.getLandingContent(3);
         console.log('Content response:', response);
         
-        if (response.success && response.data.length > 0) {
+        if (response?.success && Array.isArray(response?.data) && response.data.length > 0) {
           setArticles(response.data);
         } else {
           console.log('No content found, showing empty state');
@@ -37,17 +37,22 @@ export default function SMIBlog() {
     loadArticles();
   }, []);
 
-  const ContentCard = ({ content, onClick }) => (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="bg-white rounded-2xl border border-neutral-100 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group"
-      onClick={onClick}
+  const ContentCard = ({ content }) => (
+    <a 
+      href={content.link} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="block h-full"
     >
-      {/* Image */}
-      <div className="h-48 relative overflow-hidden">
+      <motion.article
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6 }}
+        className="bg-white rounded-2xl border border-neutral-100 overflow-hidden hover:shadow-lg transition-shadow cursor-pointer group h-full flex flex-col"
+      >
+        {/* Image */}
+        <div className="h-48 relative overflow-hidden flex-shrink-0">
         {content.featuredImage ? (
           <img
             src={content.featuredImage}
@@ -84,7 +89,7 @@ export default function SMIBlog() {
         </div>
       </div>
 
-      <div className="p-6">
+      <div className="p-6 flex-grow flex flex-col">
         {/* Category */}
         <div className="flex items-center gap-2 mb-4">
           <span className="bg-brand-50 text-brand-600 px-2 py-1 rounded-md font-medium text-xs">
@@ -96,7 +101,7 @@ export default function SMIBlog() {
         <div className="flex items-center gap-4 text-xs text-neutral-500 mb-4">
           <div className="flex items-center gap-1">
             <Calendar className="w-3 h-3" />
-            {new Date(content.publishedAt).toLocaleDateString('id-ID', {
+            {new Date(content.publishedAt || content.pubDate).toLocaleDateString('id-ID', {
               day: 'numeric',
               month: 'long',
               year: 'numeric'
@@ -104,7 +109,7 @@ export default function SMIBlog() {
           </div>
           <div className="flex items-center gap-1">
             <Clock className="w-3 h-3" />
-            {content.readTime} min
+            {content.readTime || content.readingTime} min
           </div>
         </div>
 
@@ -114,24 +119,23 @@ export default function SMIBlog() {
         </h3>
 
         {/* Excerpt */}
-        <p className="text-neutral-600 text-sm mb-4 line-clamp-3">
-          {content.excerpt}
-        </p>
+        <SafeHTML html={content.excerpt} className="text-neutral-600 text-sm mb-4 line-clamp-3 flex-grow" />
 
         {/* Read More */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between mt-auto">
           <div className="flex items-center gap-2 text-xs text-neutral-500">
             <User className="w-3 h-3" />
             {content.author}
           </div>
-          <button className="text-brand-600 hover:text-brand-700 font-medium text-sm flex items-center gap-1 transition-colors">
+          <span className="text-brand-600 hover:text-brand-700 font-medium text-sm flex items-center gap-1 transition-colors">
             {content.type === 'video' ? 'Tonton Video' :
              content.type === 'ebook' ? 'Download Ebook' : 'Baca Selengkapnya'}
             <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-          </button>
+          </span>
         </div>
       </div>
-    </motion.article>
+      </motion.article>
+    </a>
   );
 
   if (loading) {
@@ -195,7 +199,6 @@ export default function SMIBlog() {
                 >
                   <ContentCard 
                     content={content} 
-                    onClick={() => setSelectedArticle(content)}
                   />
                 </motion.div>
               ))}
@@ -203,13 +206,15 @@ export default function SMIBlog() {
 
             {/* View More Button */}
             <div className="text-center">
-              <button 
-                onClick={() => window.open('/konten-gratis', '_self')}
+              <a 
+                href="https://sekolahmentorindonesia.blogspot.com/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 px-8 py-3 bg-brand-600 text-white rounded-full hover:bg-brand-700 transition-colors font-medium"
               >
                 Lihat Semua Konten
                 <ArrowRight className="w-4 h-4" />
-              </button>
+              </a>
             </div>
           </>
         ) : (
@@ -221,93 +226,11 @@ export default function SMIBlog() {
               Belum Ada Konten
             </h3>
             <p className="text-neutral-600">
-              Konten akan segera tersedia
+              No blog posts available
             </p>
           </div>
         )}
       </div>
-
-      {/* Content Modal/Popup */}
-      {selectedArticle && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4"
-          onClick={() => setSelectedArticle(null)}
-        >
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-2xl max-h-[90vh] overflow-y-auto w-full max-w-4xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="p-6 sm:p-8">
-              {/* Header */}
-              <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-neutral-900">
-                  {selectedArticle.title}
-                </h2>
-                <button
-                  onClick={() => setSelectedArticle(null)}
-                  className="text-neutral-500 hover:text-neutral-700"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-
-              {/* Meta Info */}
-              <div className="flex items-center gap-4 text-sm text-neutral-500 mb-6">
-                <div className="flex items-center gap-1">
-                  <Calendar className="w-4 h-4" />
-                  {new Date(selectedArticle.publishedAt).toLocaleDateString('id-ID', {
-                    day: 'numeric',
-                    month: 'long',
-                    year: 'numeric'
-                  })}
-                </div>
-                <div className="flex items-center gap-1">
-                  <Clock className="w-4 h-4" />
-                  {selectedArticle.readTime} menit baca
-                </div>
-                <div className="flex items-center gap-1">
-                  <User className="w-4 h-4" />
-                  {selectedArticle.author}
-                </div>
-              </div>
-
-              {/* Type & Category */}
-              <div className="flex flex-wrap gap-2 mb-6">
-                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
-                  selectedArticle.type === 'video' ? 'bg-red-100 text-red-600' :
-                  selectedArticle.type === 'ebook' ? 'bg-green-100 text-green-600' :
-                  'bg-blue-100 text-blue-600'
-                }`}>
-                  {selectedArticle.type === 'video' ? 'Video' : 
-                   selectedArticle.type === 'ebook' ? 'Ebook' : 'Artikel'}
-                </span>
-                <span className="bg-brand-50 text-brand-600 px-3 py-1 rounded-full text-sm font-medium">
-                  {selectedArticle.category}
-                </span>
-                {selectedArticle.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="bg-neutral-100 text-neutral-600 px-3 py-1 rounded-full text-sm"
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
-
-              {/* Body */}
-              <div className="prose prose-brand max-w-none">
-                <SafeHTML html={selectedArticle.content} />
-              </div>
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
     </section>
   );
 }

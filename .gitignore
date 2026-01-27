@@ -14,3 +14,4 @@ build-log-latest.log
 .env
 .env.*
 !.env.example
+dist/

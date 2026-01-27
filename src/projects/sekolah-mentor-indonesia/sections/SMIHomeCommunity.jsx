@@ -15,7 +15,7 @@ export default function SMIHomeCommunity() {
   const benefits = t('community.benefits', { returnObjects: true }) || [];
 
   const scrollToPricing = () => {
-    const pricingSection = document.getElementById('paket');
+    const pricingSection = document.getElementById('pricing');
     if (pricingSection) {
       pricingSection.scrollIntoView({ behavior: 'smooth' });
     }

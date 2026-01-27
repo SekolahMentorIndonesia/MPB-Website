@@ -277,7 +277,7 @@ export default function SuccessPage() {
                 WhatsApp Support
               </a>
               <Link
-                to="/konten-gratis"
+                to="/sekolah-mentor-indonesia/blog"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition-colors"
               >
                 <Calendar className="w-5 h-5" />

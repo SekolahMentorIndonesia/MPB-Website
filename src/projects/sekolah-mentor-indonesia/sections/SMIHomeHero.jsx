@@ -11,7 +11,7 @@ export default function SMIHomeHero() {
 
   const handleStartLearning = () => {
     // Dashboard removed, scroll to packages
-    document.getElementById('paket')?.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
@@ -66,7 +66,7 @@ export default function SMIHomeHero() {
             <motion.button
               whileHover={{ scale: 1.02, backgroundColor: "#f8fafc" }}
               whileTap={{ scale: 0.98 }}
-              onClick={() => document.getElementById('paket')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
               className="w-full sm:w-auto bg-white text-neutral-900 border-2 border-neutral-100 px-8 py-3.5 sm:py-4 rounded-xl font-bold text-sm sm:text-base flex items-center justify-center gap-3 transition-all"
             >
               {t('hero.cta_packages')}

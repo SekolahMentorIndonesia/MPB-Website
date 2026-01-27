@@ -41,7 +41,6 @@ export default function CompanyHero() {
               {t('hero.subheadline')}
             </p>
 
-            {/* CTA Button */}
             <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start mb-10">
               <a
                 href="#about-company"
@@ -50,6 +49,15 @@ export default function CompanyHero() {
               >
                 {t('hero.cta')}
                 <ArrowRight className="w-4.5 h-4.5" />
+              </a>
+              <a
+                href="/images/company/company-profile.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto bg-white text-brand-700 border border-brand-100 font-bold text-sm sm:text-base px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-2 font-sans"
+                download
+              >
+                Unduh Profil
               </a>
             </div>
 

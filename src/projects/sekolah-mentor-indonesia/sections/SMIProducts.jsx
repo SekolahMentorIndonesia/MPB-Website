@@ -565,25 +565,17 @@ Mohon dicek kembali. Berikut saya lampirkan FOTO BUKTI PEMBAYARAN. Terima kasih.
           className="text-center mt-16"
         >
           <p className="text-neutral-600 mb-6">
-            Butuh bantuan memilih paket yang tepat?
+            Ingin uji coba materi gratis & diskusi?
           </p>
-          <button
-            onClick={() => handleOrderClick(products[0])}
-            disabled={isProcessing}
-            className="inline-flex items-center gap-2 px-8 py-3 bg-brand-600 text-white rounded-full hover:bg-brand-700 transition-colors font-medium disabled:bg-neutral-300 disabled:cursor-not-allowed"
+          <a
+            href="https://t.me/sekolahmentorindonesia"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-8 py-3 bg-brand-600 text-white rounded-full hover:bg-brand-700 transition-colors font-medium"
           >
-            {isProcessing ? (
-              <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                Memproses...
-              </>
-            ) : (
-              <>
-                Gabung Komunitas Sekarang
-                <ArrowRight className="w-4 h-4" />
-              </>
-            )}
-          </button>
+            Gabung Komunitas Gratis
+            <ArrowRight className="w-4 h-4" />
+          </a>
         </motion.div>
       </div>
       

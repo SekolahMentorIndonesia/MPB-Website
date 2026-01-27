@@ -66,7 +66,7 @@ export default function NavbarMain() {
 
   const leftMenuItems = [
     { name: t('navbar.home'), href: '/' },
-    { name: t('navbar.free_content'), href: '/konten-gratis' },
+    { name: t('navbar.free_content'), href: '/sekolah-mentor-indonesia/blog' },
     { name: t('navbar.community'), href: '/#komunitas' },
   ];
 
