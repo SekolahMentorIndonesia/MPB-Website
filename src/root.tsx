@@ -636,7 +636,7 @@ export function Layout({ children }: { children: ReactNode }) {
       <body>
         <AuthProvider>
           <NotificationProvider>
-              <ClientOnly loader={() => children} />
+              {children}
               <NotificationContainer />
           </NotificationProvider>
         </AuthProvider>

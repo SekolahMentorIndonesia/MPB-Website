@@ -1,5 +1,7 @@
+import * as bloggerService from './bloggerService';
+
 // Content Management Service
-// Handle: Blogger API, JSON fallback, dan content filtering
+// Delegating to bloggerService for API calls
 
 class ApiResponse {
   static success(data, message = 'Success') {
@@ -21,231 +23,138 @@ class ApiResponse {
 
 class ContentService {
   constructor() {
-    this.baseURL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-    this.bloggerAPI = import.meta.env.VITE_BLOGGER_API_KEY;
-    this.blogId = import.meta.env.VITE_BLOGGER_ID;
+    // No config needed here, handled by bloggerService
   }
 
   /**
-   * Fetch konten dari Blogger API via Backend Proxy
+   * Helper: Generate Slug from Title
    */
-  async fetchContent() {
-    try {
-      // Priority 1: Backend Proxy for Blogger RSS Feed
-      const bloggerData = await this.fetchFromBloggerProxy();
-      const entries = this.transformBloggerData(bloggerData);
-      
-      if (entries.length > 0) {
-        return ApiResponse.success(entries, 'Content loaded from Blogger Proxy');
-      }
-
-      // Priority 2: Local JSON fallback
-      const jsonData = await this.fetchFromJSON();
-      return ApiResponse.success(jsonData, 'Content loaded from local JSON');
-
-    } catch (error) {
-      console.error('Error fetching content:', error);
-      // Fallback to JSON on error
-      const jsonData = await this.fetchFromJSON();
-      return ApiResponse.success(jsonData, 'Content loaded from local JSON (Fallback)');
-    }
+  generateSlug(title) {
+    return title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)+/g, '');
   }
 
   /**
-   * Fetch dari Blogger via Backend Proxy (Secure)
+   * Enrich Blogger Item with App-specific fields
    */
-  async fetchFromBloggerProxy() {
-    try {
-      const response = await fetch('/api/content/blogger');
-      if (!response.ok) {
-        throw new Error(`Proxy error: ${response.status}`);
-      }
-      return await response.json();
-    } catch (error) {
-      console.warn('Failed to fetch from proxy:', error);
-      return {};
-    }
-  }
+  enrichItem(item) {
+    if (!item) return null;
+    
+    // Determine target from categories (labels)
+    const target = item.categories.includes('landing') ? 'landing' : 
+                   item.categories.includes('website') ? 'website' : 'website';
+    
+    // Type is already determined in bloggerService as contentType
+    const type = item.contentType || 'artikel';
 
-  /**
-   * Transform raw Blogger data ke format SMI
-   */
-  transformBloggerData(data) {
-    if (!data || !data.feed || !data.feed.entry) {
-      return [];
-    }
-    
-    const entries = data.feed.entry.map(entry => this.transformBloggerRSSEntry(entry));
-    console.log('✅ Transformed entries:', entries);
-    
-    return entries;
-  }
+    // Generate stable slug
+    const slug = this.generateSlug(item.title);
 
-  /**
-   * Transform Blogger RSS entry ke format SMI
-   */
-  transformBloggerRSSEntry(entry) {
-    // Extract content
-    const content = entry.content.$t || entry.summary.$t || '';
-    
-    // Extract labels from categories
-    const categories = entry.category || [];
-    const labels = categories.map(cat => cat.term);
-    
-    console.log('🏷️ Entry labels:', labels, 'Title:', entry.title.$t);
-    
-    const target = this.extractTargetFromLabels(labels);
-    const type = this.extractTypeFromLabels(labels);
-    
-    console.log('🎯 Extracted target:', target, 'type:', type);
-    
     return {
-      id: entry.id.$t.split('/').pop(),
-      title: entry.title.$t,
-      slug: this.generateSlug(entry.title.$t),
-      excerpt: this.extractExcerpt(content),
-      content: content,
-      author: entry.author[0].name.$t,
-      authorAvatar: entry.author[0].gd$image?.src || '/images/default-avatar.png',
-      publishedAt: entry.published.$t,
-      updatedAt: entry.updated.$t,
-      readTime: this.calculateReadTime(content),
-      featuredImage: this.extractFeaturedImage(content),
+      ...item,
+      // Overwrite or add fields expected by UI
+      slug: slug,
+      type: type,
+      category: item.categories.filter(c => !['website', 'landing', 'artikel', 'video', 'ebook', 'tutorial'].includes(c))[0] || 'Content Creation',
+      tags: item.categories,
+      excerpt: item.description, // bloggerService description is already clean excerpt
       
-      // Tags
-      target,
-      type,
-      category: this.extractCategoryFromLabels(labels),
-      tags: labels.filter(label => !this.isSystemTag(label)),
+      // SEO & Meta
+      seoTitle: item.title,
+      seoDescription: item.description,
       
-      // SEO
-      status: 'published',
-      seoTitle: entry.title.$t,
-      seoDescription: this.extractExcerpt(content),
-      seoKeywords: labels.filter(label => !this.isSystemTag(label)),
-      
-      // Engagement
+      // Engagement (Mock for now, or real if available)
       views: Math.floor(Math.random() * 1000) + 100,
-      likes: Math.floor(Math.random() * 100) + 10,
-      bookmarks: Math.floor(Math.random() * 50) + 5,
       
-      // Media
-      downloadUrl: this.extractDownloadUrl(content),
-      fileSize: this.extractFileSize(content),
-      pageCount: this.extractPageCount(content),
-      videoUrl: this.extractVideoUrl(content),
-      videoDuration: this.extractVideoDuration(content),
-      thumbnailUrl: this.extractThumbnailUrl(content)
+      // Additional
+      target: target,
+      author: 'Sekolah Mentor Indonesia',
+      authorAvatar: '/logo.jpeg',
     };
-  }
-
-  /**
-   * Fetch dari local JSON (fallback)
-   */
-  async fetchFromJSON() {
-    try {
-      const response = await fetch('/data/content.json');
-      if (!response.ok) {
-        throw new Error('JSON file not found');
-      }
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      // Return empty array if JSON not available
-      console.warn('Local JSON fallback failed, returning empty content');
-      return [];
-    }
-  }
-
-  /**
-   * Filter konten berdasarkan target dan type
-   */
-  filterContent(content, filters = {}) {
-    const { target, type, category, search } = filters;
-    
-    let filtered = [...content];
-
-    // Filter by target
-    if (target && target !== 'all') {
-      filtered = filtered.filter(item => 
-        item.target === target
-      );
-    }
-
-    // Filter by type
-    if (type && type !== 'all') {
-      filtered = filtered.filter(item => item.type === type);
-    }
-
-    // Filter by category
-    if (category && category !== 'all') {
-      filtered = filtered.filter(item => item.category === category);
-    }
-
-    // Search filter
-    if (search) {
-      const searchTerm = search.toLowerCase();
-      filtered = filtered.filter(item =>
-        item.title.toLowerCase().includes(searchTerm) ||
-        item.excerpt.toLowerCase().includes(searchTerm) ||
-        item.content.toLowerCase().includes(searchTerm) ||
-        item.tags.some(tag => tag.toLowerCase().includes(searchTerm))
-      );
-    }
-
-    // Sort by published date (newest first)
-    filtered.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
-
-    return filtered;
   }
 
   /**
    * Get konten untuk landing page
    */
   async getLandingContent(limit = 6) {
-    const response = await this.fetchContent();
-    if (!response.success) return response;
-
-    console.log('🔍 All content before filter:', response.data);
+    // 1. Try to fetch with 'landing' label first
+    let posts = await bloggerService.fetchFilteredContent('landing');
     
-    const landingContent = this.filterContent(response.data, {
-      target: 'landing'
-    });
+    // 2. Fallback: If no posts found, fetch all posts (no label filter)
+    if (!posts || posts.length === 0) {
+      console.log('No landing content found, falling back to all content');
+      posts = await bloggerService.fetchFilteredContent('');
+    }
 
-    console.log('🎯 Landing content after filter:', landingContent);
-
-    return ApiResponse.success(landingContent.slice(0, limit));
+    const enriched = posts.map(p => this.enrichItem(p));
+    return ApiResponse.success(enriched.slice(0, limit));
   }
 
   /**
    * Get konten untuk website utama
    */
   async getWebsiteContent(filters = {}) {
-    const response = await this.fetchContent();
-    if (!response.success) return response;
+    // 1. Try to fetch with 'website' label first
+    let posts = await bloggerService.fetchFilteredContent('website');
 
-    const websiteContent = this.filterContent(response.data, {
-      target: 'website',
-      ...filters
-    });
+    // 2. Fallback: If no posts found, fetch all posts (no label filter)
+    if (!posts || posts.length === 0) {
+      console.log('No website content found, falling back to all content');
+      posts = await bloggerService.fetchFilteredContent('');
+    }
 
-    return ApiResponse.success(websiteContent);
+    let enriched = posts.map(p => this.enrichItem(p));
+
+    // Client-side filtering (since API only supports label filter)
+    if (filters.type && filters.type !== 'all') {
+      enriched = enriched.filter(item => item.type === filters.type);
+    }
+    if (filters.category && filters.category !== 'all') {
+      enriched = enriched.filter(item => item.category === filters.category);
+    }
+    if (filters.search) {
+      const term = filters.search.toLowerCase();
+      enriched = enriched.filter(item => 
+        item.title.toLowerCase().includes(term) || 
+        item.excerpt.toLowerCase().includes(term)
+      );
+    }
+
+    return ApiResponse.success(enriched);
   }
 
   /**
    * Get detail konten by slug
+   * Note: Since we use generated slugs, we fetch all and find match.
+   * If we used Blogger IDs or URLs as slugs, we could use search/byurl.
    */
   async getContentBySlug(slug) {
-    const response = await this.fetchContent();
-    if (!response.success) return response;
-
-    const content = response.data.find(item => item.slug === slug);
+    // 1. Try to fetch from website content cache/list first
+    const posts = await bloggerService.fetchFilteredContent('website');
+    const enriched = posts.map(p => this.enrichItem(p));
     
-    if (!content) {
-      return ApiResponse.error('Content not found', 404);
+    const content = enriched.find(item => item.slug === slug);
+    
+    if (content) {
+      return ApiResponse.success(content);
     }
 
-    return ApiResponse.success(content);
+    // 2. If not found, maybe try search?
+    // Reverse slug is hard, so we assume title matches slug somewhat
+    const searchResults = await bloggerService.searchContent(slug.replace(/-/g, ' '));
+    if (searchResults.length > 0) {
+      // Find exact match if possible
+      const exact = searchResults.find(p => this.generateSlug(p.title) === slug);
+      if (exact) {
+        return ApiResponse.success(this.enrichItem(exact));
+      }
+      // Or return first result
+      return ApiResponse.success(this.enrichItem(searchResults[0]));
+    }
+
+    return ApiResponse.error('Content not found', 404);
   }
 
   /**
@@ -256,109 +165,18 @@ class ContentService {
     if (!contentResponse.success) return contentResponse;
 
     const content = contentResponse.data;
-    const response = await this.fetchContent();
-    if (!response.success) return response;
+    const allResponse = await this.getWebsiteContent(); // cached fetch ideally
+    
+    if (!allResponse.success) return ApiResponse.success([]);
 
-    // Filter related content by type, category, and tags
-    const related = response.data
+    const related = allResponse.data
       .filter(item => 
-        item.id !== content.id && // Exclude current content
-        (item.type === content.type || 
-         item.category === content.category ||
-         item.tags.some(tag => content.tags.includes(tag)))
+        item.id !== content.id && 
+        (item.type === content.type || item.category === content.category)
       )
       .slice(0, limit);
 
     return ApiResponse.success(related);
-  }
-
-  /**
-   * Helper functions
-   */
-  extractTargetFromLabels(labels) {
-    if (labels.includes('landing')) return 'landing';
-    if (labels.includes('website')) return 'website';
-    return 'landing'; // Default untuk landing page
-  }
-
-  extractTypeFromLabels(labels) {
-    if (labels.includes('artikel')) return 'artikel';
-    if (labels.includes('ebook')) return 'ebook';
-    if (labels.includes('video')) return 'video';
-    if (labels.includes('tutorial')) return 'tutorial';
-    return 'artikel'; // Default
-  }
-
-  extractCategoryFromLabels(labels) {
-    const categoryLabels = labels.filter(label => 
-      !this.isSystemTag(label)
-    );
-    return categoryLabels[0] || 'Content Creation';
-  }
-
-  isSystemTag(label) {
-    return ['landing', 'website', 'artikel', 'ebook', 'video', 'tutorial'].includes(label);
-  }
-
-  generateSlug(title) {
-    return (title || '')
-      .toLowerCase()
-      .replace(/[^a-z0-9\s-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/-+/g, '-')
-      .trim();
-  }
-
-  extractExcerpt(content, maxLength = 150) {
-    // Remove HTML tags
-    const plainText = (content || '').replace(/<[^>]*>/g, '');
-    const excerpt = plainText.substring(0, maxLength);
-    return excerpt.length < plainText.length ? excerpt + '...' : excerpt;
-  }
-
-  extractFeaturedImage(content) {
-    const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
-    return imgMatch ? imgMatch[1] : '/images/default-featured.jpg';
-  }
-
-  extractDownloadUrl(content) {
-    const linkMatch = content.match(/<a[^>]+href="([^">]+download[^">]*)"/);
-    return linkMatch ? linkMatch[1] : null;
-  }
-
-  extractFileSize(content) {
-    const sizeMatch = content.match(/(\d+(?:\.\d+)?)\s*(MB|GB|KB)/i);
-    return sizeMatch ? sizeMatch[0] : null;
-  }
-
-  extractPageCount(content) {
-    const pageMatch = content.match(/(\d+)\s*(?:halaman|pages?)/i);
-    return pageMatch ? parseInt(pageMatch[1]) : null;
-  }
-
-  extractVideoUrl(content) {
-    const youtubeMatch = content.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^"&?\/\s]{11})/);
-    if (youtubeMatch) return `https://www.youtube.com/embed/${youtubeMatch[1]}`;
-    
-    const videoMatch = content.match(/<video[^>]+src="([^">]+)"/);
-    return videoMatch ? videoMatch[1] : null;
-  }
-
-  extractVideoDuration(content) {
-    const durationMatch = content.match(/(\d{1,2}:\d{2}(?::\d{2})?)/);
-    return durationMatch ? durationMatch[1] : null;
-  }
-
-  extractThumbnailUrl(content) {
-    const thumbnailMatch = content.match(/<img[^>]+(?:thumbnail|thumb)[^>]+src="([^">]+)"/);
-    return thumbnailMatch ? thumbnailMatch[1] : null;
-  }
-
-  calculateReadTime(content) {
-    const plainText = (content || '').replace(/<[^>]*>/g, '');
-    const wordsPerMinute = 200;
-    const wordCount = plainText.split(/\s+/).length;
-    return Math.ceil(wordCount / wordsPerMinute);
   }
 }
 

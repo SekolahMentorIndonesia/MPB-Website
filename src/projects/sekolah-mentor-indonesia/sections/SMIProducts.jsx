@@ -8,8 +8,8 @@ import { createPaymentToken } from "../../../services/paymentApi";
 // KONFIGURASI PEMBAYARAN
 // Mengontrol metode pembayaran untuk setiap tipe produk
 const PAYMENT_CONFIG = {
-  program: "gateway", // "gateway" | "manual"
-  mentoring: "gateway", // "gateway" | "manual"
+  program: "manual", // "gateway" | "manual"
+  mentoring: "manual", // "gateway" | "manual"
   coaching: "manual" // "manual" only (Redirect WA)
 };
 
@@ -142,22 +142,28 @@ export default function SMIProducts() {
 
   // 2. Manual Payment Flow
   const handleManualSubmit = async () => {
-    // Submit data to backend (mock or real)
+    // Construct WhatsApp Message
+    const { name, email, product } = manualPaymentData;
+    
+    const message = `Halo Admin SMI, saya telah melakukan pembayaran untuk pesanan berikut:
+
+DATA PEMESANAN
+Nama: ${name}
+Email: ${email}
+Program: ${product.name}
+Nominal: ${product.price}
+
+Mohon dicek kembali. Berikut saya lampirkan FOTO BUKTI PEMBAYARAN. Terima kasih.`;
+
+    const whatsappUrl = `https://wa.me/6281915020498?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
+    // Set status to review on website
     setIsProcessing(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    // Set status based on product type
-    // Program (Manual) -> PENDING -> 1x24 jam
-    // Mentoring (Manual) -> MENUNGGU REVIEW -> 1x24 jam
-    
-    const status = manualPaymentData.product.productType === 'mentoring' ? 'review' : 'pending';
-    setPaymentStatus(status);
-    
-    // Kirim notifikasi ke Telegram (Mock)
-    sendTelegramNotification(manualPaymentData, status === 'review' ? 'MENUNGGU REVIEW' : 'PENDING', 'Manual');
-    
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    setPaymentStatus('review');
     setIsProcessing(false);
     setIsManualModalOpen(false);
   };
@@ -206,8 +212,8 @@ export default function SMIProducts() {
           <div className="space-y-4 mb-8">
             <div className="border border-neutral-200 rounded-xl p-4">
               <p className="font-semibold text-neutral-900 mb-1">Bank Transfer</p>
-              <p className="text-sm text-neutral-600">BCA: 1234567890</p>
-              <p className="text-sm text-neutral-600">A.n. Sekolah Mentor Indonesia</p>
+              <p className="text-sm text-neutral-600">BCA: 0661555920</p>
+              <p className="text-sm text-neutral-600">A.n. Mohamad Iqbal Alhafizh</p>
             </div>
             {/* 
             <div className="border border-neutral-200 rounded-xl p-4">

@@ -58,9 +58,6 @@ export default function AppPage() {
   return (
     <div className="min-h-screen bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
-      <AnimatePresence>
-        {isLoading && <SMILoadingScreen key="loading" />}
-      </AnimatePresence>
 
       <main>
         <SMIHomeHero />

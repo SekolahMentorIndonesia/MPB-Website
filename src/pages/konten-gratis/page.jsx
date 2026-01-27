@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useLoaderData } from 'react-router';
 import { motion } from 'framer-motion';
 import { 
   Search, 
@@ -19,7 +20,11 @@ import {
 } from 'lucide-react';
 import contentService from '../../services/contentService';
 import { CONTENT_TYPE, FilterOptions } from '../../types/content';
-import SafeHTML from '../../components/SafeHTML';
+
+export async function loader() {
+  const response = await contentService.getWebsiteContent();
+  return response.success ? response.data : [];
+}
 
 export function meta() {
   return [
@@ -42,41 +47,15 @@ export function meta() {
 }
 
 export default function KontenGratisPage() {
-  const [content, setContent] = useState([]);
-  const [filteredContent, setFilteredContent] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const initialContent = useLoaderData();
+  const [content, setContent] = useState(initialContent);
+  const [filteredContent, setFilteredContent] = useState(initialContent);
+  const [loading, setLoading] = useState(false);
   const [selectedContent, setSelectedContent] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [showFilters, setShowFilters] = useState(false);
-
-  // Load content
-  useEffect(() => {
-    const loadContent = async () => {
-      try {
-        setLoading(true);
-        const response = await contentService.getWebsiteContent();
-        if (response.success && response.data) {
-          setContent(response.data);
-          setFilteredContent(response.data);
-        } else {
-          console.warn('No content loaded, using fallback');
-          setContent([]);
-          setFilteredContent([]);
-        }
-      } catch (error) {
-        console.error('Error loading content:', error);
-        // Set empty state on error
-        setContent([]);
-        setFilteredContent([]);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    loadContent();
-  }, []);
 
   // Filter content
   useEffect(() => {
