@@ -1,8 +1,10 @@
 
-// Blogger Service - Refactored to use Internal API Proxy
-// This ensures API keys are hidden and we use real data from Google Blogger API v3
+// Blogger Service - Client Side Implementation
+// Fetches directly from Google Blogger API v3 using public API Key
 
-const INTERNAL_API_URL = '/api/content/blogger';
+const API_KEY = import.meta.env.VITE_BLOGGER_API_KEY;
+const BLOG_ID = import.meta.env.VITE_BLOGGER_BLOG_ID;
+const BASE_URL = import.meta.env.VITE_BLOGGER_BASE_URL || 'https://www.googleapis.com/blogger/v3';
 
 // Helper: Extract first image from HTML content
 const extractFirstImage = (content) => {
@@ -22,7 +24,7 @@ const estimateReadingTime = (content) => {
 // Helper: Transform Blogger API Item to App Content Format
 const transformBloggerItem = (item) => {
   // Skip invalid items
-  if (!item.title) return null;
+  if (!item || !item.title) return null;
 
   const rawContent = item.content || ''; // V3 API uses 'content'
   const cleanDescription = (rawContent).replace(/<[^>]*>/g, '').substring(0, 200) + '...';
@@ -54,20 +56,26 @@ const transformBloggerItem = (item) => {
   };
 };
 
-// Core Fetch Function (Generic)
-const fetchFromInternalAPI = async (params = {}) => {
+// Core Fetch Function
+const fetchFromBloggerAPI = async (endpoint, params = {}) => {
   try {
-    const queryParams = new URLSearchParams(params);
-    const response = await fetch(`${INTERNAL_API_URL}?${queryParams.toString()}`);
+    const url = new URL(`${BASE_URL}/blogs/${BLOG_ID}/${endpoint}`);
+    url.searchParams.append('key', API_KEY);
+    
+    Object.keys(params).forEach(key => {
+        if (params[key]) url.searchParams.append(key, params[key]);
+    });
+
+    const response = await fetch(url.toString());
     
     if (!response.ok) {
-      console.error(`API Error: ${response.status}`);
+      console.error(`API Error: ${response.status} ${response.statusText}`);
       return null;
     }
 
     return await response.json();
   } catch (error) {
-    console.error('Error fetching from internal API:', error);
+    console.error('Error fetching from Blogger API:', error);
     return null;
   }
 };
@@ -79,9 +87,10 @@ const fetchFromInternalAPI = async (params = {}) => {
  */
 export const fetchFilteredContent = async (location, contentType = null) => {
   try {
-    const data = await fetchFromInternalAPI({
+    const data = await fetchFromBloggerAPI('posts', {
       labels: location,
-      maxResults: 50
+      maxResults: 50,
+      status: 'live' // Only live posts
     });
 
     // Ensure we have an array
@@ -89,14 +98,14 @@ export const fetchFilteredContent = async (location, contentType = null) => {
 
     const posts = items.map(transformBloggerItem).filter(post => post !== null);
 
-    // Sort by date (newest first)
-    const sortedPosts = posts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+    // Sort by date (newest first) is default in Blogger API, but good to ensure
+    // const sortedPosts = posts.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
     if (contentType) {
-      return sortedPosts.filter(post => post.contentType === contentType);
+      return posts.filter(post => post.contentType === contentType);
     }
 
-    return sortedPosts;
+    return posts;
   } catch (error) {
     console.error('Error in fetchFilteredContent:', error);
     return [];
@@ -108,7 +117,7 @@ export const fetchFilteredContent = async (location, contentType = null) => {
  */
 export const getContentByUrl = async (postUrl) => {
   try {
-    const data = await fetchFromInternalAPI({ url: postUrl });
+    const data = await fetchFromBloggerAPI('posts/byurl', { url: postUrl });
     if (!data || data.error) return null;
     return transformBloggerItem(data);
   } catch (error) {
@@ -122,7 +131,7 @@ export const getContentByUrl = async (postUrl) => {
  */
 export const searchContent = async (query) => {
   try {
-    const data = await fetchFromInternalAPI({ q: query });
+    const data = await fetchFromBloggerAPI('posts/search', { q: query });
     const items = data && data.items ? data.items : [];
     return items.map(transformBloggerItem).filter(post => post !== null);
   } catch (error) {

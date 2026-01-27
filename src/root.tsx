@@ -20,7 +20,6 @@ import {
   Component,
 } from 'react';
 import './styles/global.css';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import { toPng } from 'html-to-image';
 import fetch from '@/__create/fetch';

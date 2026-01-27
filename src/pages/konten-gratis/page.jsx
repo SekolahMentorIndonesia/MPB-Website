@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useLoaderData } from 'react-router';
+import { useLoaderData, Link } from 'react-router';
 import { motion } from 'framer-motion';
 import { 
   Search, 
@@ -13,9 +13,7 @@ import {
   Clock, 
   User,
   Heart,
-  Bookmark,
   Eye,
-  X,
   ChevronDown
 } from 'lucide-react';
 import contentService from '../../services/contentService';
@@ -51,7 +49,6 @@ export default function KontenGratisPage() {
   const [content, setContent] = useState(initialContent);
   const [filteredContent, setFilteredContent] = useState(initialContent);
   const [loading, setLoading] = useState(false);
-  const [selectedContent, setSelectedContent] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedType, setSelectedType] = useState('all');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -89,126 +86,118 @@ export default function KontenGratisPage() {
   const categories = ['all', ...new Set(content.map(item => item.category))];
 
   const ContentCard = ({ item }) => (
-    <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="bg-white rounded-xl border border-neutral-100 overflow-hidden hover:shadow-lg transition-all duration-300 group cursor-pointer"
-      onClick={() => setSelectedContent(item)}
-    >
-      {/* Image */}
-      <div className="h-48 relative overflow-hidden">
-        {item.featuredImage ? (
-          <img
-            src={item.featuredImage}
-            alt={item.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-          />
-        ) : (
-          <div className="w-full h-full bg-gradient-to-br from-brand-50 to-blue-50 flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center mx-auto mb-2">
-                {item.type === 'video' ? (
-                  <Play className="w-6 h-6 text-white" />
-                ) : item.type === 'ebook' ? (
-                  <Download className="w-6 h-6 text-white" />
-                ) : (
-                  <BookOpen className="w-6 h-6 text-white" />
-                )}
+    <Link to={`/konten-gratis/${item.slug}`} className="block h-full">
+      <motion.article
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="bg-white rounded-xl border border-neutral-100 overflow-hidden hover:shadow-lg transition-all duration-300 group h-full flex flex-col"
+      >
+        {/* Image */}
+        <div className="h-48 relative overflow-hidden flex-shrink-0">
+          {item.featuredImage || item.image ? (
+            <img
+              src={item.featuredImage || item.image}
+              alt={item.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-brand-50 to-blue-50 flex items-center justify-center">
+              <div className="text-center">
+                <div className="w-12 h-12 bg-brand-600 rounded-full flex items-center justify-center mx-auto mb-2">
+                  {item.type === 'video' ? (
+                    <Play className="w-6 h-6 text-white" />
+                  ) : item.type === 'ebook' ? (
+                    <Download className="w-6 h-6 text-white" />
+                  ) : (
+                    <BookOpen className="w-6 h-6 text-white" />
+                  )}
+                </div>
+                <p className="text-brand-600 text-sm font-medium capitalize">{item.type}</p>
               </div>
-              <p className="text-brand-600 text-sm font-medium capitalize">{item.type}</p>
             </div>
-          </div>
-        )}
-        
-        {/* Type Badge */}
-        <div className="absolute top-4 right-4">
-          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-            item.type === 'video' ? 'bg-red-100 text-red-600' :
-            item.type === 'ebook' ? 'bg-green-100 text-green-600' :
-            'bg-blue-100 text-blue-600'
-          }`}>
-            {item.type === 'video' ? 'Video' : 
-             item.type === 'ebook' ? 'Ebook' : 'Artikel'}
-          </span>
-        </div>
-
-        {/* Engagement Stats */}
-        <div className="absolute bottom-4 left-4 flex items-center gap-3 text-white text-xs">
-          <div className="flex items-center gap-1 bg-black/50 px-2 py-1 rounded-full">
-            <Eye className="w-3 h-3" />
-            {item.views}
-          </div>
-          <div className="flex items-center gap-1 bg-black/50 px-2 py-1 rounded-full">
-            <Heart className="w-3 h-3" />
-            {item.likes}
-          </div>
-        </div>
-      </div>
-
-      <div className="p-6">
-        {/* Category */}
-        <div className="flex items-center gap-2 mb-3">
-          <span className="bg-brand-50 text-brand-600 px-2 py-1 rounded-md font-medium text-xs">
-            {item.category}
-          </span>
-        </div>
-
-        {/* Title */}
-        <h3 className="text-lg font-bold text-neutral-900 mb-3 font-display line-clamp-2 group-hover:text-brand-600 transition-colors">
-          {item.title}
-        </h3>
-
-        {/* Excerpt */}
-        <p className="text-neutral-600 text-sm mb-4 line-clamp-3">
-          {item.excerpt}
-        </p>
-
-        {/* Meta Info */}
-        <div className="flex items-center justify-between text-xs text-neutral-500 mb-4">
-          <div className="flex items-center gap-3">
-            <div className="flex items-center gap-1">
-              <Calendar className="w-3 h-3" />
-              {new Date(item.publishedAt).toLocaleDateString('id-ID', {
-                day: 'numeric',
-                month: 'short'
-              })}
-            </div>
-            <div className="flex items-center gap-1">
-              <Clock className="w-3 h-3" />
-              {item.readTime}m
-            </div>
-          </div>
-          <div className="flex items-center gap-1">
-            <User className="w-3 h-3" />
-            {item.author}
-          </div>
-        </div>
-
-        {/* Tags */}
-        <div className="flex flex-wrap gap-1 mb-4">
-          {item.tags.slice(0, 3).map((tag, index) => (
-            <span
-              key={index}
-              className="bg-neutral-100 text-neutral-600 px-2 py-1 rounded text-xs"
-            >
-              {tag}
-            </span>
-          ))}
-          {item.tags.length > 3 && (
-            <span className="text-neutral-500 text-xs">
-              +{item.tags.length - 3}
-            </span>
           )}
+          
+          {/* Type Badge */}
+          <div className="absolute top-4 right-4">
+            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+              item.type === 'video' ? 'bg-red-100 text-red-600' :
+              item.type === 'ebook' ? 'bg-green-100 text-green-600' :
+              'bg-blue-100 text-blue-600'
+            }`}>
+              {item.type === 'video' ? 'Video' : 
+               item.type === 'ebook' ? 'Ebook' : 'Artikel'}
+            </span>
+          </div>
+
+          {/* Engagement Stats */}
+          <div className="absolute bottom-4 left-4 flex items-center gap-3 text-white text-xs">
+            <div className="flex items-center gap-1 bg-black/50 px-2 py-1 rounded-full">
+              <Eye className="w-3 h-3" />
+              {item.views}
+            </div>
+            <div className="flex items-center gap-1 bg-black/50 px-2 py-1 rounded-full">
+              <Heart className="w-3 h-3" />
+              {item.likes || 0}
+            </div>
+          </div>
         </div>
 
-        {/* Action Button */}
-        <button className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition-colors text-sm font-medium">
-          {item.type === 'video' ? 'Tonton Video' :
-           item.type === 'ebook' ? 'Download Ebook' : 'Baca Artikel'}
-          <ChevronDown className="w-4 h-4 rotate-180" />
-        </button>
-      </div>
-    </motion.article>
+        <div className="p-6 flex flex-col flex-grow">
+          {/* Category */}
+          <div className="flex items-center gap-2 mb-3">
+            <span className="bg-brand-50 text-brand-600 px-2 py-1 rounded-md font-medium text-xs">
+              {item.category}
+            </span>
+          </div>
+
+          {/* Title */}
+          <h3 className="text-lg font-bold text-neutral-900 mb-3 font-display line-clamp-2 group-hover:text-brand-600 transition-colors">
+            {item.title}
+          </h3>
+
+          {/* Excerpt */}
+          <p className="text-neutral-600 text-sm mb-4 line-clamp-3 flex-grow">
+            {item.excerpt}
+          </p>
+
+          {/* Meta Info */}
+          <div className="flex items-center justify-between text-xs text-neutral-500 mb-4 mt-auto">
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1">
+                <Calendar className="w-3 h-3" />
+                {new Date(item.pubDate || item.publishedAt).toLocaleDateString('id-ID', {
+                  day: 'numeric',
+                  month: 'short'
+                })}
+              </div>
+              <div className="flex items-center gap-1">
+                <Clock className="w-3 h-3" />
+                {item.readingTime || item.readTime}m
+              </div>
+            </div>
+          </div>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-1 mb-4">
+            {item.tags && item.tags.slice(0, 3).map((tag, index) => (
+              <span
+                key={index}
+                className="bg-neutral-100 text-neutral-600 px-2 py-1 rounded text-xs"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+
+          {/* Action Button */}
+          <div className="w-full flex items-center justify-center gap-2 px-4 py-2 bg-brand-600 text-white rounded-lg hover:bg-brand-700 transition-colors text-sm font-medium mt-auto">
+            {item.type === 'video' ? 'Tonton Video' :
+             item.type === 'ebook' ? 'Download Ebook' : 'Baca Artikel'}
+            <ChevronDown className="w-4 h-4 -rotate-90" />
+          </div>
+        </div>
+      </motion.article>
+    </Link>
   );
 
   if (loading) {
