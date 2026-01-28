@@ -26,7 +26,6 @@ import fetch from '@/__create/fetch';
 // @ts-ignore
 
 import { useNavigate } from 'react-router';
-import { serializeError } from 'serialize-error';
 import { Toaster } from 'sonner';
 // @ts-ignore
 import { LoadFonts } from 'virtual:load-fonts.jsx';
@@ -345,68 +344,8 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
-        {/* SEO Meta Tags (PT MPB) */}
-        <meta name="description" content="PT Multiusaha Prioritas Bersama (MPB Group) - Perusahaan induk yang berfokus pada pengembangan ekosistem wirausaha melalui unit bisnis pendidikan, teknologi, dan ekonomi kreatif." />
-        <meta name="keywords" content="PT Multiusaha Prioritas Bersama, MPB Group, Sekolah Mentor Indonesia, perusahaan induk, investasi pendidikan, bisnis kreatif indonesia, Mohamad Iqbal Alhafizh, teknologi, startup indonesia" />
-        <meta name="author" content="PT Multiusaha Prioritas Bersama" />
+        {/* SEO Meta Tags are handled by React Router's <Meta /> */}
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://multipriority.com" />
-        
-        {/* Open Graph Tags */}
-        <meta property="og:title" content="PT Multiusaha Prioritas Bersama - Membangun Ekosistem Wirausaha" />
-        <meta property="og:description" content="Perusahaan induk yang berfokus pada pengembangan ekosistem wirausaha melalui unit bisnis pendidikan, teknologi, dan ekonomi kreatif." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://multipriority.com" />
-        <meta property="og:image" content="/images/company/logo.jpeg" />
-        <meta property="og:image:alt" content="Logo MPB Group" />
-        <meta property="og:site_name" content="MPB Group" />
-        <meta property="og:locale" content="id_ID" />
-        
-        {/* Twitter Card Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="PT Multiusaha Prioritas Bersama" />
-        <meta name="twitter:description" content="Membangun Ekosistem Wirausaha Indonesia" />
-        <meta name="twitter:image" content="/images/company/logo.jpeg" />
-        <meta name="twitter:image:alt" content="Logo MPB Group" />
-        
-        {/* Organization Schema (PT MPB) */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Corporation",
-              "name": "PT Multiusaha Prioritas Bersama",
-              "alternateName": "MPB Group",
-              "url": "https://multipriority.com",
-              "logo": "https://multipriority.com/images/company/logo.jpeg",
-              "description": "Perusahaan induk yang berfokus pada pengembangan ekosistem wirausaha melalui unit bisnis pendidikan, teknologi, dan ekonomi kreatif.",
-              "foundingDate": "2023",
-              "founder": {
-                "@type": "Person",
-                "name": "Mohamad Iqbal Alhafizh",
-                "jobTitle": "Founder & CEO"
-              },
-              "address": {
-                "@type": "PostalAddress",
-                "streetAddress": "Blk. G, Sriamur",
-                "addressLocality": "Kec. Tambun Utara",
-                "addressRegion": "Jawa Barat",
-                "postalCode": "17510",
-                "addressCountry": "ID"
-              },
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "contactType": "corporate contact",
-                "email": "info@multipriority.com"
-              },
-              "sameAs": [
-                "https://www.instagram.com/mpbgroup.id",
-                "https://www.linkedin.com/company/mpb-group"
-              ]
-            }),
-          }}
-        />
         
         <Meta />
         <Links />

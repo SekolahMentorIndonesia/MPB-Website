@@ -38,44 +38,30 @@ export default function CompanyContact() {
     }, 3000);
   };
 
+  const getCsrfToken = () => {
+    const m = document.cookie.match(/(?:^|; )csrfToken=([^;]+)/);
+    return m ? decodeURIComponent(m[1]) : '';
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Send to Telegram bot
-    const telegramBotToken = '8252237259:AAFhxJBP_LHl3vyVzjyrlYCTGfUW_aK9H_M';
-    const telegramChatId = '8375398953'; // Your correct user ID
-    
-    const telegramMessage = `📩 Pesan Baru dari Website SMI
-
-Nama: ${formData.name}
-Email: ${formData.email}
-Subjek: ${formData.subject}
-Pesan: ${formData.message}
-
----
-Dikirim: ${new Date().toLocaleString('id-ID')}`;
-    
-    console.log('Sending message to Telegram bot...');
-    console.log('Chat ID:', telegramChatId);
-    
     try {
-      const response = await fetch(`https://api.telegram.org/bot${telegramBotToken}/sendMessage`, {
+      const response = await fetch(`/api/contact/telegram`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-CSRF-Token': getCsrfToken(),
         },
         body: JSON.stringify({
-          chat_id: telegramChatId,
-          text: telegramMessage
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message
         })
       });
       
-      const responseData = await response.json();
-      console.log('Response status:', response.status);
-      console.log('Response data:', responseData);
-      
       if (response.ok) {
-        console.log('✅ Message sent to Telegram bot successfully');
         showNotification(t('contact.form.success_message'), 'success');
         // Reset form
         setFormData({
@@ -85,11 +71,9 @@ Dikirim: ${new Date().toLocaleString('id-ID')}`;
           message: ''
         });
       } else {
-        console.log('❌ Failed to send message to Telegram bot');
         showNotification(t('contact.form.error_message'), 'error');
       }
     } catch (error) {
-      console.error('❌ Error sending message to Telegram bot:', error);
       showNotification(t('contact.form.error_general'), 'error');
     }
   };

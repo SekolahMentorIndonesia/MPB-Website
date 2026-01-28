@@ -13,6 +13,12 @@ export default function SafeHTML({ html, className = '' }) {
         if (node.tagName === 'IMG') {
           node.setAttribute('loading', 'lazy');
         }
+        if (node.tagName === 'A') {
+          const target = node.getAttribute('target');
+          if (target === '_blank') {
+            node.setAttribute('rel', 'noopener noreferrer');
+          }
+        }
       });
 
       // Configure DOMPurify

@@ -41,10 +41,13 @@ class PaymentService {
         }]
       };
 
+      const csrfMatch = typeof document !== 'undefined' ? document.cookie.match(/(?:^|; )csrfToken=([^;]+)/) : null;
+      const csrfToken = csrfMatch ? decodeURIComponent(csrfMatch[1]) : '';
       const response = await fetch('/api/payment/token', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'X-CSRF-Token': csrfToken,
         },
         body: JSON.stringify(payload),
       });

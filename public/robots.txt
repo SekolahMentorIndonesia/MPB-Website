@@ -10,7 +10,7 @@ Disallow: /api/
 Disallow: /_create/
 
 # Sitemap location
-Sitemap: https://smi.id/sitemap.xml
+Sitemap: https://multipriority.com/sitemap.xml
 
 # Block common bot paths
 Disallow: /tmp/

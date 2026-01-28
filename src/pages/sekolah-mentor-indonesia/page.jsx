@@ -46,15 +46,20 @@ export function meta() {
   return [
     { title: "Sekolah Mentor Indonesia - Platform Belajar Content Creator" },
     { name: "description", content: "Bergabung dengan Sekolah Mentor Indonesia. Platform edukasi terdepan untuk content creator. Pelajari strategi branding, produksi konten, dan monetisasi." },
+    { name: "keywords", content: "Sekolah Mentor Indonesia, SMI, kursus content creator, belajar jadi konten kreator, mentoring online, kelas konten kreator indonesia, strategi branding" },
     { property: "og:title", content: "Sekolah Mentor Indonesia - Platform Belajar Content Creator" },
     { property: "og:description", content: "Bergabung dengan Sekolah Mentor Indonesia. Platform edukasi terdepan untuk content creator." },
     { property: "og:image", content: "/logo.jpeg" },
+    { property: "og:image:alt", content: "Logo Sekolah Mentor Indonesia" },
     { property: "og:url", content: "https://multipriority.com/sekolah-mentor-indonesia" },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: "Sekolah Mentor Indonesia" },
     { name: "twitter:description", content: "Platform edukasi terdepan untuk content creator." },
-    { name: "twitter:image", content: "/logo.jpeg" }
+    { name: "twitter:image", content: "/logo.jpeg" },
+    { name: "twitter:image:alt", content: "Logo Sekolah Mentor Indonesia" },
+    { name: "robots", content: "index, follow" },
+    { rel: "canonical", href: "https://multipriority.com/sekolah-mentor-indonesia" }
   ];
 }
 
@@ -72,6 +77,19 @@ export default function AppPage() {
     "name": "Sekolah Mentor Indonesia",
     "alternateName": "SMI",
     "url": "https://multipriority.com/sekolah-mentor-indonesia",
+    "logo": "https://multipriority.com/logo.jpeg",
+    "description": "Platform edukasi terdepan untuk content creator. Pelajari strategi branding, produksi konten, dan monetisasi.",
+    "sameAs": [
+        "https://www.instagram.com/sekolahmentor_id"
+    ],
+    "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Blk. G, Sriamur",
+        "addressLocality": "Kec. Tambun Utara",
+        "addressRegion": "Jawa Barat",
+        "postalCode": "17510",
+        "addressCountry": "ID"
+    },
     "parentOrganization": {
       "@type": "Corporation",
       "name": "PT Multiusaha Prioritas Bersama",

@@ -50,6 +50,11 @@ export default function HomePage() {
     "url": "https://multipriority.com",
     "logo": "https://multipriority.com/images/company/logo.jpeg",
     "description": "Perusahaan induk yang menaungi berbagai unit bisnis strategis di Indonesia, berfokus pada pendidikan, teknologi, dan pemberdayaan ekonomi.",
+    "foundingDate": "2023",
+    "sameAs": [
+      "https://www.instagram.com/mpbgroup.id",
+      "https://www.linkedin.com/company/mpb-group"
+    ],
     "founder": {
       "@type": "Person",
       "name": "Mohamad Iqbal Alhafizh",
