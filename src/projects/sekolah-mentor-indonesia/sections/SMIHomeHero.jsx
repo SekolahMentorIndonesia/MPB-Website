@@ -78,7 +78,12 @@ export default function SMIHomeHero() {
             <div className="flex -space-x-3">
               {[1, 2, 3, 4].map((i) => (
                 <div key={i} className="w-8 h-8 sm:w-10 sm:h-10 rounded-full border-2 border-white bg-neutral-200 flex items-center justify-center text-[10px] font-bold overflow-hidden">
-                  <img src={`https://i.pravatar.cc/100?img=${i+10}`} alt="user" className="w-full h-full object-cover" />
+                  <img 
+                    src={`https://i.pravatar.cc/100?img=${i+10}`} 
+                    alt="user" 
+                    loading="lazy"
+                    className="w-full h-full object-cover" 
+                  />
                 </div>
               ))}
             </div>

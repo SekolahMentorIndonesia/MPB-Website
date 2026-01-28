@@ -20,7 +20,7 @@ export function meta() {
     },
     { 
       name: "keywords", 
-      content: "PT Multiusaha Prioritas Bersama, MPB Group, Sekolah Mentor Indonesia, perusahaan induk, investasi pendidikan, bisnis kreatif indonesia, Mohammad Iqbal Alhafizh" 
+      content: "PT Multiusaha Prioritas Bersama, MPB Group, Sekolah Mentor Indonesia, perusahaan induk, investasi pendidikan, bisnis kreatif indonesia, Mohamad Iqbal Alhafizh" 
     },
     { property: "og:title", content: "PT Multiusaha Prioritas Bersama - Membangun Ekosistem Wirausaha" },
     { 
@@ -28,13 +28,16 @@ export function meta() {
       content: "Membangun masa depan Indonesia melalui pendidikan dan pemberdayaan ekonomi kreatif. Induk perusahaan Sekolah Mentor Indonesia." 
     },
     { property: "og:type", content: "website" },
-    { property: "og:url", content: "https://mpbgroup.id" },
+    { property: "og:url", content: "https://multipriority.com" },
     { property: "og:image", content: "/images/company/logo.jpeg" },
     { property: "og:site_name", content: "MPB Group" },
     { property: "og:locale", content: "id_ID" },
     { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: "PT Multiusaha Prioritas Bersama" },
+    { name: "twitter:description", content: "Membangun masa depan Indonesia melalui pendidikan dan pemberdayaan ekonomi kreatif." },
+    { name: "twitter:image", content: "/images/company/logo.jpeg" },
     { name: "robots", content: "index, follow" },
-    { rel: "canonical", href: "https://mpbgroup.id" }
+    { rel: "canonical", href: "https://multipriority.com" }
   ];
 }
 
@@ -44,18 +47,27 @@ export default function HomePage() {
     "@type": "Corporation",
     "name": "PT Multiusaha Prioritas Bersama",
     "alternateName": "MPB Group",
-    "url": "https://mpbgroup.id",
-    "logo": "https://mpbgroup.id/images/company/logo.jpeg",
+    "url": "https://multipriority.com",
+    "logo": "https://multipriority.com/images/company/logo.jpeg",
     "description": "Perusahaan induk yang menaungi berbagai unit bisnis strategis di Indonesia, berfokus pada pendidikan, teknologi, dan pemberdayaan ekonomi.",
     "founder": {
       "@type": "Person",
-      "name": "Mohammad Iqbal Alhafizh",
+      "name": "Mohamad Iqbal Alhafizh",
       "jobTitle": "Founder & CEO"
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Blk. G, Sriamur",
+      "addressLocality": "Kec. Tambun Utara",
+      "addressRegion": "Jawa Barat",
+      "postalCode": "17510",
+      "addressCountry": "ID"
     },
     "contactPoint": {
       "@type": "ContactPoint",
       "telephone": "+62-819-1502-0498",
       "contactType": "customer service",
+      "email": "info@multipriority.com",
       "areaServed": "ID",
       "availableLanguage": "Indonesian"
     },
@@ -81,13 +93,9 @@ export default function HomePage() {
       {/* Header Navigation */}
       <Navbar variant="company" />
 
-      {/* Hero Section */}
       <CompanyHero />
 
-      {/* About Section */}
       <CompanyAbout />
-
-      {/* Founder Story Section */}
       <CompanyFounderStory />
 
       {/* Products Section - Hidden */}

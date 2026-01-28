@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useLoaderData } from "react-router";
 import { AnimatePresence } from "framer-motion";
+import contentService from "../../services/contentService";
 import Navbar from "../../components/Navbar";
 import SMIHomeHero from "../../projects/sekolah-mentor-indonesia/sections/SMIHomeHero";
 import WebsiteContent from "../../projects/sekolah-mentor-indonesia/sections/WebsiteContent";
@@ -7,8 +9,7 @@ import SMIHomeCommunity from "../../projects/sekolah-mentor-indonesia/sections/S
 import SMIProducts from "../../projects/sekolah-mentor-indonesia/sections/SMIProducts";
 import SMIAdvantages from "../../projects/sekolah-mentor-indonesia/sections/SMIAdvantages";
 import SMIHomeSuccessStories from "../../projects/sekolah-mentor-indonesia/sections/SMIHomeSuccessStories";
-import SMIAIAssistant from "../../projects/sekolah-mentor-indonesia/sections/SMIAIAssistant";
-import SMILoadingScreen from "../../projects/sekolah-mentor-indonesia/sections/SMILoadingScreen";
+import SMIChatAI from "../../components/SMIChatAI";
 import SMIFAQ from "../../projects/sekolah-mentor-indonesia/sections/SMIFAQ";
 import SMIBlog from "../../projects/sekolah-mentor-indonesia/sections/SMIBlog";
 
@@ -29,17 +30,40 @@ const loadMidtransScript = () => {
   }
 };
 
+export async function clientLoader() {
+  try {
+    const response = await contentService.getLandingContent(3);
+    return {
+      articles: response?.success ? response.data : []
+    };
+  } catch (error) {
+    console.error("Failed to load articles:", error);
+    return { articles: [] };
+  }
+}
+
+export function meta() {
+  return [
+    { title: "Sekolah Mentor Indonesia - Platform Belajar Content Creator" },
+    { name: "description", content: "Bergabung dengan Sekolah Mentor Indonesia. Platform edukasi terdepan untuk content creator. Pelajari strategi branding, produksi konten, dan monetisasi." },
+    { property: "og:title", content: "Sekolah Mentor Indonesia - Platform Belajar Content Creator" },
+    { property: "og:description", content: "Bergabung dengan Sekolah Mentor Indonesia. Platform edukasi terdepan untuk content creator." },
+    { property: "og:image", content: "/logo.jpeg" },
+    { property: "og:url", content: "https://multipriority.com/sekolah-mentor-indonesia" },
+    { property: "og:type", content: "website" },
+    { name: "twitter:card", content: "summary_large_image" },
+    { name: "twitter:title", content: "Sekolah Mentor Indonesia" },
+    { name: "twitter:description", content: "Platform edukasi terdepan untuk content creator." },
+    { name: "twitter:image", content: "/logo.jpeg" }
+  ];
+}
+
 export default function AppPage() {
-  const [isLoading, setIsLoading] = useState(true);
+  const { articles } = useLoaderData() || { articles: [] };
 
   useEffect(() => {
     // Load Midtrans script sekali saat app mount
     loadMidtransScript();
-    
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 500);
-    return () => clearTimeout(timer);
   }, []);
 
   const schema = {
@@ -47,11 +71,11 @@ export default function AppPage() {
     "@type": "EducationalOrganization",
     "name": "Sekolah Mentor Indonesia",
     "alternateName": "SMI",
-    "url": "https://mpbgroup.id/sekolah-mentor-indonesia",
+    "url": "https://multipriority.com/sekolah-mentor-indonesia",
     "parentOrganization": {
       "@type": "Corporation",
       "name": "PT Multiusaha Prioritas Bersama",
-      "url": "https://mpbgroup.id"
+      "url": "https://multipriority.com"
     }
   };
 
@@ -66,10 +90,10 @@ export default function AppPage() {
         <SMIProducts />
         <SMIAdvantages />
         <SMIHomeSuccessStories />
-        <SMIBlog />
+        <SMIBlog articles={articles} />
         <SMIFAQ />
       </main>
-      <SMIAIAssistant />
+      <SMIChatAI />
     </div>
   );
 }

@@ -25,6 +25,7 @@ export default function Navbar({ variant = 'company' }) {
             { name: t('navbar.structure', { ns: 'company' }), href: '#unit-usaha' },
           ]
         },
+        // { name: t('navbar.team', { ns: 'company' }), href: '#team' },
         { name: t('navbar.contact', { ns: 'company' }), href: '#contact' },
       ]
     },
@@ -37,7 +38,7 @@ export default function Navbar({ variant = 'company' }) {
         { name: 'Komunitas', href: '#komunitas' },
         { name: 'Program', href: '#pricing' },
         { name: 'Kisah Sukses', href: '#testimoni' },
-        { name: 'Blog', href: '#blog' },
+        { name: 'Konten', href: '#blog' },
         { name: 'FAQ', href: '#faq' },
       ]
     }

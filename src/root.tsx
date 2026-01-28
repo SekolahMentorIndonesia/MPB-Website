@@ -125,145 +125,6 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   return <SharedErrorBoundary isOpen={true} />;
 }
 
-function InternalErrorBoundary({ error: errorArg }: Route.ErrorBoundaryProps) {
-  const routeError = useRouteError();
-  const asyncError = useAsyncError();
-  const error = errorArg ?? asyncError ?? routeError;
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const animateTimer = setTimeout(() => setIsOpen(true), 100);
-    return () => clearTimeout(animateTimer);
-  }, []);
-  const { buttonProps: showLogsButtonProps } = useButton(
-    {
-      onPress: useCallback(() => {
-        window.parent.postMessage(
-          {
-            type: 'sandbox:web:show-logs',
-          },
-          '*'
-        );
-      }, []),
-    },
-    useRef<HTMLButtonElement>(null)
-  );
-  const { buttonProps: fixButtonProps } = useButton(
-    {
-      onPress: useCallback(() => {
-        window.parent.postMessage(
-          {
-            type: 'sandbox:web:fix',
-            error: serializeError(error),
-          },
-          '*'
-        );
-        setIsOpen(false);
-      }, [error]),
-      isDisabled: !error,
-    },
-    useRef<HTMLButtonElement>(null)
-  );
-  const { buttonProps: copyButtonProps } = useButton(
-    {
-      onPress: useCallback(() => {
-        navigator.clipboard.writeText(JSON.stringify(serializeError(error)));
-      }, [error]),
-    },
-    useRef<HTMLButtonElement>(null)
-  );
-
-  function isInIframe() {
-    try {
-      return window.parent !== window;
-    } catch {
-      return true;
-    }
-  }
-  return (
-    <SharedErrorBoundary isOpen={isOpen}>
-      {isInIframe() ? (
-        <div className="flex gap-2">
-          {!!error && (
-            <button
-              className="flex flex-row items-center justify-center gap-[4px] outline-none transition-colors rounded-[8px] border-[1px] bg-[#f9f9f9] hover:bg-[#dbdbdb] active:bg-[#c4c4c4] border-[#c4c4c4] text-[#18191B] text-sm px-[8px] py-[4px] cursor-pointer"
-              type="button"
-              {...fixButtonProps}
-            >
-              Try to fix
-            </button>
-          )}
-
-          <button
-            className="flex flex-row items-center justify-center gap-[4px] outline-none transition-colors rounded-[8px] border-[1px] bg-[#2C2D2F] hover:bg-[#414243] active:bg-[#555658] border-[#414243] text-white text-sm px-[8px] py-[4px]"
-            type="button"
-            {...showLogsButtonProps}
-          >
-            Show logs
-          </button>
-        </div>
-      ) : (
-        <button
-          className="flex flex-row items-center justify-center gap-[4px] outline-none transition-colors rounded-[8px] border-[1px] bg-[#2C2D2F] hover:bg-[#414243] active:bg-[#555658] border-[#414243] text-white text-sm px-[8px] py-[4px] w-fit"
-          type="button"
-          {...copyButtonProps}
-        >
-          Copy error
-        </button>
-      )}
-    </SharedErrorBoundary>
-  );
-}
-
-type ErrorBoundaryProps = {
-  children: React.ReactNode;
-};
-
-type ErrorBoundaryState = { hasError: boolean; error: unknown | null };
-
-class ErrorBoundaryWrapper extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
-  state: ErrorBoundaryState = { hasError: false, error: null };
-
-  static getDerivedStateFromError(error: unknown): ErrorBoundaryState {
-    return { hasError: true, error };
-  }
-
-  componentDidCatch(error: unknown, info: unknown) {
-    console.error(error, info);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return <InternalErrorBoundary error={this.state.error} params={{}} />;
-    }
-    return this.props.children;
-  }
-}
-
-function LoaderWrapper({ loader }: { loader: () => React.ReactNode }) {
-  return <>{loader()}</>;
-}
-
-type ClientOnlyProps = {
-  loader: () => React.ReactNode;
-};
-
-export const ClientOnly: React.FC<ClientOnlyProps> = ({ loader }) => {
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null;
-
-  return (
-    <ErrorBoundaryWrapper>
-      <LoaderWrapper loader={loader} />
-    </ErrorBoundaryWrapper>
-  );
-};
-
 /**
  * useHmrConnection()
  * ------------------
@@ -484,144 +345,65 @@ export function Layout({ children }: { children: ReactNode }) {
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         
-        {/* SEO Meta Tags */}
-        <meta name="description" content="Sekolah Mentor Indonesia - Platform mentoring terbaik untuk content creator Indonesia. Belajar dari mentor profesional, bergabung dengan komunitas kreator, dan kembangkan karir digital Anda." />
-        <meta name="keywords" content="sekolah mentor indonesia, mentoring content creator, kursus digital, belajar content creation, komunitas creator, platform mentoring indonesia, kursus online indonesia, mentor profesional, belajar digital marketing" />
-        <meta name="author" content="Mohammad Iqbal Alhafizh" />
+        {/* SEO Meta Tags (PT MPB) */}
+        <meta name="description" content="PT Multiusaha Prioritas Bersama (MPB Group) - Perusahaan induk yang berfokus pada pengembangan ekosistem wirausaha melalui unit bisnis pendidikan, teknologi, dan ekonomi kreatif." />
+        <meta name="keywords" content="PT Multiusaha Prioritas Bersama, MPB Group, Sekolah Mentor Indonesia, perusahaan induk, investasi pendidikan, bisnis kreatif indonesia, Mohamad Iqbal Alhafizh, teknologi, startup indonesia" />
+        <meta name="author" content="PT Multiusaha Prioritas Bersama" />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://smi.id" />
+        <link rel="canonical" href="https://multipriority.com" />
         
         {/* Open Graph Tags */}
-        <meta property="og:title" content="Sekolah Mentor Indonesia - Mentoring untuk Content Creator" />
-        <meta property="og:description" content="Platform mentoring terbaik untuk content creator Indonesia. Belajar dari mentor profesional dan bergabung dengan komunitas kreator." />
+        <meta property="og:title" content="PT Multiusaha Prioritas Bersama - Membangun Ekosistem Wirausaha" />
+        <meta property="og:description" content="Perusahaan induk yang berfokus pada pengembangan ekosistem wirausaha melalui unit bisnis pendidikan, teknologi, dan ekonomi kreatif." />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://smi.id" />
-        <meta property="og:image" content="/logo.jpeg" />
-        <meta property="og:image:alt" content="Logo Sekolah Mentor Indonesia" />
-        <meta property="og:site_name" content="Sekolah Mentor Indonesia" />
+        <meta property="og:url" content="https://multipriority.com" />
+        <meta property="og:image" content="/images/company/logo.jpeg" />
+        <meta property="og:image:alt" content="Logo MPB Group" />
+        <meta property="og:site_name" content="MPB Group" />
         <meta property="og:locale" content="id_ID" />
         
         {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Sekolah Mentor Indonesia" />
-        <meta name="twitter:description" content="Platform mentoring untuk content creator Indonesia" />
-        <meta name="twitter:image" content="/logo.jpeg" />
-        <meta name="twitter:image:alt" content="Logo Sekolah Mentor Indonesia" />
-        <meta name="twitter:site" content="@sekolahmentorid" />
+        <meta name="twitter:title" content="PT Multiusaha Prioritas Bersama" />
+        <meta name="twitter:description" content="Membangun Ekosistem Wirausaha Indonesia" />
+        <meta name="twitter:image" content="/images/company/logo.jpeg" />
+        <meta name="twitter:image:alt" content="Logo MPB Group" />
         
-        {/* Additional SEO Tags */}
-        <meta name="theme-color" content="#2563eb" />
-        <meta name="msapplication-TileColor" content="#2563eb" />
-        <meta name="application-name" content="Sekolah Mentor Indonesia" />
-        <meta name="apple-mobile-web-app-title" content="SMI" />
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-        
-        {/* Course Schema */}
+        {/* Organization Schema (PT MPB) */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "Course",
-              "name": "Mentoring Content Creator",
-              "description": "Program mentoring komprehensif untuk content creator Indonesia dengan mentor profesional dan komunitas suportif.",
-              "provider": {
-                "@type": "Organization",
-                "name": "Sekolah Mentor Indonesia",
-                "url": "https://smi.id"
-              },
-              "educationalLevel": "Beginner to Advanced",
-              "inLanguage": ["id"],
-              "offers": {
-                "@type": "Offer",
-                "category": "Educational Course",
-                "priceCurrency": "IDR",
-                "availability": "https://schema.org/InStock"
-              },
-              "hasCourseInstance": {
-                "@type": "CourseInstance",
-                "courseMode": "online",
-                "instructor": {
-                  "@type": "Person",
-                  "name": "Mohammad Iqbal Alhafizh"
-                }
-              },
-              "teaches": [
-                "Content Creation",
-                "Digital Marketing",
-                "Social Media Strategy",
-                "Video Production",
-                "Business Mentoring"
-              ],
-              "url": "https://smi.id/app"
-            }),
-          }}
-        />
-        
-        {/* Organization Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Organization",
-              "name": "Sekolah Mentor Indonesia",
-              "alternateName": "SMI",
-              "url": "https://smi.id",
-              "logo": "https://smi.id/logo.jpeg",
-              "description": "Platform mentoring terbaik untuk content creator Indonesia dengan program komprehensif dan komunitas profesional.",
+              "@type": "Corporation",
+              "name": "PT Multiusaha Prioritas Bersama",
+              "alternateName": "MPB Group",
+              "url": "https://multipriority.com",
+              "logo": "https://multipriority.com/images/company/logo.jpeg",
+              "description": "Perusahaan induk yang berfokus pada pengembangan ekosistem wirausaha melalui unit bisnis pendidikan, teknologi, dan ekonomi kreatif.",
               "foundingDate": "2023",
               "founder": {
                 "@type": "Person",
-                "name": "Mohammad Iqbal Alhafizh",
-                "jobTitle": "Founder & Business Mentor"
+                "name": "Mohamad Iqbal Alhafizh",
+                "jobTitle": "Founder & CEO"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Blk. G, Sriamur",
+                "addressLocality": "Kec. Tambun Utara",
+                "addressRegion": "Jawa Barat",
+                "postalCode": "17510",
+                "addressCountry": "ID"
               },
               "contactPoint": {
                 "@type": "ContactPoint",
-                "contactType": "customer service",
-                "email": "info@smi.id"
+                "contactType": "corporate contact",
+                "email": "info@multipriority.com"
               },
               "sameAs": [
-                "https://www.instagram.com/sekolahmentorindonesia",
-                "https://www.youtube.com/@sekolahmentorindonesia"
-              ],
-              "knowsLanguage": ["id", "en"],
-              "areaServed": "ID"
-            }),
-          }}
-        />
-        
-        {/* Founder Person Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Mohammad Iqbal Alhafizh",
-              "alternateName": "Iqbal Alhafizh",
-              "jobTitle": "Founder & Mentor Utama",
-              "worksFor": {
-                "@type": "Organization",
-                "name": "Sekolah Mentor Indonesia",
-                "url": "https://smi.id",
-              },
-              "description": "Founder & praktisi content creator dengan pengalaman 10+ tahun di digital marketing dan mentoring. Mentor utama di Sekolah Mentor Indonesia.",
-              "url": "https://smi.id/founder",
-              "sameAs": [
-                "https://www.instagram.com/iqbalalhafizh",
-                "https://www.youtube.com/@iqbalalhafizh",
-                "https://www.linkedin.com/in/iqbalalhafizh"
-              ],
-              "knowsAbout": [
-                "Content Creation",
-                "Digital Marketing", 
-                "Mentoring",
-                "Business Strategy",
-                "Social Media Management"
-              ],
-              "image": "https://smi.id/mohamad-iqbal-alhafizh-founder-smi.jpeg"
+                "https://www.instagram.com/mpbgroup.id",
+                "https://www.linkedin.com/company/mpb-group"
+              ]
             }),
           }}
         />
@@ -629,7 +411,26 @@ export function Layout({ children }: { children: ReactNode }) {
         <Meta />
         <Links />
         <script type="module" src="/src/__create/dev-error-overlay.js"></script>
-        <link rel="icon" href="/logo.jpeg" />
+        {/* Umami Analytics */}
+        <script 
+          defer 
+          src="https://cloud.umami.is/script.js" 
+          data-website-id="2d6430ad-eda7-4713-8e63-62e3021e9ad1"
+        />
+        
+        {/* Google Analytics (GA4) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QKTE25P65"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-4QKTE25P65');
+            `,
+          }}
+        />
+        <link rel="icon" href={pathname?.startsWith('/sekolah-mentor-indonesia') ? '/logo.jpeg' : '/images/company/logo.jpeg'} />
         {LoadFontsSSR ? <LoadFontsSSR /> : null}
       </head>
       <body>

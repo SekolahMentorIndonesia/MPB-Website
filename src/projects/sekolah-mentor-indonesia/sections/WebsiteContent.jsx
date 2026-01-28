@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Clock, ArrowRight, Play, BookOpen, Download, Filter, Search } from 'lucide-react';
+import contentService from '../../../services/contentService';
 import { fetchFilteredContent, getFeaturedPosts } from '../../../services/bloggerService';
 
 export default function WebsiteContent() {
@@ -25,13 +26,17 @@ export default function WebsiteContent() {
         setLoading(true);
         
         // Load all website content
-        const [allData, featuredData] = await Promise.all([
-          fetchFilteredContent('website'),
-          getFeaturedPosts('website')
+        // Fetch featured from all posts (empty string) instead of just 'website'
+        const [allResponse, featuredData] = await Promise.all([
+          contentService.getWebsiteContent(),
+          getFeaturedPosts('')
         ]);
         
-        setAllContent(allData);
-        setFilteredContent(allData);
+        if (allResponse.success) {
+          setAllContent(allResponse.data);
+          setFilteredContent(allResponse.data);
+        }
+        
         setFeatured(featuredData.slice(0, 4));
       } catch (error) {
         console.error('Error loading website content:', error);

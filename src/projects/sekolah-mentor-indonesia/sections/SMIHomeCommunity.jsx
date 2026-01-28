@@ -98,7 +98,7 @@ export default function SMIHomeCommunity() {
                 viewport={{ once: true }}
                 className="relative bg-gradient-to-br from-brand-50 to-white border border-brand-100 rounded-[2rem] sm:rounded-[3rem] p-6 sm:p-12 shadow-sm z-10"
               >
-                {/* Grid of "Members" */}
+                {/* Grid of "Members" - Visualization */}
                 <div className="grid grid-cols-4 sm:grid-cols-4 gap-3 md:gap-4 relative z-10">
                   {[...Array(16)].map((_, i) => (
                     <motion.div

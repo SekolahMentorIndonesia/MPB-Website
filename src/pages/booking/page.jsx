@@ -19,7 +19,7 @@ export default function BookingPage() {
   const mentors = [
     {
       id: 1,
-      name: 'Mohammad Iqbal Alhafizh',
+      name: 'Mohamad Iqbal Alhafizh',
       title: 'Founder & Lead Mentor',
       specialty: 'Content Strategy & Business Development',
       experience: '10+ tahun',

@@ -31,8 +31,13 @@ export default function CompanyFounderStory() {
                 </p>
               </div>
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center">
-                  M
+                <div className="w-12 h-12 rounded-full overflow-hidden border border-neutral-200 shadow-sm shrink-0">
+                  <img 
+                    src="/images/company/founder.jpeg" 
+                    alt={t('founder_story.name')} 
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
                 </div>
                 <div>
                   <p className="text-neutral-900 font-bold">{t('founder_story.name')}</p>
@@ -67,7 +72,7 @@ export default function CompanyFounderStory() {
                   <iframe
                     className="w-full h-full"
                     src={`https://www.youtube.com/embed/${VIDEO_ID}?autoplay=0&controls=1&rel=0&modestbranding=1`}
-                    title="Mohammad Iqbal Alhafizh - Founder Sekolah Mentor Indonesia"
+                    title="Mohamad Iqbal Alhafizh - Founder Sekolah Mentor Indonesia"
                     frameBorder="0"
                     loading="lazy"
                     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

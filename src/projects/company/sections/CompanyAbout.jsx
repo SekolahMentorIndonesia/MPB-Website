@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import TeamSection from "../../../components/TeamSection";
 
 export default function CompanyAbout() {
   const { t } = useTranslation('company');
@@ -112,6 +113,8 @@ export default function CompanyAbout() {
         </div>
       </section>
 
+      <TeamSection />
+
       {/* Section 3: Unit Usaha */}
       <section id="unit-usaha" className="py-20 lg:py-32 px-4 sm:px-8 bg-neutral-50">
         <div className="max-w-7xl mx-auto">
@@ -195,8 +198,8 @@ export default function CompanyAbout() {
               >
                 <div className="mb-6">
                   <img 
-                    src="/images/company/3.png" 
-                    alt="Logo Perusahaan 3" 
+                    src="/images/company/9.png" 
+                    alt="Logo Pusat Laptop Bekasi" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                   />
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.sks_name')}</h3>
@@ -224,8 +227,8 @@ export default function CompanyAbout() {
               >
                 <div className="mb-6">
                   <img 
-                    src="/images/company/4.png" 
-                    alt="Logo Multiusaha Elektronik" 
+                    src="/images/company/10.png" 
+                    alt="Logo IQI Corps" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                   />
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.me_name')}</h3>

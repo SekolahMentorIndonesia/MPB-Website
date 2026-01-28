@@ -7,6 +7,7 @@
     "about_us": "About Us",
     "vision_mission": "Vision & Mission",
     "structure": "Corporate Structure",
+    "team": "Our Team",
     "contact": "Contact Us"
   },
   "hero": {
@@ -50,11 +51,11 @@
     "mti_name": "PT Mitranet Teknologi Internusa",
     "mti_field": "Digital Telecommunications Field",
     "mti_cta": "Visit Website",
-    "sks_name": "PT Sinergi Kasikarya Sejahtera",
-    "sks_field": "Food & Beverages Field",
+    "sks_name": "Pusat Laptop Bekasi",
+    "sks_field": "IT Field",
     "sks_cta": "Visit Website",
-    "me_name": "Multiusaha Elektronik",
-    "me_field": "Electronics Distribution Field",
+    "me_name": "IQI Corps",
+    "me_field": "Website Creation & Branding Services for Your Business Field",
     "me_cta": "Visit Website",
     "ms_name": "Multisky",
     "ms_field": "Tour & Event Field",
@@ -62,8 +63,8 @@
     "mp_name": "Multipriority Store",
     "mp_field": "Design & Printing Field",
     "mp_cta": "Visit Website",
-    "ppp_name": "Priority Pro Property",
-    "ppp_field": "Property Field",
+    "ppp_name": "Jembatan Mimpi Production House",
+    "ppp_field": "Production House Field",
     "ppp_cta": "Visit Website"
   },
   "founder_story": {
@@ -71,7 +72,7 @@
     "title": "Building Trust Through Real Stories",
     "description": "Real stories of how SMI was built from failure, learning, and directly mentoring entrepreneurs.",
     "quote": "SMI was not built from theory, but from direct experience mentoring entrepreneurs facing real problems in the field.",
-    "name": "Mohammad Iqbal Alhafizh",
+    "name": "Mohamad Iqbal Alhafizh",
     "role": "Founder & Lead Mentor",
     "subrole": "Sekolah Mentor Indonesia",
     "cta_program": "View Our Programs",

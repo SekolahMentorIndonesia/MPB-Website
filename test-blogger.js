@@ -2,9 +2,10 @@
 const BLOG_ID = '1722387930275850186';
 
 // Test URLs
+const API_KEY = 'AIzaSyDboVTZFdnrtBS-Mq7ebFRq2WgYtl-BlW4'; // Key from .env
 const TEST_URLS = {
-  blogInfo: `https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}?key=AIzaSyBnFQrGj5wX4z7h8k9J3m2P1dQvY`,
-  posts: `https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=AIzaSyBnFQrGj5wX4z7h8k9J3m2P1dQvY&maxResults=10`,
+  blogInfo: `https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}?key=${API_KEY}`,
+  posts: `https://www.googleapis.com/blogger/v3/blogs/${BLOG_ID}/posts?key=${API_KEY}&maxResults=10`,
   rss: `https://www.blogger.com/feeds/${BLOG_ID}/posts/default?alt=rss&max-results=10`,
   directBlog: `https://sekolahmentorindonesia.blogspot.com/`
 };

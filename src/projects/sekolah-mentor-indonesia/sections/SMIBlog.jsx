@@ -4,16 +4,24 @@ import { useState, useEffect } from "react";
 import contentService from "../../../services/contentService";
 import SafeHTML from "../../../components/SafeHTML";
 
-export default function SMIBlog() {
-  const [articles, setArticles] = useState([]);
-  const [loading, setLoading] = useState(true);
+export default function SMIBlog({ articles: propArticles }) {
+  const [articles, setArticles] = useState(propArticles || []);
+  const [loading, setLoading] = useState(!propArticles);
   const [selectedArticle, setSelectedArticle] = useState(null);
 
   useEffect(() => {
+    // Only use props if they actually have data
+    if (propArticles && propArticles.length > 0) {
+      setArticles(propArticles);
+      setLoading(false);
+      return;
+    }
+
+    // If no props or empty props, fetch client-side
     const loadArticles = async () => {
       try {
         setLoading(true);
-        console.log('Loading landing content...');
+        console.log('Loading landing content (client-side fallback)...');
         
         // Use new content service
         const response = await contentService.getLandingContent(3);
@@ -35,7 +43,7 @@ export default function SMIBlog() {
     };
 
     loadArticles();
-  }, []);
+  }, [propArticles]);
 
   const ContentCard = ({ content }) => (
     <a 
@@ -57,6 +65,7 @@ export default function SMIBlog() {
           <img
             src={content.featuredImage}
             alt={content.title}
+            loading="lazy"
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (

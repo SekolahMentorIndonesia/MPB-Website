@@ -80,7 +80,11 @@ class ContentService {
    */
   async getLandingContent(limit = 6) {
     // 1. Try to fetch with 'landing' label first
-    let posts = await bloggerService.fetchFilteredContent('landing');
+    // let posts = await bloggerService.fetchFilteredContent('landing');
+    
+    // Fallback strategy was not enough, so we now fetch ALL content by default
+    // to ensure posts appear even if the 'landing' label is missing or mistyped.
+    let posts = await bloggerService.fetchFilteredContent('');
     
     // 2. Fallback: If no posts found, fetch all posts (no label filter)
     if (!posts || posts.length === 0) {
@@ -96,14 +100,11 @@ class ContentService {
    * Get konten untuk website utama
    */
   async getWebsiteContent(filters = {}) {
-    // 1. Try to fetch with 'website' label first
-    let posts = await bloggerService.fetchFilteredContent('website');
+    // Fetch all posts to ensure content with 'landing' label or other labels also appear
+    // This fixes the issue where users post with 'landing' label but expect it to show on the website
+    let posts = await bloggerService.fetchFilteredContent('');
 
-    // 2. Fallback: If no posts found, fetch all posts (no label filter)
-    if (!posts || posts.length === 0) {
-      console.log('No website content found, falling back to all content');
-      posts = await bloggerService.fetchFilteredContent('');
-    }
+    if (!posts) posts = [];
 
     let enriched = posts.map(p => this.enrichItem(p));
 
