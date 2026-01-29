@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Star, Users, UserCheck, Building, Shield, CheckCircle, XCircle, AlertCircle, X, BookOpen, HeartHandshake, Clock } from "lucide-react";
+import { ArrowRight, Star, Users, UserCheck, Building, Shield, CheckCircle, XCircle, AlertCircle, X, BookOpen, HeartHandshake, Clock, QrCode, CreditCard } from "lucide-react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import OrderModal from "../../../components/OrderModal";
@@ -210,23 +210,41 @@ Mohon dicek kembali. Berikut saya lampirkan FOTO BUKTI PEMBAYARAN. Terima kasih.
           </div>
 
           <div className="space-y-4 mb-8">
+            {/* Bank Transfer Section */}
             <div className="border border-neutral-200 rounded-xl p-4">
-              <p className="font-semibold text-neutral-900 mb-1">Bank Transfer</p>
-              <p className="text-sm text-neutral-600">BCA: 0661555920</p>
-              <p className="text-sm text-neutral-600">A.n. Mohamad Iqbal Alhafizh</p>
-            </div>
-            {/* 
-            <div className="border border-neutral-200 rounded-xl p-4">
-              <p className="font-semibold text-neutral-900 mb-1">QRIS</p>
-              <div className="bg-neutral-200 h-32 rounded-lg flex items-center justify-center text-neutral-500 text-sm">
-                [QRIS Image Placeholder]
+              <div className="flex items-center gap-2 mb-3">
+                <div className="p-2 bg-blue-50 rounded-lg text-blue-600">
+                  <CreditCard className="w-5 h-5" />
+                </div>
+                <h4 className="font-bold text-neutral-900">Bank Transfer</h4>
+              </div>
+              <div className="bg-neutral-50 rounded-lg p-3">
+                <p className="text-sm font-semibold text-neutral-900">BCA: 0661555920</p>
+                <p className="text-xs text-neutral-600">A.n. Mohamad Iqbal Alhafizh</p>
               </div>
             </div>
-            */}
+
+            {/* QRIS Section */}
+            <div className="border border-neutral-200 rounded-xl p-4">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="p-2 bg-brand-50 rounded-lg text-brand-600">
+                  <QrCode className="w-5 h-5" />
+                </div>
+                <h4 className="font-bold text-neutral-900">Pembayaran Instan / QRIS</h4>
+              </div>
+              
+              <div className="w-full bg-neutral-100 rounded-lg overflow-hidden border border-neutral-200">
+                <img 
+                  src="/images/sekolah-mentor-indonesia/qris-smi.jpeg" 
+                  alt="QRIS Pembayaran SMI" 
+                  className="w-full h-auto object-contain" 
+                />
+              </div>
+            </div>
           </div>
           
           <div className="text-sm text-neutral-500 mb-6">
-            Silakan lakukan pembayaran ke nomor rekening di atas. Setelah transfer, klik tombol di bawah untuk konfirmasi. Admin akan memverifikasi dalam 1x24 jam.
+            Silakan lakukan pembayaran ke nomor rekening di atas Atau Lakukan Pmebayaran Secara Instan dengan Scan Code QR tersebut. Setelah transfer, klik tombol di bawah untuk konfirmasi. Admin akan memverifikasi dalam 1x24 jam.
           </div>
 
           <button
