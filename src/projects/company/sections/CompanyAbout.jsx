@@ -314,7 +314,7 @@ export default function CompanyAbout() {
               >
                 <div className="mb-6">
                   <img 
-                    src="/images/company/7.png" 
+                    src="/images/company/7.png?v=20260129" 
                     alt="Logo Priority Pro Property" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                   />
