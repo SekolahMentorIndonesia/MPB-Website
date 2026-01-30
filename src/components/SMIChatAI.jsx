@@ -70,14 +70,23 @@ export default function SMIChatAI() {
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[90] bg-brand-600 text-white p-3.5 sm:p-4 rounded-xl sm:rounded-2xl shadow-2xl shadow-brand-200 flex items-center gap-3 group"
+        onClick={() => setIsOpen(!isOpen)}
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[90] bg-brand-600 text-white w-14 h-14 rounded-full shadow-2xl shadow-brand-200 flex items-center justify-center group"
       >
-        <div className="relative">
-          <Bot className="w-6 h-6 sm:w-7 sm:h-7" />
-          <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-brand-600"></span>
+        <div className="relative w-7 h-7">
+          <div className={`transition-all duration-300 flex items-center justify-center ${isOpen ? 'group-hover:opacity-0 group-hover:scale-50 absolute inset-0' : 'opacity-100 scale-100'}`}>
+            <Bot className="w-7 h-7" />
+            {!isOpen && (
+              <span className="absolute top-0 right-0 w-2.5 h-2.5 bg-green-400 rounded-full border-2 border-brand-600"></span>
+            )}
+          </div>
+          
+          {isOpen && (
+            <div className="absolute inset-0 flex items-center justify-center transition-all duration-300 opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-100">
+              <X className="w-7 h-7" />
+            </div>
+          )}
         </div>
-        <span className="hidden sm:block font-semibold pr-1">Tanya MentorAI</span>
       </motion.button>
 
       {/* Chat Window */}
