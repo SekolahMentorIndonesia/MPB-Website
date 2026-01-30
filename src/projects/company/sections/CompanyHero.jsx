@@ -51,7 +51,7 @@ export default function CompanyHero() {
                 <ArrowRight className="w-4.5 h-4.5" />
               </a>
               <a
-                href="/images/company/company-profile.pdf"
+                href="/images/company/Company Profile PT MPB_20260130_124915_0000.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto bg-white text-brand-700 border border-brand-100 font-bold text-sm sm:text-base px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-2 font-sans"
