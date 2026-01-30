@@ -12,25 +12,25 @@
   },
   "hero": {
     "badge": "Lembaga Pelatihan Terakreditasi",
-    "headline_main": "Membangun Ekosistem",
-    "headline_sub": "Pendidikan & Kreator Digital",
-    "subheadline": "PT. Multiusaha Prioritas Bersama merupakan perusahaan utama yang mengelola dan mengembangkan berbagai unit usaha di bidang edukasi, komunitas, dan media kreator digital di Indonesia.",
+    "headline_main": "Profil PT Multiusaha Prioritas Bersama",
+    "headline_sub": "Website Resmi Perusahaan",
+    "subheadline": "PT Multiusaha Prioritas Bersama (MPB Group) adalah perusahaan induk yang mengelola dan mengembangkan berbagai unit usaha di bidang edukasi, komunitas, dan media kreator digital di Indonesia.",
     "cta": "Tentang Perusahaan",
     "trust_mentor": "Mentor Praktisi",
     "trust_curriculum": "Kurikulum Teruji",
     "founder_quote": "Built from real entrepreneurial battles — value-first, human-centered.",
     "founder_role": "Founder & Business Mentor",
-    "cta_title": "Tentang PT. Multiusaha Prioritas Bersama",
-    "founder_alt": "Mohamad Iqbal Alhafizh - Founder Sekolah Mentor Indonesia"
+    "cta_title": "Tentang PT Multiusaha Prioritas Bersama",
+    "founder_alt": "Mohamad Iqbal Alhafizh - Founder PT Multiusaha Prioritas Bersama"
   },
   "about": {
     "badge": "TENTANG KAMI",
-    "title": "PT. Multiusaha Prioritas Bersama",
+    "title": "Profil Perusahaan PT Multiusaha Prioritas Bersama",
     "history_badge": "SEJARAH SINGKAT",
-    "history_p1": "PT. Multiusaha Prioritas Bersama didirikan pada 27 November 2023 dengan tujuan untuk membangun ekosistem wirausaha yang tangguh di Indonesia.",
+    "history_p1": "PT Multiusaha Prioritas Bersama didirikan pada 27 November 2023 dengan tujuan untuk membangun ekosistem wirausaha yang tangguh di Indonesia.",
     "history_p2": "Sebagai perusahaan induk, kami fokus pada pembangunan ekosistem wirausaha yang tangguh melalui berbagai lini bisnis, termasuk pendidikan dan pelatihan.",
     "history_p3": "Kami percaya bahwa dengan pendekatan yang tepat, setiap potensi bisnis dapat diakselerasi secara efektif dan berkelanjutan.",
-    "parent_company": "PT. Multiusaha Prioritas Bersama",
+    "parent_company": "PT Multiusaha Prioritas Bersama",
     "parent_type": "Perusahaan Induk"
   },
   "strategy": {
@@ -63,8 +63,8 @@
     "mp_name": "Multipriority Store",
     "mp_field": "Bidang Desain & Percetakan",
     "mp_cta": "Kunjungi Website",
-    "ppp_name": "Media Mentor Kreatif Production House",
-    "ppp_field": "Bidang entertaiment",
+    "ppp_name": "Production House Creative Mentor Media",
+    "ppp_field": "Bidang Entertainment",
     "ppp_cta": "Kunjungi Website"
   },
   "founder_story": {

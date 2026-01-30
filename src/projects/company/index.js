@@ -7,4 +7,4 @@ export { default as CompanyContact } from './sections/CompanyContact';
 export { default as CompanyCTA } from './sections/CompanyCTA';
 export { default as CompanyFounderStory } from './sections/CompanyFounderStory';
 export { default as CompanyTestimonials } from './sections/CompanyTestimonials';
-
+export { default as CompanyStructure } from './sections/CompanyStructure';

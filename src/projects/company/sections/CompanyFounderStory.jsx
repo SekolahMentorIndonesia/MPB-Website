@@ -47,7 +47,7 @@ export default function CompanyFounderStory() {
               </div>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
-                  href="#program"
+                  href="/sekolah-mentor-indonesia"
                   className="w-full sm:w-auto bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-3.5 rounded-xl transition-all shadow-lg shadow-brand-200"
                 >
                   {t('founder_story.cta_program')}
