@@ -1,0 +1,333 @@
+import { Mail, Phone, MapPin, Send, MessageCircle, Clock, CheckCircle, ChevronDown, X, CheckCircle2, AlertCircle } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+
+export default function CompanyContact() {
+  const { t } = useTranslation('company');
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: ''
+  });
+  const [isSubjectOpen, setIsSubjectOpen] = useState(false);
+
+  const subjectOptions = [
+    { value: 'general', label: t('contact.form.subjects.general') },
+    { value: 'registration', label: t('contact.form.subjects.registration') },
+    { value: 'technical', label: t('contact.form.subjects.technical') },
+    { value: 'partnership', label: t('contact.form.subjects.partnership') },
+    { value: 'other', label: t('contact.form.subjects.other') }
+  ];
+
+  const [notification, setNotification] = useState({
+    visible: false,
+    message: '',
+    type: '' // 'success' or 'error'
+  });
+
+  const showNotification = (message, type) => {
+    setNotification({
+      visible: true,
+      message,
+      type
+    });
+    setTimeout(() => {
+      setNotification(prev => ({ ...prev, visible: false }));
+    }, 3000);
+  };
+
+  const getCsrfToken = () => {
+    const m = document.cookie.match(/(?:^|; )csrfToken=([^;]+)/);
+    return m ? decodeURIComponent(m[1]) : '';
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    try {
+      const response = await fetch(`/api/contact/telegram`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRF-Token': getCsrfToken(),
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message
+        })
+      });
+      
+      if (response.ok) {
+        showNotification(t('contact.form.success_message'), 'success');
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          subject: '',
+          message: ''
+        });
+      } else {
+        showNotification(t('contact.form.error_message'), 'error');
+      }
+    } catch (error) {
+      showNotification(t('contact.form.error_general'), 'error');
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubjectSelect = (option) => {
+    setFormData({
+      ...formData,
+      subject: option.value
+    });
+    setIsSubjectOpen(false);
+  };
+
+  return (
+    <>
+      {/* Custom Notification */}
+      <AnimatePresence>
+        {notification.visible && (
+          <motion.div
+            initial={{ opacity: 0, y: -50, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -50, scale: 0.9 }}
+            className={`fixed top-4 right-4 z-50 max-w-sm p-4 rounded-xl shadow-lg border ${
+              notification.type === 'success' 
+                ? 'bg-green-50 border-green-200 text-green-800' 
+                : 'bg-red-50 border-red-200 text-red-800'
+            }`}
+          >
+            <div className="flex items-start gap-3">
+              <div className={`flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center ${
+                notification.type === 'success' ? 'bg-green-100' : 'bg-red-100'
+              }`}>
+                {notification.type === 'success' ? (
+                  <CheckCircle2 className="w-4 h-4 text-green-600" />
+                ) : (
+                  <AlertCircle className="w-4 h-4 text-red-600" />
+                )}
+              </div>
+              <div className="flex-1">
+                <p className="font-semibold text-sm">
+                  {notification.type === 'success' ? t('contact.form.success_title') : t('contact.form.error_title')}
+                </p>
+                <p className="text-sm mt-1 opacity-90">
+                  {notification.message}
+                </p>
+              </div>
+              <button
+                onClick={() => setNotification(prev => ({ ...prev, visible: false }))}
+                className="flex-shrink-0 p-1 rounded-lg hover:bg-black/5 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <section id="contact" className="py-20 lg:py-32 px-4 sm:px-6 bg-gradient-to-br from-neutral-50 via-white to-brand-50/30 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="text-brand-600 font-bold tracking-[0.2em] uppercase text-[10px] sm:text-xs mb-4 block font-sans">
+            {t('contact.badge')}
+          </span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-neutral-900 mb-6 font-display leading-tight">
+            {t('contact.title')} <span className="text-brand-600">{t('contact.title_highlight')}</span>
+          </h2>
+          <p className="text-base sm:text-lg lg:text-xl text-neutral-600 max-w-3xl mx-auto leading-relaxed font-sans">
+            {t('contact.description')}
+          </p>
+        </motion.div>
+
+        
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="bg-white rounded-3xl border border-neutral-100 p-8 lg:p-10 shadow-lg">
+              <h3 className="text-2xl font-bold text-neutral-900 mb-8 font-display flex items-center gap-3">
+                <div className="w-8 h-8 bg-brand-100 rounded-xl flex items-center justify-center">
+                  <Send className="w-4 h-4 text-brand-600" />
+                </div>
+                {t('contact.form.title')}
+              </h3>
+              
+              <form onSubmit={handleSubmit} className="space-y-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-semibold text-neutral-700 mb-2">
+                      {t('contact.form.name_label')}
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-sm"
+                      placeholder={t('contact.form.name_placeholder')}
+                    />
+                  </div>
+
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-semibold text-neutral-700 mb-2">
+                      {t('contact.form.email_label')}
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-sm"
+                      placeholder={t('contact.form.email_placeholder')}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="subject" className="block text-sm font-semibold text-neutral-700 mb-2">
+                    {t('contact.form.subject_label')}
+                  </label>
+                  <div className="relative">
+                    <button
+                      type="button"
+                      onClick={() => setIsSubjectOpen(!isSubjectOpen)}
+                      className="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-sm bg-white text-left flex items-center justify-between hover:bg-neutral-50"
+                    >
+                      <span className={formData.subject ? 'text-neutral-900' : 'text-neutral-400'}>
+                        {formData.subject 
+                          ? subjectOptions.find(opt => opt.value === formData.subject)?.label 
+                          : t('contact.form.subject_placeholder')
+                        }
+                      </span>
+                      <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform duration-200 ${isSubjectOpen ? 'rotate-180' : ''}`} />
+                    </button>
+
+                    <AnimatePresence>
+                      {isSubjectOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                          className="absolute top-full left-0 right-0 mt-2 z-50 bg-white border border-neutral-200 rounded-xl shadow-lg overflow-hidden"
+                        >
+                          {subjectOptions.map((option) => (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => handleSubjectSelect(option)}
+                              className={`w-full px-4 py-3 text-left text-sm hover:bg-brand-50 transition-colors ${
+                                formData.subject === option.value ? 'bg-brand-50 text-brand-600' : 'text-neutral-700'
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="message" className="block text-sm font-semibold text-neutral-700 mb-2">
+                    {t('contact.form.message_label')}
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={6}
+                    className="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all resize-none text-sm"
+                    placeholder={t('contact.form.message_placeholder')}
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full bg-brand-600 text-white py-4 px-6 rounded-xl font-semibold hover:bg-brand-700 transition-all duration-200 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                >
+                  {t('contact.form.submit')}
+                </button>
+              </form>
+            </div>
+          </motion.div>
+
+          {/* Contact Information */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            className="space-y-8"
+          >
+            <div className="bg-white rounded-3xl border border-neutral-100 p-8 lg:p-10">
+              <h3 className="text-2xl font-bold text-neutral-900 mb-8 font-display flex items-center gap-3">
+                <div className="w-8 h-8 bg-green-100 rounded-xl flex items-center justify-center">
+                  <MapPin className="w-4 h-4 text-green-600" />
+                </div>
+                Kantor Pusat
+              </h3>
+              
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <MapPin className="w-5 h-5 text-brand-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h4 className="font-semibold text-neutral-900 mb-2">Alamat Admin</h4>
+                    <p className="text-neutral-600 leading-relaxed">
+                      Blk. G, Sriamur, Kec. Tambun Utara<br />
+                      Kabupaten Bekasi, Jawa Barat 17510<br />
+                      Indonesia
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Map Placeholder */}
+            <div className="bg-white rounded-3xl border border-neutral-100 overflow-hidden h-64 lg:h-80">
+              <iframe
+                src="https://www.google.com/maps?q=-6.181316,107.055367&z=15&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="w-full h-full"
+              />
+            </div>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+    </>
+  );
+}

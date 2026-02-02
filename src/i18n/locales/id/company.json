@@ -1,0 +1,148 @@
+{
+  "navbar": {
+    "title": "MPB Group",
+    "subtitle": "Multiusaha Prioritas Bersama",
+    "home": "Home",
+    "about": "Tentang",
+    "about_us": "Tentang Kami",
+    "vision_mission": "Visi & Misi",
+    "structure": "Struktur Perseroan",
+    "board_of_director": "Board of Director",
+    "team": "Tim Kami",
+    "contact": "Hubungi Kami"
+  },
+  "hero": {
+    "badge": "Perusahaan Induk & Investasi Strategis",
+    "headline_main": "Membangun Ekosistem",
+    "headline_sub": "Bisnis & Ekonomi Kreatif",
+    "subheadline": "PT Multiusaha Prioritas Bersama (MPB Group) adalah perusahaan induk yang mengelola dan mengembangkan berbagai unit usaha strategis, investasi bisnis, dan pemberdayaan ekonomi kreatif di Indonesia.",
+    "cta": "Tentang Perusahaan",
+    "trust_mentor": "Tim Profesional",
+    "trust_curriculum": "Sistem Terintegrasi",
+    "founder_quote": "Built from real entrepreneurial battles — value-first, human-centered.",
+    "founder_role": "Founder & CEO",
+    "cta_title": "Tentang PT Multiusaha Prioritas Bersama",
+    "founder_alt": "Mohamad Iqbal Alhafizh - Founder PT Multiusaha Prioritas Bersama"
+  },
+  "about": {
+    "badge": "TENTANG KAMI",
+    "title": "Profil Perusahaan PT Multiusaha Prioritas Bersama",
+    "history_badge": "SEJARAH SINGKAT",
+    "history_p1": "PT Multiusaha Prioritas Bersama didirikan pada 27 November 2023 dengan tujuan untuk membangun ekosistem bisnis yang tangguh dan berkelanjutan di Indonesia.",
+    "history_p2": "Sebagai perusahaan induk, kami fokus pada pengembangan unit bisnis strategis melalui manajemen profesional, inovasi terukur, dan pemberdayaan ekonomi.",
+    "history_p3": "Kami percaya bahwa dengan tata kelola yang tepat, setiap potensi bisnis dapat diakselerasi menjadi aset yang bernilai tinggi dan memberikan dampak positif.",
+    "parent_company": "PT Multiusaha Prioritas Bersama",
+    "parent_type": "Perusahaan Induk"
+  },
+  "strategy": {
+    "badge": "STRATEGI PERUSAHAAN",
+    "title": "Visi & Misi",
+    "vision_title": "Visi",
+    "vision_desc": "Menjadi perusahaan induk terkemuka di Indonesia yang menciptakan ekosistem bisnis yang berkelanjutan, inovatif, dan memberikan nilai tambah bagi seluruh pemangku kepentingan.",
+    "mission_title": "Misi",
+    "mission_1": "Mengembangkan unit bisnis strategis dengan manajemen profesional dan tata kelola perusahaan yang baik (Good Corporate Governance).",
+    "mission_2": "Memberdayakan potensi ekonomi kreatif melalui investasi strategis dan kemitraan yang saling menguntungkan untuk pertumbuhan bersama."
+  },
+  "structure": {
+    "badge": "STRUKTUR PERSEROAN",
+    "title": "Gurita Bisnis Perseroan",
+    "smi_name": "Sekolah Mentor Indonesia",
+    "smi_field": "Unit Edukasi & Pengembangan Talenta",
+    "smi_cta": "Kunjungi Website",
+    "mti_name": "PT Mitranet Teknologi Internusa",
+    "mti_field": "Unit Telekomunikasi Digital",
+    "mti_cta": "Kunjungi Website",
+    "sks_name": "Pusat Laptop Bekasi",
+    "sks_field": "Unit Perdagangan & Layanan IT",
+    "sks_cta": "Kunjungi Website",
+    "me_name": "IQI Corps",
+    "me_field": "Unit Jasa Digital & Branding",
+    "me_cta": "Kunjungi Website",
+    "ms_name": "Multisky",
+    "ms_field": "Unit Pariwisata & Manajemen Acara",
+    "ms_cta": "Kunjungi Website",
+    "mp_name": "Multipriority Store",
+    "mp_field": "Unit Desain & Percetakan Kreatif",
+    "mp_cta": "Kunjungi Website",
+    "ppp_name": "Production House Creative Mentor Media",
+    "ppp_field": "Unit Produksi Kreatif & Hiburan",
+    "ppp_cta": "Kunjungi Website"
+  },
+  "founder_story": {
+    "badge": "Perjalanan Membangun Ekosistem",
+    "title": "Membangun Kepercayaan Melalui Integritas",
+    "description": "Kisah bagaimana PT Multiusaha Prioritas Bersama dibangun dengan fondasi yang kuat, visi jangka panjang, dan komitmen untuk memberdayakan potensi ekonomi.",
+    "quote": "MPB Group tidak dibangun di atas teori semata, melainkan dari pengalaman nyata dalam membangun dan mengelola bisnis yang berkelanjutan.",
+    "name": "Mohamad Iqbal Alhafizh",
+    "role": "Founder & CEO",
+    "subrole": "PT Multiusaha Prioritas Bersama",
+    "cta_program": "Lihat Unit Bisnis",
+    "cta_consultation": "Hubungi Kami"
+  },
+  "footer": {
+    "description": "Perusahaan induk yang membangun ekosistem bisnis berkelanjutan dan inovatif melalui sinergi berbagai unit usaha strategis.",
+    "business_units": "Unit Bisnis",
+    "contact": "Hubungi Kami",
+    "company_header": "Perusahaan",
+    "legal": "Legal",
+    "privacy": "Kebijakan Privasi",
+    "terms": "Syarat & Ketentuan",
+    "copyright": "© {{year}} PT Multiusaha Prioritas Bersama. All rights reserved.",
+    "powered_by": "Powered by"
+  },
+  "testimonials": {
+    "badge": "TESTIMONI",
+    "title": "Apa Kata Mitra & Klien MPB Group?",
+    "subtitle": "Pengalaman nyata dari mitra bisnis dan klien yang telah bekerjasama dengan unit bisnis di bawah naungan MPB Group.",
+    "list": [
+      {
+        "name": "Robert Leonardo Tobing",
+        "role": "Owner PT Karya Sejahtera",
+        "image": "/images/company/robert.jpeg",
+        "content": "Sebagai owner, tantangan terbesar saya adalah membangun sistem bisnis yang rapi dan scalable. Melalui kemitraan dengan MPB Group, saya mendapatkan blueprint sistem operasional yang jelas dan terukur. Dampaknya langsung terasa pada pertumbuhan perusahaan kami."
+      },
+      {
+        "name": "Irvan Kusuma Tardiyanto",
+        "role": "Owner KK Production House",
+        "image": "/images/company/irvan.jpeg",
+        "content": "MPB Group memiliki pendekatan yang sangat profesional. Dukungan strategis yang diberikan membantu bisnis saya berkembang lebih terarah dan berbasis data. Sinergi yang terbangun sangat positif."
+      },
+      {
+        "name": "Rigel Pradiko",
+        "role": "Business Partner",
+        "image": "/images/company/rigel.jpeg",
+        "content": "Kerjasama dengan MPB Group memberikan perspektif baru dalam pengelolaan bisnis. Profesionalisme dan komitmen mereka terhadap kualitas sangat luar biasa."
+      }
+    ]
+  },
+  "contact": {
+    "badge": "HUBUNGI KAMI",
+    "title": "Siap Berkolaborasi?",
+    "title_highlight": "Mari Bicara",
+    "description": "Kami selalu terbuka untuk peluang kerjasama baru, pertanyaan seputar unit bisnis, atau diskusi strategis lainnya.",
+    "form": {
+      "title": "Kirim Pesan",
+      "name_label": "Nama Lengkap",
+      "name_placeholder": "Masukkan nama lengkap Anda",
+      "email_label": "Alamat Email",
+      "email_placeholder": "nama@perusahaan.com",
+      "subject_label": "Perihal",
+      "subject_placeholder": "Pilih perihal pesan",
+      "message_label": "Pesan",
+      "message_placeholder": "Tuliskan pesan Anda di sini...",
+      "submit": "Kirim Pesan",
+      "success_title": "Berhasil!",
+      "error_title": "Gagal!",
+      "success_message": "Pesan Anda berhasil dikirim! Tim kami akan segera menghubungi Anda.",
+      "error_message": "Gagal mengirim pesan. Silakan coba lagi.",
+      "error_general": "Terjadi kesalahan. Silakan coba lagi nanti.",
+      "subjects": {
+        "general": "Pertanyaan Umum",
+        "registration": "Pendaftaran / Layanan",
+        "technical": "Dukungan Teknis",
+        "partnership": "Kemitraan & Kerjasama",
+        "other": "Lainnya"
+      }
+    }
+  }
+}
