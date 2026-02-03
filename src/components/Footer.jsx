@@ -55,10 +55,10 @@ export default function Footer({
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
           
-          {/* Column 1: Company Info (MPB Group) */}
+          {/* Column 1: Company Info (MPB Corps) */}
           <div className="flex flex-col items-start">
             <a href="/" className="flex flex-col items-start mb-6 group">
-                  <span className="text-xl font-bold text-white leading-tight tracking-tight">MPB Group</span>
+                  <span className="text-xl font-bold text-white leading-tight tracking-tight">MPB Corps</span>
                   <span className="text-xs text-neutral-500 font-medium tracking-wide uppercase mt-0.5">Multiusaha Prioritas Bersama</span>
             </a>
             <p className="text-sm leading-relaxed mb-8 font-sans text-neutral-400 max-w-xs">

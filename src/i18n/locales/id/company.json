@@ -1,13 +1,13 @@
 {
   "navbar": {
-    "title": "MPB Group",
+    "title": "MPB Corps",
     "subtitle": "Multiusaha Prioritas Bersama",
     "home": "Home",
     "about": "Tentang",
     "about_us": "Tentang Kami",
     "vision_mission": "Visi & Misi",
     "structure": "Struktur Perseroan",
-    "board_of_director": "Board of Director",
+    "board_of_director": "Management Perseroan",
     "team": "Tim Kami",
     "contact": "Hubungi Kami"
   },
@@ -92,26 +92,26 @@
   },
   "testimonials": {
     "badge": "TESTIMONI",
-    "title": "Apa Kata Mitra & Klien MPB Group?",
-    "subtitle": "Pengalaman nyata dari mitra bisnis dan klien yang telah bekerjasama dengan unit bisnis di bawah naungan MPB Group.",
+    "title": "Apa Kata Mitra & Klien MPB Corps?",
+    "subtitle": "Pengalaman nyata dari mitra bisnis dan klien yang telah bekerjasama dengan unit bisnis di bawah naungan MPB Corps.",
     "list": [
       {
         "name": "Robert Leonardo Tobing",
         "role": "Owner PT Karya Sejahtera",
         "image": "/images/company/robert.jpeg",
-        "content": "Sebagai owner, tantangan terbesar saya adalah membangun sistem bisnis yang rapi dan scalable. Melalui kemitraan dengan MPB Group, saya mendapatkan blueprint sistem operasional yang jelas dan terukur. Dampaknya langsung terasa pada pertumbuhan perusahaan kami."
+        "content": "Sebagai owner, tantangan terbesar saya adalah membangun sistem bisnis yang rapi dan scalable. Melalui kemitraan dengan MPB Corps, saya mendapatkan blueprint sistem operasional yang jelas dan terukur. Dampaknya langsung terasa pada pertumbuhan perusahaan kami."
       },
       {
         "name": "Irvan Kusuma Tardiyanto",
         "role": "Owner KK Production House",
         "image": "/images/company/irvan.jpeg",
-        "content": "MPB Group memiliki pendekatan yang sangat profesional. Dukungan strategis yang diberikan membantu bisnis saya berkembang lebih terarah dan berbasis data. Sinergi yang terbangun sangat positif."
+        "content": "MPB Corps memiliki pendekatan yang sangat profesional. Dukungan strategis yang diberikan membantu bisnis saya berkembang lebih terarah dan berbasis data. Sinergi yang terbangun sangat positif."
       },
       {
         "name": "Rigel Pradiko",
         "role": "Business Partner",
         "image": "/images/company/rigel.jpeg",
-        "content": "Kerjasama dengan MPB Group memberikan perspektif baru dalam pengelolaan bisnis. Profesionalisme dan komitmen mereka terhadap kualitas sangat luar biasa."
+        "content": "Kerjasama dengan MPB Corps memberikan perspektif baru dalam pengelolaan bisnis. Profesionalisme dan komitmen mereka terhadap kualitas sangat luar biasa."
       }
     ]
   },

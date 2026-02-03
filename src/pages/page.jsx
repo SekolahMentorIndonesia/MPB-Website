@@ -1,30 +1,39 @@
+import { Suspense, lazy } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import {
-  CompanyHero,
-  CompanyAbout,
-  CompanyContact,
-  CompanyTestimonials,
-  CompanyCTA,
-  CompanyFounderStory
-} from "../projects/company";
+import { CompanyHero } from "../projects/company";
+
+// Lazy load non-critical sections
+const CompanyAbout = lazy(() => import("../projects/company/sections/CompanyAbout"));
+const CompanyContact = lazy(() => import("../projects/company/sections/CompanyContact"));
+const CompanyTestimonials = lazy(() => import("../projects/company/sections/CompanyTestimonials"));
+const CompanyFounderStory = lazy(() => import("../projects/company/sections/CompanyFounderStory"));
 
 // Halaman landing utama publik untuk memperkenalkan Sekolah Mentor Indonesia.
+export function links() {
+  return [
+    { rel: "canonical", href: "https://multipriority.com" },
+    { rel: "alternate", href: "https://multipriority.com", hreflang: "x-default" },
+    { rel: "alternate", href: "https://multipriority.com", hreflang: "id" },
+    { rel: "alternate", href: "https://multipriority.com/en", hreflang: "en" }
+  ];
+}
+
 export function meta() {
   return [
     { title: "PT Multiusaha Prioritas Bersama | Solusi Bisnis & Korporasi" },
     { 
       name: "description", 
-      content: "PT Multiusaha Prioritas Bersama (MPB Group) adalah perusahaan induk yang fokus pada investasi strategis, pengembangan unit bisnis, dan pemberdayaan ekonomi kreatif." 
+      content: "PT Multiusaha Prioritas Bersama (MPB Corps) adalah perusahaan induk yang fokus pada investasi strategis, pengembangan unit bisnis, dan pemberdayaan ekonomi kreatif." 
     },
     { 
       name: "keywords", 
-      content: "PT Multiusaha Prioritas Bersama, MPB Group, perusahaan induk, holding company, investasi bisnis, pengembangan bisnis, ekonomi kreatif" 
+      content: "PT Multiusaha Prioritas Bersama, MPB Corps, perusahaan induk, holding company, investasi bisnis, pengembangan bisnis, ekonomi kreatif" 
     },
     { property: "og:title", content: "PT Multiusaha Prioritas Bersama | Solusi Bisnis & Korporasi" },
     { 
-      name: "og:description", 
-      content: "PT Multiusaha Prioritas Bersama (MPB Group). Perusahaan induk profesional untuk pengembangan bisnis dan pemberdayaan ekonomi kreatif." 
+      property: "og:description", 
+      content: "PT Multiusaha Prioritas Bersama (MPB Corps). Perusahaan induk profesional untuk pengembangan bisnis dan pemberdayaan ekonomi kreatif." 
     },
     { property: "og:type", content: "website" },
     { property: "og:url", content: "https://multipriority.com" },
@@ -35,8 +44,7 @@ export function meta() {
     { name: "twitter:title", content: "PT Multiusaha Prioritas Bersama | Solusi Bisnis & Korporasi" },
     { name: "twitter:description", content: "Perusahaan induk profesional untuk pengembangan bisnis dan pemberdayaan ekonomi kreatif." },
     { name: "twitter:image", content: "/images/company/logo.jpeg" },
-    { name: "robots", content: "index, follow" },
-    { rel: "canonical", href: "https://multipriority.com" }
+    { name: "robots", content: "index, follow" }
   ];
 }
 
@@ -57,7 +65,7 @@ export default function HomePage() {
       {
         "@type": "Corporation",
         "name": "PT Multiusaha Prioritas Bersama",
-        "alternateName": "MPB Group",
+        "alternateName": "MPB Corps",
         "url": "https://multipriority.com",
         "logo": "https://multipriority.com/images/company/logo.jpeg",
         "description": "Perusahaan induk yang menaungi berbagai unit bisnis strategis, berfokus pada layanan profesional dan pemberdayaan ekonomi.",
@@ -113,16 +121,18 @@ export default function HomePage() {
 
       <CompanyHero />
 
-      <CompanyAbout />
-      <CompanyFounderStory />
-      
-      {/* Business Units Structure handled in CompanyAbout */}
+      <Suspense fallback={<div className="py-20 text-center text-gray-500">Loading sections...</div>}>
+        <CompanyAbout />
+        <CompanyFounderStory />
+        
+        {/* Business Units Structure handled in CompanyAbout */}
 
-      {/* Testimonials Section */}
-      <CompanyTestimonials />
+        {/* Testimonials Section */}
+        <CompanyTestimonials />
 
-      {/* Contact Section */}
-      <CompanyContact />
+        {/* Contact Section */}
+        <CompanyContact />
+      </Suspense>
 
       {/* Footer */}
       <Footer variant="company" />

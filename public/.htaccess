@@ -2,6 +2,9 @@
   RewriteEngine On 
   RewriteBase / 
 
+  # Serve custom 404 page
+  ErrorDocument 404 /404.html
+
   # Allow direct access to existing files & folders 
   RewriteRule ^index\.html$ - [L] 
   RewriteCond %{REQUEST_FILENAME} -f [OR] 

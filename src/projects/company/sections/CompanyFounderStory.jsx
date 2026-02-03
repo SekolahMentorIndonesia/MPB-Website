@@ -33,7 +33,7 @@ export default function CompanyFounderStory() {
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-12 h-12 rounded-full overflow-hidden border border-neutral-200 shadow-sm shrink-0">
                   <img 
-                    src="/images/company/founder.jpeg" 
+                    src="/images/company/iqbal.png?v=20260203" 
                     alt={t('founder_story.name')} 
                     className="w-full h-full object-cover"
                     loading="lazy"

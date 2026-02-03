@@ -51,7 +51,7 @@ export default function CompanyHero() {
                 <ArrowRight className="w-4.5 h-4.5" />
               </a>
               <a
-                href="/images/company/Company Profile PT MPB_20260202_100139_0000.pdf"
+                href="/images/company/Company Profile PT MPB_20260203_161630_0000.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-full sm:w-auto bg-white text-brand-700 border border-brand-100 font-bold text-sm sm:text-base px-8 py-4 rounded-xl transition-all flex items-center justify-center gap-2 font-sans"
@@ -84,9 +84,12 @@ export default function CompanyHero() {
             <div className="relative z-10 rounded-3xl lg:rounded-[2rem] overflow-hidden shadow-2xl border border-neutral-100 bg-white max-w-[380px] sm:max-w-[420px] lg:max-w-[440px] xl:max-w-[480px] mx-auto lg:ml-auto">
               <div className="relative w-full h-full aspect-[4/5] sm:aspect-[3/4]">
                 <img
-                  src="/images/company/iqbal.png"
+                  src="/images/company/iqbal.png?v=20260203"
                   alt={t('hero.founder_alt')}
                   className="absolute inset-0 w-full h-full object-cover object-top"
+                  width="480"
+                  height="640"
+                  fetchPriority="high"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/25 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">
