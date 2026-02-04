@@ -339,10 +339,30 @@ export function Layout({ children }: { children: ReactNode }) {
         
         {/* SEO Meta Tags are handled by React Router's <Meta /> */}
         <meta name="robots" content="index, follow" />
-        
+        <title>MPB Corps - Multiusaha Prioritas Bersama</title>
+        <link rel="preconnect" href="https://api-gateway.umami.dev" />
         <Meta />
         <Links />
-        <script type="module" src="/src/__create/dev-error-overlay.js"></script>
+        
+        {/* Optimized Google Fonts Loading */}
+        <link 
+          rel="preload" 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" 
+          as="style" 
+        />
+        <link 
+          rel="stylesheet" 
+          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" 
+          media="print" 
+          onLoad={(e) => { e.currentTarget.media = 'all'; }}
+        />
+        <noscript>
+          <link 
+            rel="stylesheet" 
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" 
+          />
+        </noscript>
+
         {/* Umami Analytics */}
         <script 
           defer 
@@ -350,8 +370,7 @@ export function Layout({ children }: { children: ReactNode }) {
           data-website-id="2d6430ad-eda7-4713-8e63-62e3021e9ad1"
         />
         
-        {/* Google Analytics (GA4) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-4QKTE25P65"></script>
+        {/* Google Analytics (GA4) - Deferred */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -359,10 +378,26 @@ export function Layout({ children }: { children: ReactNode }) {
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
               gtag('config', 'G-4QKTE25P65');
+              
+              // Defer GTM loading with 4s delay or idle callback
+              const loadGTM = () => {
+                setTimeout(function() {
+                  var script = document.createElement('script');
+                  script.src = "https://www.googletagmanager.com/gtag/js?id=G-4QKTE25P65";
+                  script.async = true;
+                  document.head.appendChild(script);
+                }, 4000);
+              };
+
+              if (window.requestIdleCallback) {
+                window.requestIdleCallback(loadGTM);
+              } else {
+                window.addEventListener('load', loadGTM);
+              }
             `,
           }}
         />
-        <link rel="icon" href="/images/company/logo.jpeg" />
+        <link rel="icon" href="/images/company/logo.webp" />
         {LoadFontsSSR ? <LoadFontsSSR /> : null}
       </head>
       <body>
@@ -371,7 +406,6 @@ export function Layout({ children }: { children: ReactNode }) {
         <Toaster position="bottom-right" />
         <ScrollRestoration />
         <Scripts />
-        <script src="https://kit.fontawesome.com/2c15cc0cc7.js" crossOrigin="anonymous" async />
       </body>
     </html>
   );

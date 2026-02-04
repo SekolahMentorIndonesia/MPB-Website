@@ -34,7 +34,7 @@ export function HotReloadIndicator() {
         () => (
           <div style={{ ...toastStyle, padding: '10px' }}>
             <img
-              src="/logo.jpeg"
+              src="/logo.webp"
               alt="Sekolah Mentor Indonesia loading"
               className="w-8 h-8"
             />

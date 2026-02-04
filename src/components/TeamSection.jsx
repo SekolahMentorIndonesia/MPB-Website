@@ -6,19 +6,19 @@ const managementMembers = [
   { 
     name: "Mohamad Iqbal Alhafizh", 
     role: "Direktur Utama", 
-    img: "/images/company/iqbal.png?v=20260203", 
+    img: "/images/company/iqbal.webp", 
     linkedin: "https://www.linkedin.com/in/mohamad-iqbal-alhafizh" 
   },
   { 
     name: "Daffa Naufal Fachrezi", 
     role: "Direktur Marketing", 
-    img: "/images/company/daffa.png", 
+    img: "/images/company/daffa.webp", 
     linkedin: "https://www.linkedin.com/in/dappnett" 
   },
   { 
     name: "Muhammad Habiban", 
     role: "Direktur Operasional", 
-    img: "/images/company/iban.png", 
+    img: "/images/company/iban.webp", 
     linkedin: "#" 
   },
 ];
@@ -27,7 +27,7 @@ const stafMembers = [
   { 
     name: "Muhamad Dzarel Alghifari", 
     role: "Staff IT Specialist", 
-    img: "/images/company/dzarel.png", 
+    img: "/images/company/dzarel.webp", 
     linkedin: "https://www.linkedin.com/in/dzarelalghifari" 
   },
 ];
@@ -99,7 +99,10 @@ export default function TeamSection() {
                     <img
                       src={member.img}
                       alt={member.name}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                      width="300"
+                      height="400"
                     />
                     <div className="absolute inset-x-4 bottom-4">
                       <div className="flex items-center justify-between gap-3 px-4 py-3 bg-white/95 backdrop-blur rounded-2xl shadow-lg border border-neutral-100">
@@ -116,6 +119,7 @@ export default function TeamSection() {
                             href={member.linkedin}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`LinkedIn profil ${member.name}`}
                             className="flex items-center justify-center w-9 h-9 rounded-full border border-neutral-200 text-neutral-500 hover:text-[#0077b5] hover:border-[#0077b5]/30 bg-white transition-all duration-300 hover:shadow-md"
                           >
                             <FaLinkedin className="w-4 h-4" />

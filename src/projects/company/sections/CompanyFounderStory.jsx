@@ -33,16 +33,18 @@ export default function CompanyFounderStory() {
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-12 h-12 rounded-full overflow-hidden border border-neutral-200 shadow-sm shrink-0">
                   <img 
-                    src="/images/company/iqbal.png?v=20260203" 
+                    src="/images/company/iqbal.webp" 
                     alt={t('founder_story.name')} 
                     className="w-full h-full object-cover"
                     loading="lazy"
+                    width="48"
+                    height="48"
                   />
                 </div>
                 <div>
                   <p className="text-neutral-900 font-bold">{t('founder_story.name')}</p>
                   <p className="text-neutral-500 text-sm font-medium">{t('founder_story.role')}</p>
-                  <p className="text-neutral-400 text-xs mt-1">{t('founder_story.subrole')}</p>
+                  <p className="text-neutral-600 text-xs mt-1">{t('founder_story.subrole')}</p>
                 </div>
               </div>
               <div className="flex flex-col sm:flex-row gap-3">

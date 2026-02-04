@@ -42,13 +42,15 @@ export default function CompanyAbout() {
               <div className="mt-8 pt-8 border-t border-neutral-100">
                 <div className="flex items-center gap-4">
                   <img 
-                    src="/images/company/logo.jpeg" 
+                    src="/images/company/logo.webp" 
                     alt="Logo PT Multiusaha Prioritas Bersama" 
                     className="h-12 w-auto object-contain rounded"
+                    width="48"
+                    height="48"
                   />
                   <div>
                     <p className="text-neutral-900 font-bold text-base font-display leading-none">{t('about.parent_company')}</p>
-                    <p className="text-neutral-400 text-sm font-sans mt-1">{t('about.parent_type')}</p>
+                    <p className="text-neutral-500 text-sm font-sans mt-1">{t('about.parent_type')}</p>
                   </div>
                 </div>
               </div>
@@ -142,9 +144,11 @@ export default function CompanyAbout() {
               >
                 <div>
                   <img 
-                    src="/images/company/1.png" 
+                    src="/images/company/1.webp" 
                     alt="Logo Sekolah Mentor Indonesia" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
+                    width="228"
+                    height="128"
                   />
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.smi_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.smi_field')}</p>
@@ -169,9 +173,11 @@ export default function CompanyAbout() {
               >
                 <div>
                   <img 
-                    src="/images/company/2.png" 
+                    src="/images/company/2.webp" 
                     alt="Logo PT Mitranet Teknologi Internusa" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
+                    width="228"
+                    height="128"
                   />
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.mti_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.mti_field')}</p>
@@ -201,6 +207,8 @@ export default function CompanyAbout() {
                     src="/images/company/9.png" 
                     alt="Logo Pusat Laptop Bekasi" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
+                    width="228"
+                    height="128"
                   />
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.sks_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.sks_field')}</p>
@@ -226,9 +234,11 @@ export default function CompanyAbout() {
               >
                 <div className="mb-6">
                   <img 
-                    src="/images/company/10.png" 
+                    src="/images/company/10.webp" 
                     alt="Logo IQI Corps" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
+                    width="228"
+                    height="128"
                   />
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.me_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.me_field')}</p>
@@ -254,9 +264,11 @@ export default function CompanyAbout() {
               >
                 <div className="mb-6">
                   <img 
-                    src="/images/company/5.png" 
+                    src="/images/company/5.webp" 
                     alt="Logo Multisky" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
+                    width="228"
+                    height="128"
                   />
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.ms_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.ms_field')}</p>
@@ -282,9 +294,11 @@ export default function CompanyAbout() {
               >
                 <div className="mb-6">
                   <img 
-                    src="/images/company/6.png" 
+                    src="/images/company/6.webp" 
                     alt="Logo Multipriority Store" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
+                    width="228"
+                    height="128"
                   />
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.mp_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.mp_field')}</p>
@@ -310,9 +324,11 @@ export default function CompanyAbout() {
               >
                 <div className="mb-6">
                   <img 
-                    src="/images/company/7.png?v=20260129" 
+                    src="/images/company/7.webp?v=20260129" 
                     alt="Logo Priority Pro Property" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
+                    width="228"
+                    height="128"
                   />
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.ppp_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.ppp_field')}</p>

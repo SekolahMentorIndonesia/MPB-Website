@@ -37,13 +37,13 @@ export function meta() {
     },
     { property: "og:type", content: "website" },
     { property: "og:url", content: "https://multipriority.com" },
-    { property: "og:image", content: "/images/company/logo.jpeg" },
+    { property: "og:image", content: "/images/company/logo.webp" },
     { property: "og:site_name", content: "PT Multiusaha Prioritas Bersama" },
     { property: "og:locale", content: "id_ID" },
     { name: "twitter:card", content: "summary_large_image" },
     { name: "twitter:title", content: "PT Multiusaha Prioritas Bersama | Solusi Bisnis & Korporasi" },
     { name: "twitter:description", content: "Perusahaan induk profesional untuk pengembangan bisnis dan pemberdayaan ekonomi kreatif." },
-    { name: "twitter:image", content: "/images/company/logo.jpeg" },
+    { name: "twitter:image", content: "/images/company/logo.webp" },
     { name: "robots", content: "index, follow" }
   ];
 }
@@ -67,7 +67,7 @@ export default function HomePage() {
         "name": "PT Multiusaha Prioritas Bersama",
         "alternateName": "MPB Corps",
         "url": "https://multipriority.com",
-        "logo": "https://multipriority.com/images/company/logo.jpeg",
+        "logo": "https://multipriority.com/images/company/logo.webp",
         "description": "Perusahaan induk yang menaungi berbagai unit bisnis strategis, berfokus pada layanan profesional dan pemberdayaan ekonomi.",
         "foundingDate": "2023",
         "sameAs": [

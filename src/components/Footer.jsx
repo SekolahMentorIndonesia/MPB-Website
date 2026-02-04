@@ -51,7 +51,7 @@ export default function Footer({
   const navigationLinks = getNavigationLinks();
 
   return (
-    <footer className={`bg-neutral-900 text-neutral-400 pt-16 lg:pt-24 pb-12 px-6 ${effectiveVariant === 'smi' ? 'mt-20' : ''} ${className}`}>
+    <footer className={`bg-neutral-900 text-neutral-300 pt-16 lg:pt-24 pb-12 px-6 ${effectiveVariant === 'smi' ? 'mt-20' : ''} ${className}`}>
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 mb-16">
           
@@ -59,9 +59,9 @@ export default function Footer({
           <div className="flex flex-col items-start">
             <a href="/" className="flex flex-col items-start mb-6 group">
                   <span className="text-xl font-bold text-white leading-tight tracking-tight">MPB Corps</span>
-                  <span className="text-xs text-neutral-500 font-medium tracking-wide uppercase mt-0.5">Multiusaha Prioritas Bersama</span>
+                  <span className="text-xs text-neutral-300 font-medium tracking-wide uppercase mt-0.5">Multiusaha Prioritas Bersama</span>
             </a>
-            <p className="text-sm leading-relaxed mb-8 font-sans text-neutral-400 max-w-xs">
+            <p className="text-sm leading-relaxed mb-8 font-sans text-neutral-300 max-w-xs">
               {t('footer.description', { ns: 'company' })}
             </p>
             <div className="flex gap-4">
@@ -71,8 +71,8 @@ export default function Footer({
                   href={url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 bg-neutral-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all text-neutral-400 rounded-full group"
-                  aria-label={`Social link ${i + 1}`}
+                  className="w-10 h-10 bg-neutral-800 flex items-center justify-center hover:bg-brand-600 hover:text-white transition-all text-neutral-300 rounded-full group"
+                  aria-label={url.includes('instagram') ? 'Instagram MPB Corps' : `Social link ${i + 1}`}
                 >
                   <Icon className="w-5 h-5 transition-transform group-hover:scale-110" />
                 </a>

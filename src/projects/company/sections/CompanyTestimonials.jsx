@@ -37,13 +37,8 @@ export default function CompanyTestimonials() {
     return () => clearInterval(interval);
   }, [isAutoSliding, testimonials.length, direction]);
 
-  // Update slider position when activeIndex changes
-  useEffect(() => {
-    if (sliderRef.current) {
-      const slideWidth = sliderRef.current.offsetWidth;
-      sliderRef.current.scrollLeft = activeIndex * slideWidth;
-    }
-  }, [activeIndex]);
+  // Update slider position when activeIndex changes - Handled by Framer Motion now
+
 
   // Handle manual slide
   const handleSlide = (index) => {
@@ -129,16 +124,18 @@ export default function CompanyTestimonials() {
                     <img 
                       src={testi.image} 
                       alt={`${testi.name} - ${testi.role}`} 
+                      width="56"
+                      height="56"
                       className="w-full h-full object-cover"
                       onError={(e) => {
                         e.target.style.display = 'none'; // Hide image if broken
                         e.target.parentElement.classList.add('flex', 'items-center', 'justify-center');
-                        e.target.parentElement.innerHTML = `<span class="text-neutral-400 font-bold text-lg">${testi.name.charAt(0)}</span>`;
+                        e.target.parentElement.innerHTML = `<span class="text-neutral-600 font-bold text-lg">${testi.name.charAt(0)}</span>`;
                       }}
                     />
                   </div>
                   <div>
-                    <h4 className="font-bold text-neutral-900 text-sm sm:text-base font-display mb-0.5">{testi.name}</h4>
+                    <h3 className="font-bold text-neutral-900 text-sm sm:text-base font-display mb-0.5">{testi.name}</h3>
                     <p className="text-neutral-500 text-xs sm:text-sm font-sans leading-tight">
                       {testi.role}
                     </p>
@@ -149,32 +146,21 @@ export default function CompanyTestimonials() {
           </div>
 
           {/* Mobile: Slider showing 1 testimonial at a time */}
-          <div className="lg:hidden relative max-w-3xl mx-auto">
-            <div 
-              ref={sliderRef}
-              className="overflow-x-auto overflow-y-hidden scroll-smooth snap-x snap-mandatory"
+          <div className="lg:hidden relative max-w-3xl mx-auto overflow-hidden">
+            <motion.div 
+              className="flex"
+              animate={{ x: `-${activeIndex * 100}%` }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
-              {/* Hide scrollbar for WebKit browsers */}
-              <style jsx>{
-                `.overflow-x-auto::-webkit-scrollbar {
-                  display: none;
-                }
-              `}</style>
-              
-              <div className="flex gap-6">
-                {testimonials.map((testi, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="min-w-full max-w-full snap-center bg-neutral-50 p-8 rounded-2xl sm:rounded-3xl border border-neutral-100 shadow-soft flex flex-col justify-between"
-                  >
+              {testimonials.map((testi, index) => (
+                <div
+                  key={index}
+                  className="min-w-full px-4"
+                >
+                  <div className="bg-neutral-50 p-8 rounded-2xl sm:rounded-3xl border border-neutral-100 shadow-soft flex flex-col justify-between h-full">
                     <div>
                       <Quote className="text-brand-200 mb-6 w-8 h-8" />
                       <p className="text-base text-neutral-700 leading-relaxed mb-8 font-sans italic">
@@ -187,25 +173,27 @@ export default function CompanyTestimonials() {
                         <img 
                           src={testi.image} 
                           alt={testi.name} 
+                          width="56"
+                          height="56"
                           className="w-full h-full object-cover"
                           onError={(e) => {
                             e.target.style.display = 'none';
                             e.target.parentElement.classList.add('flex', 'items-center', 'justify-center');
-                            e.target.parentElement.innerHTML = `<span class="text-neutral-400 font-bold text-lg">${testi.name.charAt(0)}</span>`;
+                            e.target.parentElement.innerHTML = `<span class="text-neutral-600 font-bold text-lg">${testi.name.charAt(0)}</span>`;
                           }}
                         />
                       </div>
                       <div>
-                        <h4 className="font-bold text-neutral-900 text-sm sm:text-base font-display mb-0.5">{testi.name}</h4>
+                        <h3 className="font-bold text-neutral-900 text-sm sm:text-base font-display mb-0.5">{testi.name}</h3>
                         <p className="text-neutral-500 text-xs sm:text-sm font-sans leading-tight">
                           {testi.role}
                         </p>
                       </div>
                     </div>
-                  </motion.div>
-                ))}
-              </div>
-            </div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
             
             {/* Slider Indicators for Mobile */}
             <div className="flex justify-center gap-2 mt-8">
@@ -213,9 +201,19 @@ export default function CompanyTestimonials() {
                 <button
                   key={index}
                   onClick={() => handleSlide(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === activeIndex ? 'bg-brand-600 w-6' : 'bg-neutral-300'}`}
+                  className={`relative w-2.5 h-2.5 rounded-full transition-colors duration-300 ${index === activeIndex ? 'bg-brand-600' : 'bg-neutral-300'}`}
                   aria-label={`Go to slide ${index + 1}`}
-                />
+                >
+                  {index === activeIndex && (
+                    <motion.span
+                      layoutId="activeDot"
+                      className="absolute inset-0 bg-brand-600 rounded-full"
+                      initial={false}
+                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      style={{ width: '24px', left: '-7px' }}
+                    />
+                  )}
+                </button>
               ))}
             </div>
           </div>

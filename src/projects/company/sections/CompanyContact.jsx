@@ -219,13 +219,13 @@ export default function CompanyContact() {
                       onClick={() => setIsSubjectOpen(!isSubjectOpen)}
                       className="w-full px-4 py-3 border border-neutral-200 rounded-xl focus:ring-2 focus:ring-brand-500 focus:border-transparent transition-all text-sm bg-white text-left flex items-center justify-between hover:bg-neutral-50"
                     >
-                      <span className={formData.subject ? 'text-neutral-900' : 'text-neutral-400'}>
+                      <span className={formData.subject ? 'text-neutral-900' : 'text-neutral-600'}>
                         {formData.subject 
                           ? subjectOptions.find(opt => opt.value === formData.subject)?.label 
                           : t('contact.form.subject_placeholder')
                         }
                       </span>
-                      <ChevronDown className={`w-4 h-4 text-neutral-400 transition-transform duration-200 ${isSubjectOpen ? 'rotate-180' : ''}`} />
+                      <ChevronDown className={`w-4 h-4 text-neutral-600 transition-transform duration-200 ${isSubjectOpen ? 'rotate-180' : ''}`} />
                     </button>
 
                     <AnimatePresence>
@@ -317,6 +317,7 @@ export default function CompanyContact() {
                 src="https://www.google.com/maps?q=-6.181316,107.055367&z=15&output=embed"
                 width="100%"
                 height="100%"
+                title="Lokasi Kantor Pusat MPB Corps"
                 style={{ border: 0 }}
                 allowFullScreen=""
                 loading="lazy"

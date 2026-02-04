@@ -16,12 +16,7 @@ export default function CompanyHero() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 w-full">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-center">
           {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center lg:text-left"
-          >
+          <div className="text-center lg:text-left">
             {/* Badge */}
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-50 border border-brand-100 text-brand-700 font-semibold text-[10px] sm:text-xs mb-6 font-sans">
               <span className="flex h-1.5 w-1.5 rounded-full bg-brand-600"></span>
@@ -72,7 +67,7 @@ export default function CompanyHero() {
                 <span className="text-neutral-700 font-medium text-xs sm:text-sm font-sans">{t('hero.trust_curriculum')}</span>
               </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Visual Section - Founder Portrait with Quote */}
           <motion.div
@@ -84,7 +79,7 @@ export default function CompanyHero() {
             <div className="relative z-10 rounded-3xl lg:rounded-[2rem] overflow-hidden shadow-2xl border border-neutral-100 bg-white max-w-[380px] sm:max-w-[420px] lg:max-w-[440px] xl:max-w-[480px] mx-auto lg:ml-auto">
               <div className="relative w-full h-full aspect-[4/5] sm:aspect-[3/4]">
                 <img
-                  src="/images/company/iqbal.png?v=20260203"
+                  src="/images/company/iqbal.webp"
                   alt={t('hero.founder_alt')}
                   className="absolute inset-0 w-full h-full object-cover object-top"
                   width="480"

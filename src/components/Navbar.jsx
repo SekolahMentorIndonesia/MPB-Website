@@ -12,7 +12,7 @@ export default function Navbar({ variant = 'company' }) {
 
   const navbarConfig = {
     company: {
-      logo: "/images/company/logo.jpeg",
+      logo: "/images/company/logo.webp",
       title: t('navbar.title', { ns: 'company' }),
       subtitle: t('navbar.subtitle', { ns: 'company' }),
       menuItems: [
@@ -22,7 +22,7 @@ export default function Navbar({ variant = 'company' }) {
           href: '#about-company',
           hasDropdown: true,
           dropdownItems: [
-            { name: t('navbar.about_us', { ns: 'company' }), href: '/about' },
+            { name: t('navbar.about_us', { ns: 'company' }), href: '#about-company' },
             { name: t('navbar.vision_mission', { ns: 'company' }), href: '#visi-misi' },
             { name: t('navbar.board_of_director', { ns: 'company' }), href: '#team' },
             { name: t('navbar.structure', { ns: 'company' }), href: '#unit-usaha' },
@@ -83,6 +83,8 @@ export default function Navbar({ variant = 'company' }) {
               src={currentConfig.logo}
               alt=""
               className="h-10 sm:h-12 w-auto object-contain" 
+              width="48"
+              height="48"
             />
             <div className="ml-3 flex flex-col items-start">
                 <span className="text-sm font-bold text-neutral-900 leading-tight">{currentConfig.title}</span>
@@ -273,7 +275,7 @@ export default function Navbar({ variant = 'company' }) {
                 </div>
 
                 <div className="mt-8 pt-8 border-t border-neutral-100">
-                  <p className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-4">Language</p>
+                  <p className="text-xs font-semibold text-neutral-600 uppercase tracking-wider mb-4">Language</p>
                   <div className="flex gap-3">
                     <button
                       onClick={() => changeLanguage('id')}
