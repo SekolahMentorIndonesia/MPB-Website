@@ -28,6 +28,19 @@ export default function Navbar({ variant = 'company' }) {
             { name: t('navbar.structure', { ns: 'company' }), href: '#unit-usaha' },
           ]
         },
+        { name: t('navbar.our_services', { ns: 'company' }), 
+            hasDropdown: true,
+            dropdownItems: [
+              { name: t('navbar.education_talent', { ns: 'company' }), href: 'https://smi.multipriority.com/' },
+              { name: t('navbar.digital_telecom', { ns: 'company' }), href: '#unit-mti' },
+              { name: t('navbar.it_trade_services', { ns: 'company' }), href: '/Product-Pusat-Laptop-Bekasi' },
+              { name: t('navbar.digital_branding', { ns: 'company' }), href: '/Product-IQICorps' },
+              { name: t('navbar.tourism_event', { ns: 'company' }), href: '#unit-ms' },
+              { name: t('navbar.creative_design_print', { ns: 'company' }), href: '#unit-mp' },
+              { name: t('navbar.creative_production', { ns: 'company' }), href: '#unit-ppp' },
+            ]
+          },
+        { name: t('navbar.career', { ns: 'company' }), href: 'https://recruitment.multipriority.com' },
         { name: t('navbar.contact', { ns: 'company' }), href: '#contact' },
       ]
     }
@@ -39,29 +52,32 @@ export default function Navbar({ variant = 'company' }) {
   const [activeDropdown, setActiveDropdown] = useState(null);
 
   const scrollToSection = (e, href) => {
-    e.preventDefault();
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
     
     // Handle page navigation
-    if (href.startsWith('/')) {
-      navigate(href);
-      return;
-    }
-    
-    if (href.startsWith('#')) {
-      const element = document.querySelector(href);
-      if (element) {
-        const navbarHeight = 68;
-        const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-        const offsetPosition = elementPosition - navbarHeight;
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        });
+    if (href.startsWith('/') || href.startsWith('#')) {
+      e.preventDefault(); // Only prevent default for internal links
+      if (href.startsWith('/')) {
+        navigate(href);
+        return;
+      }
+      
+      if (href.startsWith('#')) {
+        const element = document.querySelector(href);
+        if (element) {
+          const navbarHeight = 68;
+          const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+          const offsetPosition = elementPosition - navbarHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
       }
     }
+    // If it's an external link, let the default behavior (navigation) happen
   };
 
   const changeLanguage = (lng) => {
@@ -126,7 +142,7 @@ export default function Navbar({ variant = 'company' }) {
               {/* Desktop Dropdown */}
               {item.hasDropdown && (
                 <div 
-                  className={`absolute top-full right-0 w-56 pt-2 transition-all duration-200 ${
+                  className={`absolute top-full right-0 w-72 pt-2 transition-all duration-200 ${
                     activeDropdown === item.name 
                       ? 'opacity-100 translate-y-0 visible' 
                       : 'opacity-0 translate-y-2 invisible'
