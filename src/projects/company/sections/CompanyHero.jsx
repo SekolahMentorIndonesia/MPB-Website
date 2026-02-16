@@ -84,7 +84,7 @@ export default function CompanyHero() {
                   className="absolute inset-0 w-full h-full object-cover object-top"
                   width="480"
                   height="640"
-                  fetchPriority="high"
+                  fetchpriority="high"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-black/25 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-7">

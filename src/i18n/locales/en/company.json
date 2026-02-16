@@ -9,7 +9,16 @@
     "structure": "Corporate Structure",
     "board_of_director": "Corporate Management",
     "team": "Our Team",
-    "contact": "Contact Us"
+    "contact": "Contact Us",
+    "career": "Career",
+    "our_services": "Our Services",
+    "education_talent": "Education & Talent Development",
+    "digital_telecom": "Digital Telecommunications",
+    "it_trade_services": "IT Trade & Services",
+    "digital_branding": "Digital & Branding Services",
+    "tourism_event": "Tourism & Event Management",
+    "creative_design_print": "Creative Design & Printing",
+    "creative_production": "Creative Production & Entertainment"
   },
   "hero": {
     "badge": "Accredited Training Institution",

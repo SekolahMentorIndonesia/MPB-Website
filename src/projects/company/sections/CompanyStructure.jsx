@@ -39,6 +39,7 @@ export default function CompanyStructure() {
             return (
               <motion.div
                 key={unit.key}
+                id={`unit-${unit.key}`}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

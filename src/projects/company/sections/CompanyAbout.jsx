@@ -155,7 +155,7 @@ export default function CompanyAbout() {
                 </div>
                 
                 <a 
-                  href="https://smi.multipriority.com/" 
+                  href="https://www.tiktok.com/@growwithsmi" 
                   className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors duration-200 text-sm mt-6"
                 >
                   {t('structure.smi_cta')}
@@ -204,7 +204,7 @@ export default function CompanyAbout() {
               >
                 <div className="mb-6">
                   <img 
-                    src="/images/company/9.png" 
+                    src="/images/company/9.webp" 
                     alt="Logo Pusat Laptop Bekasi" 
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                     width="228"
@@ -335,12 +335,12 @@ export default function CompanyAbout() {
                 </div>
                 
                 <a 
-                  href="#" 
-                  target="_blank" 
+                  href="https://smi.multipriority.com/" 
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors duration-200 text-sm"
                 >
-                  {t('structure.ppp_cta')}
+                  {t('structure.smi_cta')}
                   <span>→</span>
                 </a>
               </motion.div>

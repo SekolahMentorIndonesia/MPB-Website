@@ -17,8 +17,8 @@ export default function Navbar({ variant = 'company' }) {
       subtitle: t('navbar.subtitle', { ns: 'company' }),
       menuItems: [
         { name: t('navbar.home', { ns: 'company' }), href: '#hero' },
-        { 
-          name: t('navbar.about', { ns: 'company' }), 
+        {
+          name: t('navbar.about', { ns: 'company' }),
           href: '#about-company',
           hasDropdown: true,
           dropdownItems: [
@@ -28,18 +28,19 @@ export default function Navbar({ variant = 'company' }) {
             { name: t('navbar.structure', { ns: 'company' }), href: '#unit-usaha' },
           ]
         },
-        { name: t('navbar.our_services', { ns: 'company' }), 
-            hasDropdown: true,
-            dropdownItems: [
-              { name: t('navbar.education_talent', { ns: 'company' }), href: 'https://smi.multipriority.com/' },
-              { name: t('navbar.digital_telecom', { ns: 'company' }), href: '#unit-mti' },
-              { name: t('navbar.it_trade_services', { ns: 'company' }), href: '/Product-Pusat-Laptop-Bekasi' },
-              { name: t('navbar.digital_branding', { ns: 'company' }), href: '/Product-IQICorps' },
-              { name: t('navbar.tourism_event', { ns: 'company' }), href: '#unit-ms' },
-              { name: t('navbar.creative_design_print', { ns: 'company' }), href: '#unit-mp' },
-              { name: t('navbar.creative_production', { ns: 'company' }), href: '#unit-ppp' },
-            ]
-          },
+        {
+          name: t('navbar.our_services', { ns: 'company' }),
+          hasDropdown: true,
+          dropdownItems: [
+            { name: t('navbar.education_talent', { ns: 'company' }), href: 'https://smi.multipriority.com/' },
+            { name: t('navbar.digital_telecom', { ns: 'company' }), href: '#unit-mti' },
+            { name: t('navbar.it_trade_services', { ns: 'company' }), href: '/Product-Pusat-Laptop-Bekasi' },
+            { name: t('navbar.digital_branding', { ns: 'company' }), href: '/Product-IQICorps' },
+            { name: t('navbar.tourism_event', { ns: 'company' }), href: '#unit-ms' },
+            { name: t('navbar.creative_design_print', { ns: 'company' }), href: '/Product-Desain-Percetakan-Kreatif' },
+            { name: t('navbar.creative_production', { ns: 'company' }), href: '#unit-ppp' },
+          ]
+        },
         { name: t('navbar.career', { ns: 'company' }), href: 'https://recruitment.multipriority.com' },
         { name: t('navbar.contact', { ns: 'company' }), href: '#contact' },
       ]
@@ -54,7 +55,7 @@ export default function Navbar({ variant = 'company' }) {
   const scrollToSection = (e, href) => {
     setIsMobileMenuOpen(false);
     setActiveDropdown(null);
-    
+
     // Handle page navigation
     if (href.startsWith('/') || href.startsWith('#')) {
       e.preventDefault(); // Only prevent default for internal links
@@ -62,14 +63,14 @@ export default function Navbar({ variant = 'company' }) {
         navigate(href);
         return;
       }
-      
+
       if (href.startsWith('#')) {
         const element = document.querySelector(href);
         if (element) {
           const navbarHeight = 68;
           const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
           const offsetPosition = elementPosition - navbarHeight;
-          
+
           window.scrollTo({
             top: offsetPosition,
             behavior: 'smooth'
@@ -90,21 +91,21 @@ export default function Navbar({ variant = 'company' }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-[68px] flex items-center justify-between">
         {/* Logo Section (Left) */}
         <div className="flex items-center flex-shrink-0">
-          <button 
+          <button
             onClick={(e) => scrollToSection(e, '#hero')}
             className="flex items-center hover:scale-105 transition-transform duration-200"
             aria-label="Go to homepage"
           >
-            <img 
+            <img
               src={currentConfig.logo}
               alt=""
-              className="h-10 sm:h-12 w-auto object-contain" 
+              className="h-10 sm:h-12 w-auto object-contain"
               width="48"
               height="48"
             />
             <div className="ml-3 flex flex-col items-start">
-                <span className="text-sm font-bold text-neutral-900 leading-tight">{currentConfig.title}</span>
-                <span className="text-[10px] text-neutral-500 leading-tight">{currentConfig.subtitle}</span>
+              <span className="text-sm font-bold text-neutral-900 leading-tight">{currentConfig.title}</span>
+              <span className="text-[10px] text-neutral-500 leading-tight">{currentConfig.subtitle}</span>
             </div>
           </button>
         </div>
@@ -112,8 +113,8 @@ export default function Navbar({ variant = 'company' }) {
         {/* Desktop Menu (Right) */}
         <div className="hidden lg:flex items-center gap-6">
           {menuItems.map((item) => (
-            <div 
-              key={item.name} 
+            <div
+              key={item.name}
               className="relative group"
               onMouseEnter={() => item.hasDropdown && setActiveDropdown(item.name)}
               onMouseLeave={() => item.hasDropdown && setActiveDropdown(null)}
@@ -141,12 +142,11 @@ export default function Navbar({ variant = 'company' }) {
 
               {/* Desktop Dropdown */}
               {item.hasDropdown && (
-                <div 
-                  className={`absolute top-full right-0 w-72 pt-2 transition-all duration-200 ${
-                    activeDropdown === item.name 
-                      ? 'opacity-100 translate-y-0 visible' 
+                <div
+                  className={`absolute top-full right-0 w-72 pt-2 transition-all duration-200 ${activeDropdown === item.name
+                      ? 'opacity-100 translate-y-0 visible'
                       : 'opacity-0 translate-y-2 invisible'
-                  }`}
+                    }`}
                   role="menu"
                   aria-label={`${item.name} submenu`}
                 >
@@ -193,18 +193,16 @@ export default function Navbar({ variant = 'company' }) {
                 >
                   <button
                     onClick={() => changeLanguage('id')}
-                    className={`w-full text-left px-3 py-2 text-xs font-medium rounded-md transition-colors duration-200 ${
-                      i18n.language === 'id' ? 'bg-brand-50 text-brand-600' : 'text-neutral-600 hover:bg-neutral-50'
-                    }`}
+                    className={`w-full text-left px-3 py-2 text-xs font-medium rounded-md transition-colors duration-200 ${i18n.language === 'id' ? 'bg-brand-50 text-brand-600' : 'text-neutral-600 hover:bg-neutral-50'
+                      }`}
                     role="menuitem"
                   >
                     Bahasa Indonesia
                   </button>
                   <button
                     onClick={() => changeLanguage('en')}
-                    className={`w-full text-left px-3 py-2 text-xs font-medium rounded-md transition-colors duration-200 ${
-                      i18n.language.startsWith('en') ? 'bg-brand-50 text-brand-600' : 'text-neutral-600 hover:bg-neutral-50'
-                    }`}
+                    className={`w-full text-left px-3 py-2 text-xs font-medium rounded-md transition-colors duration-200 ${i18n.language.startsWith('en') ? 'bg-brand-50 text-brand-600' : 'text-neutral-600 hover:bg-neutral-50'
+                      }`}
                     role="menuitem"
                   >
                     English
@@ -230,7 +228,7 @@ export default function Navbar({ variant = 'company' }) {
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -238,7 +236,7 @@ export default function Navbar({ variant = 'company' }) {
               onClick={() => setIsMobileMenuOpen(false)}
               aria-hidden="true"
             />
-            <motion.div 
+            <motion.div
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}
@@ -250,7 +248,7 @@ export default function Navbar({ variant = 'company' }) {
             >
               <div className="p-5 border-b border-neutral-100 flex items-center justify-between">
                 <span className="font-bold text-neutral-900">{currentConfig.title}</span>
-                <button 
+                <button
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="p-2 -mr-2 text-neutral-500 hover:text-neutral-900"
                   aria-label="Close menu"
@@ -270,7 +268,7 @@ export default function Navbar({ variant = 'company' }) {
                       >
                         {item.name}
                       </a>
-                      
+
                       {/* Mobile Dropdown Items */}
                       {item.hasDropdown && (
                         <div className="pl-4 flex flex-col gap-3 border-l-2 border-neutral-100">
@@ -295,21 +293,19 @@ export default function Navbar({ variant = 'company' }) {
                   <div className="flex gap-3">
                     <button
                       onClick={() => changeLanguage('id')}
-                      className={`flex-1 py-2 text-xs font-medium rounded-lg border transition-all ${
-                        i18n.language === 'id' 
-                          ? 'bg-brand-50 border-brand-200 text-brand-700' 
+                      className={`flex-1 py-2 text-xs font-medium rounded-lg border transition-all ${i18n.language === 'id'
+                          ? 'bg-brand-50 border-brand-200 text-brand-700'
                           : 'border-neutral-200 text-neutral-600'
-                      }`}
+                        }`}
                     >
                       Indonesia
                     </button>
                     <button
                       onClick={() => changeLanguage('en')}
-                      className={`flex-1 py-2 text-xs font-medium rounded-lg border transition-all ${
-                        i18n.language.startsWith('en') 
-                          ? 'bg-brand-50 border-brand-200 text-brand-700' 
+                      className={`flex-1 py-2 text-xs font-medium rounded-lg border transition-all ${i18n.language.startsWith('en')
+                          ? 'bg-brand-50 border-brand-200 text-brand-700'
                           : 'border-neutral-200 text-neutral-600'
-                      }`}
+                        }`}
                     >
                       English
                     </button>
