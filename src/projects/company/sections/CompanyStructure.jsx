@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import { ArrowRight, Building2, Globe, Laptop, Smartphone, Palette, Film, Plane } from "lucide-react";
 
 export default function CompanyStructure() {
@@ -8,10 +9,10 @@ export default function CompanyStructure() {
   const units = [
     { key: 'smi', icon: Building2 },
     { key: 'mti', icon: Smartphone },
-    { key: 'sks', icon: Laptop },
-    { key: 'me', icon: Globe },
+    { key: 'sks', icon: Laptop, link: "/Product-Pusat-Laptop-Bekasi" },
+    { key: 'me', icon: Globe, link: "/Product-IQICorps" },
     { key: 'ms', icon: Plane },
-    { key: 'mp', icon: Palette },
+    { key: 'mp', icon: Palette, link: "/Product-Desain-Percetakan-Kreatif" },
     { key: 'ppp', icon: Film },
   ];
 
@@ -36,7 +37,7 @@ export default function CompanyStructure() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {units.map((unit, index) => {
             const Icon = unit.icon;
-            return (
+            const content = (
               <motion.div
                 key={unit.key}
                 id={`unit-${unit.key}`}
@@ -44,7 +45,7 @@ export default function CompanyStructure() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="bg-white rounded-2xl p-8 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow group"
+                className="bg-white rounded-2xl p-8 border border-neutral-100 shadow-sm hover:shadow-md transition-shadow group h-full"
               >
                 <div className="w-12 h-12 bg-brand-50 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
                   <Icon className="w-6 h-6 text-brand-600" />
@@ -55,12 +56,22 @@ export default function CompanyStructure() {
                 <p className="text-neutral-600 text-sm mb-6 font-sans">
                   {t(`structure.${unit.key}_field`)}
                 </p>
-                <div className="flex items-center text-brand-600 font-bold text-sm group-hover:gap-2 transition-all cursor-pointer">
+                {/* <div className="flex items-center text-brand-600 font-bold text-sm group-hover:gap-2 transition-all cursor-pointer">
                   {t(`structure.${unit.key}_cta`)}
                   <ArrowRight className="w-4 h-4 ml-1" />
-                </div>
+                </div> */}
               </motion.div>
             );
+
+            if (unit.link) {
+              return (
+                <Link key={unit.key} to={unit.link} className="block transition-transform hover:-translate-y-1">
+                  {content}
+                </Link>
+              );
+            }
+
+            return content;
           })}
         </div>
       </div>

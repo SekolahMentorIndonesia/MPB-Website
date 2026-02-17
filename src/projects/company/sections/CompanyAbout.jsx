@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import TeamSection from "../../../components/TeamSection";
 
 export default function CompanyAbout() {
@@ -22,7 +23,7 @@ export default function CompanyAbout() {
             <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-12 font-display leading-tight">
               {t('about.title')}
             </h2>
-            
+
             <div className="bg-white p-8 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl shadow-soft border border-neutral-100">
               <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-50 text-brand-700 rounded-full text-xs font-bold uppercase tracking-wider mb-5 font-sans">
                 {t('about.history_badge')}
@@ -38,12 +39,12 @@ export default function CompanyAbout() {
                   {t('about.history_p3')}
                 </p>
               </div>
-              
+
               <div className="mt-8 pt-8 border-t border-neutral-100">
                 <div className="flex items-center gap-4">
-                  <img 
-                    src="/images/company/logo.webp" 
-                    alt="Logo PT Multiusaha Prioritas Bersama" 
+                  <img
+                    src="/images/company/logo.webp"
+                    alt="Logo PT Multiusaha Prioritas Bersama"
                     className="h-12 w-auto object-contain rounded"
                     width="48"
                     height="48"
@@ -74,7 +75,7 @@ export default function CompanyAbout() {
             <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-12 font-display leading-tight">
               {t('strategy.title')}
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {/* Visi */}
               <motion.div
@@ -86,10 +87,10 @@ export default function CompanyAbout() {
               >
                 <h3 className="text-xl sm:text-2xl font-bold text-neutral-900 mb-5 font-display">{t('strategy.vision_title')}</h3>
                 <p className="text-neutral-600 font-sans leading-relaxed text-sm sm:text-base">
-                 {t('strategy.vision_desc')}
+                  {t('strategy.vision_desc')}
                 </p>
               </motion.div>
-              
+
               {/* Misi */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -132,7 +133,7 @@ export default function CompanyAbout() {
             <h2 className="text-3xl sm:text-4xl font-bold text-neutral-900 mb-12 font-display leading-tight">
               {t('structure.title')}
             </h2>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {/* SMI Card */}
               <motion.div
@@ -143,9 +144,9 @@ export default function CompanyAbout() {
                 className="bg-white p-8 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl shadow-soft border border-neutral-100 flex flex-col justify-between"
               >
                 <div>
-                  <img 
-                    src="/images/company/1.webp" 
-                    alt="Logo Sekolah Mentor Indonesia" 
+                  <img
+                    src="/images/company/1.webp"
+                    alt="Logo Sekolah Mentor Indonesia"
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                     width="228"
                     height="128"
@@ -153,16 +154,16 @@ export default function CompanyAbout() {
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.smi_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.smi_field')}</p>
                 </div>
-                
-                <a 
-                  href="https://www.tiktok.com/@growwithsmi" 
+
+                {/* <a
+                  href="https://www.tiktok.com/@growwithsmi"
                   className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors duration-200 text-sm mt-6"
                 >
                   {t('structure.smi_cta')}
                   <span>→</span>
-                </a>
+                </a> */}
               </motion.div>
-              
+
               {/* MTI Card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -172,9 +173,9 @@ export default function CompanyAbout() {
                 className="bg-white p-8 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl shadow-soft border border-neutral-100 flex flex-col justify-between"
               >
                 <div>
-                  <img 
-                    src="/images/company/2.webp" 
-                    alt="Logo PT Mitranet Teknologi Internusa" 
+                  <img
+                    src="/images/company/2.webp"
+                    alt="Logo PT Mitranet Teknologi Internusa"
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                     width="228"
                     height="128"
@@ -182,18 +183,18 @@ export default function CompanyAbout() {
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.mti_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.mti_field')}</p>
                 </div>
-                
-                <a 
-                  href="#" 
-                  target="_blank" 
+
+                {/* <a
+                  href="#"
+                  target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors duration-200 text-sm mt-6"
                 >
                   {t('structure.mti_cta')}
                   <span>→</span>
-                </a>
+                </a> */}
               </motion.div>
-              
+
               {/* Card 3 */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -203,9 +204,9 @@ export default function CompanyAbout() {
                 className="bg-white p-8 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl shadow-soft border border-neutral-100 flex flex-col"
               >
                 <div className="mb-6">
-                  <img 
-                    src="/images/company/9.webp" 
-                    alt="Logo Pusat Laptop Bekasi" 
+                  <img
+                    src="/images/company/9.webp"
+                    alt="Logo Pusat Laptop Bekasi"
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                     width="228"
                     height="128"
@@ -213,17 +214,16 @@ export default function CompanyAbout() {
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.sks_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.sks_field')}</p>
                 </div>
-                
-                <a 
-                  href="#" 
-                  onClick={(e) => e.preventDefault()}
+
+                {/* <Link
+                  to="/Product-Pusat-Laptop-Bekasi"
                   className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors duration-200 text-sm"
                 >
                   {t('structure.sks_cta')}
                   <span>→</span>
-                </a>
+                </Link> */}
               </motion.div>
-              
+
               {/* Card 4 */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -233,9 +233,9 @@ export default function CompanyAbout() {
                 className="bg-white p-8 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl shadow-soft border border-neutral-100 flex flex-col"
               >
                 <div className="mb-6">
-                  <img 
-                    src="/images/company/10.webp" 
-                    alt="Logo IQI Corps" 
+                  <img
+                    src="/images/company/10.webp"
+                    alt="Logo IQI Corps"
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                     width="228"
                     height="128"
@@ -243,17 +243,16 @@ export default function CompanyAbout() {
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.me_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.me_field')}</p>
                 </div>
-                
-                <a 
-                  href="#" 
-                  onClick={(e) => e.preventDefault()}
+
+                {/* <Link
+                  to="/Product-IQICorps"
                   className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors duration-200 text-sm"
                 >
                   {t('structure.me_cta')}
                   <span>→</span>
-                </a>
+                </Link> */}
               </motion.div>
-              
+
               {/* Card 5 */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -263,9 +262,9 @@ export default function CompanyAbout() {
                 className="bg-white p-8 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl shadow-soft border border-neutral-100 flex flex-col"
               >
                 <div className="mb-6">
-                  <img 
-                    src="/images/company/5.webp" 
-                    alt="Logo Multisky" 
+                  <img
+                    src="/images/company/5.webp"
+                    alt="Logo Multisky"
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                     width="228"
                     height="128"
@@ -273,17 +272,17 @@ export default function CompanyAbout() {
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.ms_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.ms_field')}</p>
                 </div>
-                
-                <a 
-                  href="#" 
+
+                {/* <a
+                  href="#"
                   onClick={(e) => e.preventDefault()}
                   className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors duration-200 text-sm"
                 >
                   {t('structure.ms_cta')}
                   <span>→</span>
-                </a>
+                </a> */}
               </motion.div>
-              
+
               {/* Card 6 */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -293,9 +292,9 @@ export default function CompanyAbout() {
                 className="bg-white p-8 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl shadow-soft border border-neutral-100 flex flex-col"
               >
                 <div className="mb-6">
-                  <img 
-                    src="/images/company/6.webp" 
-                    alt="Logo Multipriority Store" 
+                  <img
+                    src="/images/company/6.webp"
+                    alt="Logo Multipriority Store"
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                     width="228"
                     height="128"
@@ -303,17 +302,16 @@ export default function CompanyAbout() {
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.mp_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.mp_field')}</p>
                 </div>
-                
-                <a 
-                  href="#" 
-                  onClick={(e) => e.preventDefault()}
+
+                {/* <Link
+                  to="/Product-Desain-Percetakan-Kreatif"
                   className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors duration-200 text-sm"
                 >
                   {t('structure.mp_cta')}
                   <span>→</span>
-                </a>
+                </Link> */}
               </motion.div>
-              
+
               {/* Card 7 */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -323,9 +321,9 @@ export default function CompanyAbout() {
                 className="bg-white p-8 sm:p-10 lg:p-12 rounded-2xl sm:rounded-3xl shadow-soft border border-neutral-100 flex flex-col"
               >
                 <div className="mb-6">
-                  <img 
-                    src="/images/company/7.webp?v=20260129" 
-                    alt="Logo Priority Pro Property" 
+                  <img
+                    src="/images/company/7.webp?v=20260129"
+                    alt="Logo Priority Pro Property"
                     className="h-32 w-auto object-contain mb-4 mx-auto"
                     width="228"
                     height="128"
@@ -333,18 +331,17 @@ export default function CompanyAbout() {
                   <h3 className="text-xl font-bold text-neutral-900 font-display">{t('structure.ppp_name')}</h3>
                   <p className="text-brand-600 text-sm font-sans mt-1">{t('structure.ppp_field')}</p>
                 </div>
-                
-                <a 
-                  href="https://smi.multipriority.com/" 
-                  target="_blank"
-                  rel="noopener noreferrer"
+
+                {/* <a
+                  href="#"
+                  onClick={(e) => e.preventDefault()}
                   className="inline-flex items-center gap-2 px-5 py-3 bg-brand-600 text-white font-medium rounded-lg hover:bg-brand-700 transition-colors duration-200 text-sm"
                 >
-                  {t('structure.smi_cta')}
+                  {t('structure.ppp_cta')}
                   <span>→</span>
-                </a>
+                </a> */}
               </motion.div>
-              
+
 
             </div>
           </motion.div>
