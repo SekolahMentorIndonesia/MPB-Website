@@ -36,7 +36,7 @@ export default function Navbar({ variant = 'company' }) {
             { name: t('navbar.digital_telecom', { ns: 'company' }), href: '#unit-mti' },
             { name: t('navbar.it_trade_services', { ns: 'company' }), href: '/Product-Pusat-Laptop-Bekasi' },
             { name: t('navbar.digital_branding', { ns: 'company' }), href: '/Product-IQICorps' },
-            { name: t('navbar.tourism_event', { ns: 'company' }), href: '#unit-ms' },
+            { name: t('navbar.tourism_event', { ns: 'company' }), href: '/Product-Multisky' },
             { name: t('navbar.creative_design_print', { ns: 'company' }), href: '/Product-Desain-Percetakan-Kreatif' },
             { name: t('navbar.creative_production', { ns: 'company' }), href: '#unit-ppp' },
           ]
@@ -144,8 +144,8 @@ export default function Navbar({ variant = 'company' }) {
               {item.hasDropdown && (
                 <div
                   className={`absolute top-full right-0 w-72 pt-2 transition-all duration-200 ${activeDropdown === item.name
-                      ? 'opacity-100 translate-y-0 visible'
-                      : 'opacity-0 translate-y-2 invisible'
+                    ? 'opacity-100 translate-y-0 visible'
+                    : 'opacity-0 translate-y-2 invisible'
                     }`}
                   role="menu"
                   aria-label={`${item.name} submenu`}
@@ -294,8 +294,8 @@ export default function Navbar({ variant = 'company' }) {
                     <button
                       onClick={() => changeLanguage('id')}
                       className={`flex-1 py-2 text-xs font-medium rounded-lg border transition-all ${i18n.language === 'id'
-                          ? 'bg-brand-50 border-brand-200 text-brand-700'
-                          : 'border-neutral-200 text-neutral-600'
+                        ? 'bg-brand-50 border-brand-200 text-brand-700'
+                        : 'border-neutral-200 text-neutral-600'
                         }`}
                     >
                       Indonesia
@@ -303,8 +303,8 @@ export default function Navbar({ variant = 'company' }) {
                     <button
                       onClick={() => changeLanguage('en')}
                       className={`flex-1 py-2 text-xs font-medium rounded-lg border transition-all ${i18n.language.startsWith('en')
-                          ? 'bg-brand-50 border-brand-200 text-brand-700'
-                          : 'border-neutral-200 text-neutral-600'
+                        ? 'bg-brand-50 border-brand-200 text-brand-700'
+                        : 'border-neutral-200 text-neutral-600'
                         }`}
                     >
                       English
