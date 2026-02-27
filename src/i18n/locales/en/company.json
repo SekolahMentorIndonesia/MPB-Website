@@ -18,7 +18,8 @@
     "digital_branding": "Digital & Branding Services",
     "tourism_event": "Tourism & Event Management",
     "creative_design_print": "Creative Design & Printing",
-    "creative_production": "Creative Production & Entertainment"
+    "creative_production": "Creative Production & Entertainment",
+    "netranet": "Product Netranet"
   },
   "hero": {
     "badge": "Accredited Training Institution",
@@ -205,9 +206,15 @@
   },
   "programs": {
     "list": {
-      "mindset": { "title": "Business Mindset" },
-      "sales": { "title": "Sales Excellence" },
-      "leadership": { "title": "Leadership & Team" }
+      "mindset": {
+        "title": "Business Mindset"
+      },
+      "sales": {
+        "title": "Sales Excellence"
+      },
+      "leadership": {
+        "title": "Leadership & Team"
+      }
     }
   }
 }

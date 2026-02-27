@@ -33,7 +33,7 @@ export default function Navbar({ variant = 'company' }) {
           hasDropdown: true,
           dropdownItems: [
             { name: t('navbar.education_talent', { ns: 'company' }), href: 'https://smi.multipriority.com/' },
-            { name: t('navbar.digital_telecom', { ns: 'company' }), href: '#unit-mti' },
+            { name: t('navbar.netranet', { ns: 'company' }), href: '/Product-Netranet' },
             { name: t('navbar.it_trade_services', { ns: 'company' }), href: '/Product-Pusat-Laptop-Bekasi' },
             { name: t('navbar.digital_branding', { ns: 'company' }), href: '/Product-IQICorps' },
             { name: t('navbar.tourism_event', { ns: 'company' }), href: '/Product-Multisky' },
